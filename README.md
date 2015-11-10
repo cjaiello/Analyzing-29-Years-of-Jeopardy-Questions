@@ -64,7 +64,8 @@ Your process book should include the following topics. Depending on your project
 - Implementation: Describe the intent and functionality of the interactive visualizations you implemented. Provide clear and well-referenced images showing the key design and interaction elements.
 - Evaluation: What did you learn about the data by using your visualizations? How did you answer your questions? How well does your visualization work, and how could you further improve it?
 
-As this will be your only chance to describe your project in detail make sure that your process book is a standalone document that fully describes your results and the final design. Here are a few examples of process books from previous years. Note that those process books do not follow the exact structure laid out here, they are meant as inspiration and are not necessarily indicative of the format and scope of your project.
+As this will be your only chance to describe your project in detail make sure that your process book is a standalone document that fully describes your results and the final design. 
+[Here](http://dataviscourse.net/2015/assets/process_books/bansal_cao_hou.pdf) are a [few examples](http://dataviscourse.net/2015/assets/process_books/walsh_trevino_bett.pdf) of process books from a similar course final.
 
 ### Project Website
 
@@ -78,7 +79,7 @@ If you are not able to publish your work (e.g., due to confidential data) please
 ### Project Screen-Cast
 
 Each team will create a two minute screen-cast with narration showing a demo of your visualization and/or some slides. 
-You can use any screencast tool of your choice -- Camtasia works well. 
+You can use any [screencast tool](http://dataviscourse.net/2015/screencast/) of your choice -- Camtasia works well. 
 Please make sure that the sound quality of your video is good - it may be worthwhile to invest in an external USB microphone. 
 Upload the video to an online video-platform such as YouTube or Vimeo and embed it into your project web page. 
 We will show some of the best videos in class.
