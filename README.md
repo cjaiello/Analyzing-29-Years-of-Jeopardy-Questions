@@ -230,8 +230,6 @@ I would like to add the ability to let a user search the “question” section 
 
 9	Project Schedule
 
-Make sure that you plan your work so that you can avoid a big rush right before the final project deadline, and delegate different modules and responsibilities among your team members. Write this in terms of weekly deadlines.
-
 Week	Feature(s)
 
 Nov 17th – Nov 24th 	Develop functions to create the various visualizations needed, and preprocess the data set
