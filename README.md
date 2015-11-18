@@ -58,25 +58,25 @@ Data was compiled by the user “trexmatt” of the website reddit.com. The user
 
 The categories are described as,
 
-	•	“'category' : the question category, e.g. "HISTORY"
+•	“'category' : the question category, e.g. "HISTORY"
 
-	•	'value' : $ value of the question as string, e.g. "$200.” 
+•	'value' : $ value of the question as string, e.g. "$200.” 
 
 		o	Note: This is "None" for Final Jeopardy! and Tiebreaker questions
 
-	•	'question' : text of question
+•	'question' : text of question
 
 		o	Note: This sometimes contains hyperlinks and other things messy text such as when there's a picture or video question
 
-	•	‘answer’: answer to question
+•	‘answer’: answer to question
 
-	•	'round' : one of "Jeopardy!","Double Jeopardy!","Final Jeopardy!" or "Tiebreaker"
+•	'round' : one of "Jeopardy!","Double Jeopardy!","Final Jeopardy!" or "Tiebreaker"
 
 		o	Note: Tiebreaker questions do happen but they're very rare (like once every 20 years)
 
-	•	'show_number' : string of show number, e.g '4680'
+•	'show_number' : string of show number, e.g '4680'
 
-	•	'air_date' : the show air date in format YYYY-MM-DD”
+•	'air_date' : the show air date in format YYYY-MM-DD”
 
 Link to Reddit post:
 
@@ -104,13 +104,13 @@ I have a few ideas regarding information preprocessing the data, which would all
 
 
 
-	•	Changing the air date to be just a year
+•	Changing the air date to be just a year
 
-	•	Changing the air date to be decades (80’s, 90’s, 00’s, 10’s)
+•	Changing the air date to be decades (80’s, 90’s, 00’s, 10’s)
 
-	•	Changing show number (which is currently 1 to 6,300) to be grouped by thousands (0-999, 1000-1999, 2000-2999, 3000-3999, 4000-4999, 5000-5999, 6000-6999)
+•	Changing show number (which is currently 1 to 6,300) to be grouped by thousands (0-999, 1000-1999, 2000-2999, 3000-3999, 4000-4999, 5000-5999, 6000-6999)
 
-	•	Changing category to be grouped somehow (would require manually creating and categorizing each category), since there are 27,906 unique categories
+•	Changing category to be grouped somehow (would require manually creating and categorizing each category), since there are 27,906 unique categories
 
 
 
@@ -140,13 +140,13 @@ In addition to letting the user sort the data by his or her choosing, I want the
 
 
 
-	•	Use all bar charts. 
+•	Use all bar charts. 
 
-	•	Disallow “question,” “air date,” “answer,” “category,” and the “show number” attributes, due to them being very large.
+•	Disallow “question,” “air date,” “answer,” “category,” and the “show number” attributes, due to them being very large.
 
-	•	Let user choose which attributes to sort by, and let them drill down into the data.
+•	Let user choose which attributes to sort by, and let them drill down into the data.
 
-	•	Christina's thoughts: This seems kind of boring… Don't get me wrong, bar charts are great, but three bar charts is way too plain.
+•	Christina's thoughts: This seems kind of boring… Don't get me wrong, bar charts are great, but three bar charts is way too plain.
 
 ![Bar Charts](images/bar_charts.png)
 
@@ -156,17 +156,17 @@ In addition to letting the user sort the data by his or her choosing, I want the
 
 
 
-	•	For air date, use a calendar chart (which would actually make using the air date data useable). I could potentially preprocess the data to be month and year, rather than day/month/year.
+•	For air date, use a calendar chart (which would actually make using the air date data useable). I could potentially preprocess the data to be month and year, rather than day/month/year.
 
 http://bl.ocks.org/mbostock/4063318
 
 I could specifically have this visualization be created if the user chose to organize by air date.
 
-	•	For the question and answer attributes, use a word cloud for questions and answers (which would make using the question and answer data useable). https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F | https://github.com/jasondavies/d3-cloud | I could specifically have this visualization be created if the user chose to organize by question or answer.
+•	For the question and answer attributes, use a word cloud for questions and answers (which would make using the question and answer data useable). https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F | https://github.com/jasondavies/d3-cloud | I could specifically have this visualization be created if the user chose to organize by question or answer.
 
-	•	Bar charts for other data
+•	Bar charts for other data
 
-	•	Christina's Thoughts: This would be really cool, and it would also mean I can include more of the data from the dataset.
+•	Christina's Thoughts: This would be really cool, and it would also mean I can include more of the data from the dataset.
 
 ![Bar Chart, Calendar, and Word Cloud](images/calendar_and_word_cloud.png)
 
@@ -176,13 +176,13 @@ I could specifically have this visualization be created if the user chose to org
 
 
 
-	•	Disallow “question,” “air date,” “answer,” “category,” and the “show number” attributes, due to them being very large.
+•	Disallow “question,” “air date,” “answer,” “category,” and the “show number” attributes, due to them being very large.
 
-	•	Let user choose which attributes to sort by, and let them drill down into the data.
+•	Let user choose which attributes to sort by, and let them drill down into the data.
 
-	•	Let the user choose between a bar chart, a pie chart, or a treemap.
+•	Let the user choose between a bar chart, a pie chart, or a treemap.
 
-	•	Christina's Thoughts: I really like letting the user choose what kind of visualization they want to see. Some people prefer certain visualizations, so giving them the option to choose would be awesome.
+•	Christina's Thoughts: I really like letting the user choose what kind of visualization they want to see. Some people prefer certain visualizations, so giving them the option to choose would be awesome.
 
 ![Choose Viz Type](images/choose_viz_type.png)
 
@@ -192,7 +192,7 @@ I could specifically have this visualization be created if the user chose to org
 
 
 
-	•	I think I'd like a combo of #2 (preprocessing some data so it can be used, in addition to having Word Clouds and Calendar Charts) and #3 (letting the user choose between seeing data as a Tree Map, Bar Chart, or Pie Chart). This may make my stretch goals not doable (due to lack of time), however.
+•	I think I'd like a combo of #2 (preprocessing some data so it can be used, in addition to having Word Clouds and Calendar Charts) and #3 (letting the user choose between seeing data as a Tree Map, Bar Chart, or Pie Chart). This may make my stretch goals not doable (due to lack of time), however.
 
 
 
