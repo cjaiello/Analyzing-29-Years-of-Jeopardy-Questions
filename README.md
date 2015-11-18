@@ -162,13 +162,7 @@ http://bl.ocks.org/mbostock/4063318
 
 I could specifically have this visualization be created if the user chose to organize by air date.
 
-	•	For the question and answer attributes, use a word cloud for questions and answers (which would make using the question and answer data useable).
-
-		https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F
-
-		https://github.com/jasondavies/d3-cloud 
-
-		I could specifically have this visualization be created if the user chose to organize by question or answer.
+	•	For the question and answer attributes, use a word cloud for questions and answers (which would make using the question and answer data useable). https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F | https://github.com/jasondavies/d3-cloud | I could specifically have this visualization be created if the user chose to organize by question or answer.
 
 	•	Bar charts for other data
 
