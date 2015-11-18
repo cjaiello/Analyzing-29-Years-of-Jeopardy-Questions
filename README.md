@@ -46,12 +46,16 @@ https://docs.google.com/uc?id=0BwT5wj_P7BKXUl9tOUJWYzVvUjA&export=download
 ----------------------------------------------------
 
 5	Data Processing
+
 The data is thankfully already in CSV format, and it has the following columns: Show number, air date, round (Jeopardy, Double Jeopardy, Final Jeopardy, or Tie-Breaker), category, value, and question.
+
 I have a few ideas regarding information preprocessing the data, which would allow the users to select this data for sorting the graphs (rather than just not including these categories at all):
+
 	•	Changing the air date to be just a year
 	•	Changing the air date to be decades (80’s, 90’s, 00’s, 10’s)
 	•	Changing show number (which is currently 1 to 6,300) to be grouped by thousands (0-999, 1000-1999, 2000-2999, 3000-3999, 4000-4999, 5000-5999, 6000-6999)
 	•	Changing category to be grouped somehow (would require manually creating and categorizing each category), since there are 27,906 unique categories
+
 I plan on counting the number of items per category and the number of items per value first, due to them not all being equal. For example, “3-Letter Words” has 342 entries and 4,579 entries. This could help a user figure out which categories are most likely to appear in a Jeopardy game. In addition, I am interested in seeing which categories end up being in the Double Jeopardy and Final Jeopardy rounds most frequently. This could help a user target his or her knowledge to categories that end up in these rounds.
 Another feature I would like to have is (see “Optional Features” section below) the ability to let a user search the “question” section (or “answer” section) with any string he or she would like to find. The application would then display a table with all results matching this query, in addition to showing a count of matches.
 
@@ -59,17 +63,20 @@ Another feature I would like to have is (see “Optional Features” section bel
 ----------------------------------------------------
 
 6	Visualization Design
+
 I would like the user to be able to sort the data by three categories of his or her choice, one at a time. This will produce three graphs on the screen, with the leftmost graph containing the most data points and the rightmost containing the least amount of data points. These three graphs will all be viewable on one screen, side-by-side.
 In addition to letting the user sort the data by his or her choosing, I want the user to be able to search for keywords as well. I would like to add the ability to let a user search the “question” section  (or “answer” section) with any string he or she would like to find, and then the user would select an attribute of the data set to sort by. The application would then display a graph of that data (where the question has the keyword(s) that the user specified), separated by whatever options for the chosen attribute exist. I would also like to show a total number of matches for the keyword(s) in the entire set of data.
 
-	6.1	Idea #1:
+6.1	Idea #1:
+
 	•	Use all bar charts. 
 	•	Disallow “question,” “air date,” “answer,” “category,” and the “show number” attributes, due to them being very large.
 	•	Let user choose which attributes to sort by, and let them drill down into the data.
 	•	Christina's thoughts: This seems kind of boring… Don't get me wrong, bar charts are great, but three bar charts is way too plain.
-	![Bar Charts](images/bar_charts.png)
+![Bar Charts](images/bar_charts.png)
 
-	6.2	Idea #2:
+6.2	Idea #2:
+
 	•	For air date, use a calendar chart (which would actually make using the air date data useable). I could potentially preprocess the data to be month and year, rather than day/month/year.
 http://bl.ocks.org/mbostock/4063318
 I could specifically have this visualization be created if the user chose to organize by air date.
@@ -79,17 +86,20 @@ I could specifically have this visualization be created if the user chose to org
 		I could specifically have this visualization be created if the user chose to organize by question or answer.
 	•	Bar charts for other data
 	•	Christina's Thoughts: This would be really cool, and it would also mean I can include more of the data from the dataset.
-	![Bar Chart, Calendar, and Word Cloud](images/calendar_and_word_cloud.png)
+![Bar Chart, Calendar, and Word Cloud](images/calendar_and_word_cloud.png)
 
-	6.3	Idea #3:
+6.3	Idea #3:
+
 	•	Disallow “question,” “air date,” “answer,” “category,” and the “show number” attributes, due to them being very large.
 	•	Let user choose which attributes to sort by, and let them drill down into the data.
 	•	Let the user choose between a bar chart, a pie chart, or a treemap.
 	•	Christina's Thoughts: I really like letting the user choose what kind of visualization they want to see. Some people prefer certain visualizations, so giving them the option to choose would be awesome.
-	![Choose Viz Type](images/choose_viz_type.png)
+![Choose Viz Type](images/choose_viz_type.png)
 
-	6.4 Final Idea?
+6.4 Final Idea?
+
 	•	I think I'd like a combo of #2 (preprocessing some data so it can be used, in addition to having Word Clouds and Calendar Charts) and #3 (letting the user choose between seeing data as a Tree Map, Bar Chart, or Pie Chart). This may make my stretch goals not doable (due to lack of time), however.
+
 
 
 ----------------------------------------------------
