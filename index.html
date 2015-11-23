@@ -1,4 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="build/d3.layout.cloud.js" charset="utf-8"></script>
 
 <style>
 /* Title of Page */
@@ -144,7 +145,7 @@ body {
           d3.select("svg.thirdChart")
           .remove();
           // Now make a new second chart
-          buildSecondVis(data[i], data[i].key);
+          buildWordCloudVis(data[i], data[i].key);
           d3.select(this)
             .attr("fill", "#a2a2d5");
          })
@@ -170,8 +171,100 @@ body {
 
   }
 
+  function findMatches(input, wordToFind){
+    var numberOfMatches = 0; 
+    // Go through all questions in this piece of data:
+    for(var counter = 0; counter < input.length; counter++){
+      var currentQuestion = input[counter];
+      // And find how many matches for a particular word there are:
+      var regex = new RegExp("(?:^|\\s)" + wordToFind + "(?=\\s|$)");
+      var matches = currentQuestion.match(regex);
+      if(matches != null){
+        console.log("Found this many matches: " + matches.length);
+        numberOfMatches = numberOfMatches + matches.length;
+      }
+    }
+    return numberOfMatches;
+  }
 
-  function buildFirstPieVis(data) {
+  // Function to build a wordcloud for rows in the data set
+  function buildWordCloudVis(data){
+
+    var wordMap = {}; // Key is word, value is number of times seen
+    var wordMapList = []; // Just a list of all words (so, all keys)
+    var questionList = []; // All questions in this data set
+
+    for(var counter = 0; counter < data.values.length; counter++){
+      // Set 'question' equal to each item's question
+      var question = data.values[counter].Question;
+      questionList.push(question);
+      console.log(question);
+      // Split each string into an array
+      var listOfWords = question.split(" ");
+      console.log(listOfWords);
+      // For each word in the question
+      for(var innerCounter = 0; innerCounter < listOfWords.length; innerCounter++){
+        var currentWord = listOfWords[innerCounter];
+        // Trim away any commas and periods
+        currentWord = currentWord.replace(/,$/, "");
+        currentWord = currentWord.replace(/\)$/, "");
+        currentWord = currentWord.replace(/^\(/, "");
+          // If it's not an empty word or a period:
+        if((currentWord != " ")  && (currentWord != ".")){
+          // If we haven't seen this word yet
+          if (!(currentWord in wordMap)){
+            // Count its matches
+            var numberOfMatches = findMatches(questionList, currentWord);
+            // Add to our list of words seen:
+            wordMapList.push(currentWord);
+            // And keep track of its count as well:
+            wordMap[currentWord] = numberOfMatches;
+          } else {
+            // Count its matches
+            var numberOfMatches = findMatches(questionList, currentWord);
+            // And keep track of its count as well:
+            wordMap[currentWord] += numberOfMatches;
+          }
+        }
+      }
+    }
+
+
+
+    d3.layout.cloud().size([960, 500])
+        .words(wordMapList.map(function(d) {
+          return {text: d, size: 10 * wordMap[d]};
+        }))
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size; })
+        .on("end", draw)
+        .start();
+
+      
+      function draw(words) {
+        d3.select("body").append("svg")
+                .attr("width", 850)
+                .attr("height", 350)
+                .attr("class", "wordcloud")
+                .append("g")
+                // without the transform, words words would get cutoff to the left and top, they would
+                // appear outside of the SVG area
+                .attr("transform", "translate(320,200)")
+                .selectAll("text")
+                .data(words)
+                .enter().append("text")
+                .style("font-size", function(d) { return d.size + "px"; })
+                .style("fill", function(d, i) { return "red"; })
+                .attr("transform", function(d) {
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function(d) { return d.text; });
+    } 
+  }
+
+
+  function buildPieVis(data) {
     var color = d3.scale.ordinal()
     .range(["#1c9ce9", "#679eea" , "#67d6ee", "#9becee", "#aceff1", "#9bc2ee", "#679eea" , "#69e2e5", "#1c9ce9", "#9bc2ee", "#67d6ee"]);
 
@@ -249,166 +342,6 @@ body {
           return data[i].key + ": " + data[i].values.length; 
         });
       }
-
-
-function buildSecondPieVis(data) {
-var color = d3.scale.ordinal()
-.range(["#66e066", "#b2efb2" , "#006600", "#19d119", "#00a300"]);
-
-  // Now we aggregate by year
-  data = aggregateByYear(data);
-
-  // Width and height for smaller square
-  var width = 1800;
-  var height = 600;
-
-  // Outer and inner radii
-  var outerRadius = 190;
-  var innerRadius = 0;
-
-  // Adding svg element to body, setting its width and height,
-  // and moving it to a certain location on the screen
-  var vis = d3.select("svg")
-  .data([data])
-  .append("svg:svg") 
-  .attr("class", "secondVisualization")
-  .attr("width", width)
-  .attr("height", height)
-  .append("svg:g") 
-  .attr("transform", "translate(" + 750 + "," + 300 + ")");
-
-  // Setting inner and outer radii for each arc piece
-  var arc = d3.svg.arc()
-  .innerRadius(innerRadius)
-  .outerRadius(outerRadius);
-
-  // Selecting a pie chart
-  var pie = d3.layout.pie()
-  .value(function(d) { 
-    console.log(d.key + ": " + d.values.length);
-    return d.values.length; 
-        }); // Getting length of values array
-  
-  /* Selects all slices in g, associates pie data, 
-   * makes g elements for each item in the array,
-   * creates groups to hold each slice,
-   * and adds the class "slice" to each slice 
-   * for styling purposes
-   */
-   var arcs = vis.selectAll("smaller.slice") 
-   .data(pie)
-   .enter()
-   .append("svg:g")
-   .attr("class", "smallerSlices");
-
-      // Setting slice colors and creating SVG path
-      arcs.append("svg:path")
-      .attr("fill", function(d, i) {
-        return color(i); } )
-      .attr("d", arc)
-      .on("mouseover", function(d, i) {
-      console.log("Building third viz for: " + data[i].key);
-      d3.select("svg.thirdVisualization")
-      .remove();
-          // When we mouse over a part of the donut,
-          // build the inner donut chart with its data!!
-          buildThirdVis(data[i].values);
-        });
-
-      // Labeling each slice and placing label
-      arcs.append("svg:text")
-      .attr('class','labels')
-      .attr("transform", function(d) { //set the label's origin to the center of the arc
-      // Source for the 5 lines of code below: 
-      // http://bl.ocks.org/Guerino1/2295263
-      var c = arc.centroid(d);
-      d.outerRadius = outerRadius; // Set Outer Coordinate
-      d.innerRadius = outerRadius/2; // Set Inner Coordinate
-      console.log(angle(d));
-      return "translate(" + (c[0]*2.7) +"," + (c[1]*2.7) + ")rotate(" + angle(d) + ")";
-    })
-    .attr("text-anchor", "middle") //center the text on it's origin
-    .attr("size", "11px")
-    .style("fill", "#000000")
-          // Assigning the labels
-          .text(function(d, i) { return data[i].key + ": " + data[i].values.length; });
-
-        }
-
-function buildThirdPieVis(data) {
-var color = d3.scale.ordinal()
-.range(["#fbd2f9", "#f28be9" , "#b846bf", "#871e94", "#683776", "#bd8eca"]);
-
-  // Now we aggregate by major too
-  data = aggregateByMajor(data);
-
-  // Width and height for smaller square
-  var width = 2400;
-  var height = 600;
-
-  // Outer and inner radii
-  var outerRadius = 190;
-  var innerRadius = 0;
-
-  // Adding svg element to body, setting its width and height,
-  // and moving it to a certain location on the screens
-  var vis = d3.select("svg")
-  .data([data])
-  .append("svg:svg") 
-  .attr("class", "thirdVisualization")
-  .attr("width", width)
-  .attr("height", height)
-  .append("svg:g") 
-  .attr("transform", "translate(" + 1300 + "," + 300 + ")");
-
-  // Setting inner and outer radii for each arc piece
-  var arc = d3.svg.arc()
-  .innerRadius(innerRadius)
-  .outerRadius(outerRadius);
-
-  // Selecting a pie chart
-  var pie = d3.layout.pie()
-  .value(function(d) { 
-    console.log(d.key + ": " + d.values.length);
-    return d.values.length; 
-        }); // Getting length of values array
-  
-  /* Selects all slices in g, associates pie data, 
-   * makes g elements for each item in the array,
-   * creates groups to hold each slice,
-   * and adds the class "slice" to each slice 
-   * for styling purposes
-   */
-   var arcs = vis.selectAll("smaller.slice") 
-   .data(pie)
-   .enter()
-   .append("svg:g")
-   .attr("class", "smallerSlices");
-
-      // Setting slice colors and creating SVG path
-      arcs.append("svg:path")
-      .attr("fill", function(d, i) {
-        return color(i); } )
-      .attr("d", arc);
-
-      // Labeling each slice and placing label
-      arcs.append("svg:text")
-      .attr('class','labels')
-      .attr("transform", function(d) { //set the label's origin to the center of the arc
-      // Source for the 5 lines of code below: 
-      // http://bl.ocks.org/Guerino1/2295263
-      var c = arc.centroid(d);
-      d.outerRadius = outerRadius; // Set Outer Coordinate
-      d.innerRadius = outerRadius/2; // Set Inner Coordinate
-      console.log(angle(d));
-      return "translate(" + (c[0]*2.3) +"," + (c[1]*2.3) + ")rotate(" + angle(d) + ")";
-    })
-    .attr("text-anchor", "middle") //center the text on it's origin
-    .attr("size", "11px")
-    .style("fill", "#000000")
-          // Assigning the labels
-          .text(function(d, i) { return data[i].key + ": " + data[i].values.length; })
-        }
 
   // Computes the angle of an arc, converting from radians to degrees.
   // Source: http://bl.ocks.org/Guerino1/2295263
