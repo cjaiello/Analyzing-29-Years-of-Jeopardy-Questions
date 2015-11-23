@@ -61,7 +61,7 @@ body {
     // Aggregate data set
     data = aggregateByRound(data);
 
-    buildBarVis(data, 85, 1);
+    buildBarVis(data, 85, 1, "Round");
   });
 
   /*
@@ -126,19 +126,19 @@ body {
   // First: translateXCoordinate = 50
   // Second: translateXCoordinate = 75
   // Third: translateXCoordinate = 125
-  function buildBarVis(data, translateXCoordinate, vizNumber) {
+  function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
     console.log(data);
 
-    var w = 250;
-    var h = 700;
+    var w = 375;
+    var h = 600;
 
     var format = d3.format(",.0f");
 
     var x = d3.scale.linear().range([0, w-50]),
-        y = d3.scale.ordinal().rangeRoundBands([0, h-50], .1);
+        y = d3.scale.ordinal().rangeRoundBands([0, h-60], .1);
 
-    var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h),
+    var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
     console.log(vizNumber);
@@ -146,7 +146,8 @@ body {
 
     var svg = d3.select("body").append("svg")
         .attr("class", getVizName(vizNumber))
-        .attr("width", w+100)
+        .attr("padding", "20px")
+        .attr("width", w+150)
         .attr("height", h)
       .append("g")
         .attr("transform", "translate(" + translateXCoordinate + "," + 30 + ")");
@@ -190,11 +191,11 @@ body {
           .remove();
           d3.select("svg.thirdChart")
             .remove();
-            buildBarVis(aggregateByYear(data[i].values), 25, vizNumber + 1);
+            buildBarVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Year");
           } else if (vizNumber == 2) {
             d3.select("svg.thirdChart")
               .remove();
-            buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1);
+            buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
           }
           //buildWordCloudVis(data[i], data[i].key);
           d3.select(this)
@@ -209,7 +210,6 @@ body {
     bar.append("text")
         .attr("class", "value")
         .attr("x", function(d) { 
-          console.log("Bar label is: " + d.values.length);
           return x(d.values.length); 
         })
         .attr("y", y.rangeBand() / 2)
@@ -219,6 +219,14 @@ body {
         .text(function(d) {
           return format(d.values.length); 
         });
+
+    svg.append("text")      // text label for the x axis
+        .attr("x", w / 2 - 50 )
+        .attr("y", h - 30)
+        .style("font-size","15px")
+        .style("font-weight","bold")
+        .attr("fill", "black")
+        .text(vizLabel);
 
   }
 
