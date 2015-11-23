@@ -255,10 +255,13 @@ body {
               .remove();
             buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
           }
-          //buildWordCloudVis(data[i], data[i].key);
           d3.select(this)
             .attr("fill", "#a2a2d5");
          })
+        .on("click", function(d, i) {
+          if(vizNumber == 3){
+            buildWordCloudVis(data[i], data[i].key);
+          }})
         .on("mouseout", function() {
           d3.select(this)
             .attr("fill", "#5c5cb5");
@@ -289,6 +292,10 @@ body {
 
   }
 
+  // This function will find matches for a specific word in a given
+  // array of input.
+  // @input: An array of strings
+  // @ wordToFind: The word you want to find in the given input
   function findMatches(input, wordToFind){
     var numberOfMatches = 0; 
     // Go through all questions in this piece of data:
@@ -305,6 +312,7 @@ body {
   }
 
   // Function to build a wordcloud for rows in the data set
+  // @data: The data from the csv
   function buildWordCloudVis(data){
 
     var wordMap = {}; // Key is word, value is number of times seen
@@ -364,12 +372,10 @@ body {
       
       function draw(words) {
         d3.select("body").append("svg")
-                .attr("width", 850)
-                .attr("height", 350)
+                .attr("width", 1200)
+                .attr("height", 1000)
                 .attr("class", "wordcloud")
                 .append("g")
-                // without the transform, words words would get cutoff to the left and top, they would
-                // appear outside of the SVG area
                 .attr("transform", "translate(320,200)")
                 .selectAll("text")
                 .data(words)
