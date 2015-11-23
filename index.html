@@ -106,6 +106,10 @@ body {
   </center>
   <div id="locationOfSVGs">
   </div>
+  <center>
+    <div id="locationOfWordCloud" align="center">
+    </div>
+  </center>
 </body> 
 
 <script>
@@ -121,6 +125,7 @@ body {
 
   /*
   * Helper for aggregating data
+  * @data: The data from the csv to aggregate
   */
   function aggregateByRound(data){
 
@@ -136,6 +141,7 @@ body {
 
   /*
   * Helper for aggregating data
+  * @data: The data from the csv to aggregate
   */
   function aggregateByYear(data){
 
@@ -151,6 +157,7 @@ body {
 
   /*
   * Helper for aggregating data
+  * @data: The data from the csv to aggregate
   */
   function aggregateByValue(data){
 
@@ -164,7 +171,9 @@ body {
     return arrayOfJeopardyQuestions;
   }
 
-  // Tells the name of the viz
+  // Tells the name of the viz based on its number.
+  // @vizNumber: the number of the visualization,
+  // which is either 1, 2, or 3
   function getVizName(vizNumber){
     vizNumber = parseInt(vizNumber);
     console.log("What the fuck?");
@@ -178,14 +187,16 @@ body {
     } else return "fourthChart";
   }
 
-  // First: translateXCoordinate = 50
-  // Second: translateXCoordinate = 75
-  // Third: translateXCoordinate = 125
+  // Creates a bar visualization
+  // @data: the data from the csv
+  // @translateXCoordinate: How far over (x-wise) the graph should go
+  // @vizNumber: The number of the viz, either 1 2 or 3
+  // @vizLabel: The label for the viz (what attribute it is)
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
     console.log(data);
 
-    var w = 375;
+    var w = 365;
     var h = 600;
 
     var format = d3.format(",.0f");
@@ -359,9 +370,9 @@ body {
 
 
     // Actually building the word cloud
-    d3.layout.cloud().size([960, 500])
+    d3.layout.cloud().size([1400, 1000])
         .words(wordMapList.map(function(d) {
-          return {text: d, size: 10 + wordMap[d]/2};
+          return {text: d, size: 15 + wordMap[d]/2};
         }))
         .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .font("Impact")
@@ -371,12 +382,12 @@ body {
 
       
       function draw(words) {
-        d3.select("body").append("svg")
+        d3.select("#locationOfWordCloud").append("svg")
                 .attr("width", 1200)
-                .attr("height", 1000)
+                .attr("height", 800)
                 .attr("class", "wordcloud")
                 .append("g")
-                .attr("transform", "translate(320,200)")
+                .attr("transform", "translate(400,300)")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
