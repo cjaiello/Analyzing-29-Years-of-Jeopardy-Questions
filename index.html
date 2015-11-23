@@ -1,0 +1,422 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+<style>
+/* Title of Page */
+h1 {
+  font-size: 22px;
+  font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
+  text-align: left;
+  padding-left: 10px;
+  color: #7f7fc5;
+}
+h2 {
+  font-size: 18px;
+  font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
+  text-align: left;
+  padding-left: 10px;
+  color: #7f7fc5;
+}
+/* Body text on page */
+body {
+  background-color: #EBFAFF;
+  font-size: 11px;
+  font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
+}
+/* All labels on charts */
+.labels {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
+}
+
+.bar text.value {
+  fill: #00008B;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #000;
+  stroke-opacity: 0.2;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+</style>
+
+<script>
+
+  d3.csv('data/jeopardy_questions_and_answers_preprocessed.csv', function(err, data) {
+    if(err) console.log(err);
+
+    // Aggregate data set
+    data = aggregateBy(data, "Round");
+
+    buildBarVis(data, 85);
+  });
+
+  /*
+  * Helper for aggregating data
+  */
+  function aggregateBy(data, attributeToAggregateBy){
+
+    var arrayOfJeopardyQuestions = d3.nest()
+    arrayOfJeopardyQuestions = d3.nest()
+    .key(function(data) { 
+      return data.Round; 
+    })
+    .entries(data);
+
+    return arrayOfJeopardyQuestions;
+  }
+
+
+  // First: translateXCoordinate = 50
+  // Second: translateXCoordinate = 75
+  // Third: translateXCoordinate = 125
+  function buildBarVis(data, translateXCoordinate, yDomain) {
+
+    console.log(data);
+
+    var w = 400;
+    var h = 500;
+
+    var format = d3.format(",.0f");
+
+    var x = d3.scale.linear().range([0, w-50]),
+        y = d3.scale.ordinal().rangeRoundBands([0, h-50], .1);
+
+    var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+        yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+
+    var svg = d3.select("body").append("svg")
+        .attr("class", "barChart")
+        .attr("width", w+100)
+        .attr("height", h)
+      .append("g")
+        .attr("transform", "translate(" + translateXCoordinate + "," + 30 + ")");
+
+    // Set the scale domain.
+    x.domain([0, d3.max(data, function(d) {
+      return d.values.length; 
+    })]);
+    y.domain(data.map(function(d) { return d.key; }));
+
+    // Adding x axis to screen
+    svg.append("g")
+        .attr("class", "x axis")
+        .call(xAxis);
+
+    // Adding y axis to screen
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    var bar = svg.selectAll("g.bar")
+        .data(data)
+      .enter().append("g")
+        .attr("class", "bar")
+        .attr("transform", function(d) {
+          console.log(d.key);
+          return "translate(1," + y(d.key) + ")"; 
+        });
+
+    // Putting the rectangles on the bar chart
+    bar.append("rect")
+        .attr("fill", "#5c5cb5")
+        .attr("width", function(d, i) {
+          console.log(d.values.length);
+          return x(d.values.length); 
+        })
+        .attr("height", y.rangeBand())
+        .on("mouseover", function(d, i) {
+          // First, remove the old second and third charts
+          d3.select("svg.secondChart")
+          .remove();
+          d3.select("svg.thirdChart")
+          .remove();
+          // Now make a new second chart
+          buildSecondVis(data[i], data[i].key);
+          d3.select(this)
+            .attr("fill", "#a2a2d5");
+         })
+        .on("mouseout", function() {
+          d3.select(this)
+            .attr("fill", "#5c5cb5");
+      });
+
+    // Placing the label text for each bar
+    bar.append("text")
+        .attr("class", "value")
+        .attr("x", function(d) { 
+          console.log(d.values.length);
+          return x(d.values.length); 
+        })
+        .attr("y", y.rangeBand() / 2)
+        .attr("dx", 20)
+        .attr("dy", ".35em")
+        .attr("text-anchor", "end")
+        .text(function(d) {
+          return format(d.values.length); 
+        });
+
+  }
+
+
+  function buildFirstPieVis(data) {
+    var color = d3.scale.ordinal()
+    .range(["#1c9ce9", "#679eea" , "#67d6ee", "#9becee", "#aceff1", "#9bc2ee", "#679eea" , "#69e2e5", "#1c9ce9", "#9bc2ee", "#67d6ee"]);
+
+  // Width, height, and radius for pie chart
+  var width = 1800,
+  height = 800,
+  radius = Math.min(width, height) / 2;
+
+  var centerPlacement = width / 2;
+
+  // Outer and inner radii
+  var outerRadius = 200;
+  var innerRadius = 0;    
+
+  // Adding svg element to body, setting its width and height,
+  // and moving it to a certain location on the screen
+  var vis = d3.select("body")
+  .data([data])
+  .append("svg:svg") 
+  .attr("width", width)
+  .attr("height", height)
+  .append("svg:g") 
+  .attr("transform", "translate(" + 200 + "," + 300 + ")");
+
+  // Setting inner and outer radii for each arc piece
+  var arc = d3.svg.arc()
+  .innerRadius(innerRadius)
+  .outerRadius(outerRadius);
+
+  // Selecting a pie chart
+  var pie = d3.layout.pie()
+        .value(function(d) { return d.values.length; }); // Getting length of values array
+
+  /* Selects all slices in g, associates pie data, 
+   * makes g elements for each item in the array,
+   * creates groups to hold each slice,
+   * and adds the class "slice" to each slice 
+   * for styling purposes
+   */
+   var arcs = vis.selectAll("g.slice") 
+   .data(pie)
+   .enter()
+   .append("svg:g")
+   .attr("class", "slice")
+   .on("mouseover", function(d, i) {
+    console.log("Building inner donut chart for: " + data[i].key);
+      console.log("Removing second and third charts for: " + data[i].key);
+      d3.select("svg.secondVisualization")
+      .remove();
+      d3.select("svg.thirdVisualization")
+      .remove();
+        // When we mouse over a part of the donut,
+        // build the inner donut chart with its data!!
+        buildSecondVis(data[i].values);
+      });
+
+      // Setting slice colors and creating SVG path
+      arcs.append("svg:path")
+      .attr("fill", function(d, i) { 
+        return color(i); } )
+      .attr("d", arc);
+
+      // Labeling each slice and placing label
+      arcs.append("svg:text")
+        .attr("class", "labels")
+        .attr("transform", function(d) {
+        // Source for the line of code below: 
+        // http://bl.ocks.org/Guerino1/2295263
+        return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")";
+        })
+        // Centering text on origin
+        .attr("text-anchor", "middle")
+        // Assigning the labels
+        .text(function(d, i) { 
+          return data[i].key + ": " + data[i].values.length; 
+        });
+      }
+
+
+function buildSecondPieVis(data) {
+var color = d3.scale.ordinal()
+.range(["#66e066", "#b2efb2" , "#006600", "#19d119", "#00a300"]);
+
+  // Now we aggregate by year
+  data = aggregateByYear(data);
+
+  // Width and height for smaller square
+  var width = 1800;
+  var height = 600;
+
+  // Outer and inner radii
+  var outerRadius = 190;
+  var innerRadius = 0;
+
+  // Adding svg element to body, setting its width and height,
+  // and moving it to a certain location on the screen
+  var vis = d3.select("svg")
+  .data([data])
+  .append("svg:svg") 
+  .attr("class", "secondVisualization")
+  .attr("width", width)
+  .attr("height", height)
+  .append("svg:g") 
+  .attr("transform", "translate(" + 750 + "," + 300 + ")");
+
+  // Setting inner and outer radii for each arc piece
+  var arc = d3.svg.arc()
+  .innerRadius(innerRadius)
+  .outerRadius(outerRadius);
+
+  // Selecting a pie chart
+  var pie = d3.layout.pie()
+  .value(function(d) { 
+    console.log(d.key + ": " + d.values.length);
+    return d.values.length; 
+        }); // Getting length of values array
+  
+  /* Selects all slices in g, associates pie data, 
+   * makes g elements for each item in the array,
+   * creates groups to hold each slice,
+   * and adds the class "slice" to each slice 
+   * for styling purposes
+   */
+   var arcs = vis.selectAll("smaller.slice") 
+   .data(pie)
+   .enter()
+   .append("svg:g")
+   .attr("class", "smallerSlices");
+
+      // Setting slice colors and creating SVG path
+      arcs.append("svg:path")
+      .attr("fill", function(d, i) {
+        return color(i); } )
+      .attr("d", arc)
+      .on("mouseover", function(d, i) {
+      console.log("Building third viz for: " + data[i].key);
+      d3.select("svg.thirdVisualization")
+      .remove();
+          // When we mouse over a part of the donut,
+          // build the inner donut chart with its data!!
+          buildThirdVis(data[i].values);
+        });
+
+      // Labeling each slice and placing label
+      arcs.append("svg:text")
+      .attr('class','labels')
+      .attr("transform", function(d) { //set the label's origin to the center of the arc
+      // Source for the 5 lines of code below: 
+      // http://bl.ocks.org/Guerino1/2295263
+      var c = arc.centroid(d);
+      d.outerRadius = outerRadius; // Set Outer Coordinate
+      d.innerRadius = outerRadius/2; // Set Inner Coordinate
+      console.log(angle(d));
+      return "translate(" + (c[0]*2.7) +"," + (c[1]*2.7) + ")rotate(" + angle(d) + ")";
+    })
+    .attr("text-anchor", "middle") //center the text on it's origin
+    .attr("size", "11px")
+    .style("fill", "#000000")
+          // Assigning the labels
+          .text(function(d, i) { return data[i].key + ": " + data[i].values.length; });
+
+        }
+
+function buildThirdPieVis(data) {
+var color = d3.scale.ordinal()
+.range(["#fbd2f9", "#f28be9" , "#b846bf", "#871e94", "#683776", "#bd8eca"]);
+
+  // Now we aggregate by major too
+  data = aggregateByMajor(data);
+
+  // Width and height for smaller square
+  var width = 2400;
+  var height = 600;
+
+  // Outer and inner radii
+  var outerRadius = 190;
+  var innerRadius = 0;
+
+  // Adding svg element to body, setting its width and height,
+  // and moving it to a certain location on the screens
+  var vis = d3.select("svg")
+  .data([data])
+  .append("svg:svg") 
+  .attr("class", "thirdVisualization")
+  .attr("width", width)
+  .attr("height", height)
+  .append("svg:g") 
+  .attr("transform", "translate(" + 1300 + "," + 300 + ")");
+
+  // Setting inner and outer radii for each arc piece
+  var arc = d3.svg.arc()
+  .innerRadius(innerRadius)
+  .outerRadius(outerRadius);
+
+  // Selecting a pie chart
+  var pie = d3.layout.pie()
+  .value(function(d) { 
+    console.log(d.key + ": " + d.values.length);
+    return d.values.length; 
+        }); // Getting length of values array
+  
+  /* Selects all slices in g, associates pie data, 
+   * makes g elements for each item in the array,
+   * creates groups to hold each slice,
+   * and adds the class "slice" to each slice 
+   * for styling purposes
+   */
+   var arcs = vis.selectAll("smaller.slice") 
+   .data(pie)
+   .enter()
+   .append("svg:g")
+   .attr("class", "smallerSlices");
+
+      // Setting slice colors and creating SVG path
+      arcs.append("svg:path")
+      .attr("fill", function(d, i) {
+        return color(i); } )
+      .attr("d", arc);
+
+      // Labeling each slice and placing label
+      arcs.append("svg:text")
+      .attr('class','labels')
+      .attr("transform", function(d) { //set the label's origin to the center of the arc
+      // Source for the 5 lines of code below: 
+      // http://bl.ocks.org/Guerino1/2295263
+      var c = arc.centroid(d);
+      d.outerRadius = outerRadius; // Set Outer Coordinate
+      d.innerRadius = outerRadius/2; // Set Inner Coordinate
+      console.log(angle(d));
+      return "translate(" + (c[0]*2.3) +"," + (c[1]*2.3) + ")rotate(" + angle(d) + ")";
+    })
+    .attr("text-anchor", "middle") //center the text on it's origin
+    .attr("size", "11px")
+    .style("fill", "#000000")
+          // Assigning the labels
+          .text(function(d, i) { return data[i].key + ": " + data[i].values.length; })
+        }
+
+  // Computes the angle of an arc, converting from radians to degrees.
+  // Source: http://bl.ocks.org/Guerino1/2295263
+  // User Guerino1, posted on April 3, 2012
+  function angle(d) {
+    var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
+    return a > 90 ? a - 180 : a;
+  }
+
+    </script>
+</body>
