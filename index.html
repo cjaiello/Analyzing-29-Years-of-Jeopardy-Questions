@@ -135,8 +135,8 @@ body {
 
     var format = d3.format(",.0f");
 
-    var x = d3.scale.linear().range([0, w-50]),
-        y = d3.scale.ordinal().rangeRoundBands([0, h-60], .1);
+    var x = d3.scale.linear().range([10, w-50]),
+        y = d3.scale.ordinal().rangeRoundBands([0, h-50], .1);
 
     var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
@@ -146,7 +146,8 @@ body {
 
     var svg = d3.select("body").append("svg")
         .attr("class", getVizName(vizNumber))
-        .attr("padding", "20px")
+        .attr("padding-left", "20")
+        .attr("margin-left", "20")
         .attr("width", w+150)
         .attr("height", h)
       .append("g")
@@ -166,6 +167,7 @@ body {
     // Adding y axis to screen
     svg.append("g")
         .attr("class", "y axis")
+        .attr("transform", "translate(" + 10 + ",0)")
         .call(yAxis);
 
     var bar = svg.selectAll("g.bar")
@@ -180,6 +182,7 @@ body {
     // Putting the rectangles on the bar chart
     bar.append("rect")
         .attr("fill", "#5c5cb5")
+        .attr("transform", "translate(" + 10 + ",0)")
         .attr("width", function(d, i) {
           return x(d.values.length); 
         })
@@ -215,6 +218,7 @@ body {
         .attr("y", y.rangeBand() / 2)
         .attr("dx", 20)
         .attr("dy", ".35em")
+        .style("font-weight","bold")
         .attr("text-anchor", "end")
         .text(function(d) {
           return format(d.values.length); 
