@@ -59,15 +59,15 @@ body {
     if(err) console.log(err);
 
     // Aggregate data set
-    data = aggregateBy(data, "Round");
+    data = aggregateByRound(data);
 
-    buildBarVis(data, 85);
+    buildBarVis(data, 85, 1);
   });
 
   /*
   * Helper for aggregating data
   */
-  function aggregateBy(data, attributeToAggregateBy){
+  function aggregateByRound(data){
 
     var arrayOfJeopardyQuestions = d3.nest()
     arrayOfJeopardyQuestions = d3.nest()
@@ -79,15 +79,58 @@ body {
     return arrayOfJeopardyQuestions;
   }
 
+  /*
+  * Helper for aggregating data
+  */
+  function aggregateByYear(data){
+
+    var arrayOfJeopardyQuestions = d3.nest()
+    arrayOfJeopardyQuestions = d3.nest()
+    .key(function(data) { 
+      return data.Year; 
+    })
+    .entries(data);
+
+    return arrayOfJeopardyQuestions;
+  }
+
+  /*
+  * Helper for aggregating data
+  */
+  function aggregateByValue(data){
+
+    var arrayOfJeopardyQuestions = d3.nest()
+    arrayOfJeopardyQuestions = d3.nest()
+    .key(function(data) { 
+      return data.Value; 
+    })
+    .entries(data);
+
+    return arrayOfJeopardyQuestions;
+  }
+
+  // Tells the name of the viz
+  function getVizName(vizNumber){
+    vizNumber = parseInt(vizNumber);
+    console.log("What the fuck?");
+    console.log(vizNumber);
+    if(vizNumber == 1){
+      return "firstChart";
+    } else if(vizNumber == 2){
+      return "secondChart";
+    } else if(vizNumber == 3){
+      return "thirdChart";
+    } else return "fourthChart";
+  }
 
   // First: translateXCoordinate = 50
   // Second: translateXCoordinate = 75
   // Third: translateXCoordinate = 125
-  function buildBarVis(data, translateXCoordinate, yDomain) {
+  function buildBarVis(data, translateXCoordinate, vizNumber) {
 
     console.log(data);
 
-    var w = 400;
+    var w = 320;
     var h = 500;
 
     var format = d3.format(",.0f");
@@ -95,11 +138,14 @@ body {
     var x = d3.scale.linear().range([0, w-50]),
         y = d3.scale.ordinal().rangeRoundBands([0, h-50], .1);
 
-    var xAxis = d3.svg.axis().scale(x).orient("top").tickSize(-h),
+    var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
+    console.log(vizNumber);
+    console.log("My viz name is: " + getVizName(vizNumber));
+
     var svg = d3.select("body").append("svg")
-        .attr("class", "barChart")
+        .attr("class", getVizName(vizNumber))
         .attr("width", w+100)
         .attr("height", h)
       .append("g")
@@ -134,18 +180,23 @@ body {
     bar.append("rect")
         .attr("fill", "#5c5cb5")
         .attr("width", function(d, i) {
-          console.log(d.values.length);
           return x(d.values.length); 
         })
         .attr("height", y.rangeBand())
         .on("mouseover", function(d, i) {
+          if(vizNumber == 1){
           // First, remove the old second and third charts
           d3.select("svg.secondChart")
           .remove();
           d3.select("svg.thirdChart")
-          .remove();
-          // Now make a new second chart
-          buildWordCloudVis(data[i], data[i].key);
+            .remove();
+            buildBarVis(aggregateByYear(data[i].values), 25, vizNumber + 1);
+          } else if (vizNumber == 2) {
+            d3.select("svg.thirdChart")
+              .remove();
+            buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1);
+          }
+          //buildWordCloudVis(data[i], data[i].key);
           d3.select(this)
             .attr("fill", "#a2a2d5");
          })
@@ -158,7 +209,7 @@ body {
     bar.append("text")
         .attr("class", "value")
         .attr("x", function(d) { 
-          console.log(d.values.length);
+          console.log("Bar label is: " + d.values.length);
           return x(d.values.length); 
         })
         .attr("y", y.rangeBand() / 2)
@@ -180,7 +231,6 @@ body {
       var regex = new RegExp("(?:^|\\s)" + wordToFind + "(?=\\s|$)");
       var matches = currentQuestion.match(regex);
       if(matches != null){
-        console.log("Found this many matches: " + matches.length);
         numberOfMatches = numberOfMatches + matches.length;
       }
     }
@@ -198,17 +248,15 @@ body {
       // Set 'question' equal to each item's question
       var question = data.values[counter].Question;
       questionList.push(question);
-      console.log(question);
       // Split each string into an array
       var listOfWords = question.split(" ");
-      console.log(listOfWords);
       // For each word in the question
       for(var innerCounter = 0; innerCounter < listOfWords.length; innerCounter++){
         var currentWord = listOfWords[innerCounter];
         // Trim away any commas and periods
         currentWord = currentWord.replace(/,$/, "");
-        currentWord = currentWord.replace(/\)$/, "");
-        currentWord = currentWord.replace(/^\(/, "");
+        currentWord = currentWord.replace(/\)/, "");
+        currentWord = currentWord.replace(/\(/, "");
           // If it's not an empty word or a period:
         if((currentWord != " ")  && (currentWord != ".")){
           // If we haven't seen this word yet
@@ -229,11 +277,16 @@ body {
       }
     }
 
+    // Colors to choose from for the words
+    var color = d3.scale.linear()
+            .domain([0,1,2,3,4,5,6,7, 8, 9, 10, 11, 12])
+            .range(["#fa2d74", "#1e63e9", "#008547", "#785e94", "#3b0576", "#58011c", "#458b00", "#e93f1e", "#002849", "#16d79c", "#ff8d00", "#0000ff"]);
 
 
+    // Actually building the word cloud
     d3.layout.cloud().size([960, 500])
         .words(wordMapList.map(function(d) {
-          return {text: d, size: 10 * wordMap[d]};
+          return {text: d, size: 10 + wordMap[d]/2};
         }))
         .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .font("Impact")
@@ -255,7 +308,8 @@ body {
                 .data(words)
                 .enter().append("text")
                 .style("font-size", function(d) { return d.size + "px"; })
-                .style("fill", function(d, i) { return "red"; })
+                .style("fill", function(d, i) { 
+                  return color(Math.random() * 12); })
                 .attr("transform", function(d) {
                     return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
                 })
