@@ -4,17 +4,17 @@
 <style>
 /* Title of Page */
 h1 {
-  font-size: 22px;
+  font-size: 20px;
   font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
-  text-align: left;
-  padding-left: 10px;
+  text-align: center;
+  line-height: 20px;
   color: #7f7fc5;
 }
 h2 {
-  font-size: 18px;
+  font-size: 17px;
   font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
-  text-align: left;
-  padding-left: 10px;
+  text-align: center;
+  line-height: 17px;
   color: #7f7fc5;
 }
 /* Body text on page */
@@ -30,8 +30,12 @@ body {
   font-family: Calibri,Candara,Segoe,"Segoe UI",Optima,Arial,sans-serif;
 }
 
+.td-center {
+  text-align: center;
+}
+
 .bar text.value {
-  fill: #00008B;
+  fill: #000000;
 }
 
 .axis {
@@ -52,6 +56,49 @@ body {
 }
 
 </style>
+
+<body>
+  <center>
+    <h1>28 Years of Jeopardy Questions!</h1>
+    <h2>Choose what types of visualizations you would like to see!</h2>
+    <table id="dropdowns" class="td-center">
+      <tr>
+        <td class="td-center">
+          First Visualization:
+        </td>
+        <td class="td-center">
+          <select id="firstVizDropdown">
+          <option value="bar">Bar Graph</option>
+          <option value="pie">Pie Chart</option>
+          <option value="treemap">Tree Map</option>
+        </select>
+        </td>
+        <td class="td-center">
+          Second Visualization:
+        </td>
+        <td class="td-center">
+          <select id="secondVizDropdown">
+          <option value="bar">Bar Graph</option>
+          <option value="pie">Pie Chart</option>
+          <option value="treemap">Tree Map</option>
+        </select>
+        </td>
+        <td class="td-center">
+          Third Visualization:
+        </td>
+        <td class="td-center">
+          <select id="thirdVizDropdown">
+          <option value="bar">Bar Graph</option>
+          <option value="pie">Pie Chart</option>
+          <option value="treemap">Tree Map</option>
+        </select>
+        </td>
+      </tr>
+    </table>
+  </center>
+  <div id="locationOfSVGs">
+  </div>
+</body> 
 
 <script>
 
@@ -144,7 +191,7 @@ body {
     console.log(vizNumber);
     console.log("My viz name is: " + getVizName(vizNumber));
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#locationOfSVGs").append("svg")
         .attr("class", getVizName(vizNumber))
         .attr("padding-left", "20")
         .attr("margin-left", "20")
