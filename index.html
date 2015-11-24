@@ -358,8 +358,10 @@ body {
         currentWord = currentWord.replace(/\""/, "");
         // And make it lowercase:
         currentWord = currentWord.toLowerCase();
-          // If it's not an empty word or a period:
-        if((currentWord != " ")  && (currentWord != ".")){
+        // If it's not an empty word or a period (or what I've deemed a plain word):
+        var arrayOfPlainWords = ["\s", "\.", "a", "an", "and", "the", "was", "to", "for", "of", "is", "by", "on", "\&", "it\'s", "from", "or", "with", "at", "as", "that", "these", "be", "it", "are", "in"];
+        // If this word isn't in arrayOfPlainWords:
+        if(arrayOfPlainWords.indexOf(currentWord) < 0){
           // If we haven't seen this word yet
           if (!(currentWord in wordMap)){
             // Count its matches
@@ -385,7 +387,7 @@ body {
 
 
     // Actually building the word cloud
-    d3.layout.cloud().size([1400, 1000])
+    d3.layout.cloud().size([1200, 600])
         .words(wordMapList.map(function(d) {
           return {text: d, size: 15 + wordMap[d]/2};
         }))
@@ -399,10 +401,10 @@ body {
       function draw(words) {
         d3.select("#locationOfWordCloud").append("svg")
                 .attr("width", 1200)
-                .attr("height", 800)
+                .attr("height", 600)
                 .attr("class", "wordCloud")
                 .append("g")
-                .attr("transform", "translate(400,400)")
+                .attr("transform", "translate(600,300)")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
