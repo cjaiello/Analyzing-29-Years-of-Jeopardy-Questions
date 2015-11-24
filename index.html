@@ -20,14 +20,13 @@ h2 {
 /* Body text on page */
 body {
   background-color: #EBFAFF;
-  font-size: 11px;
+  font-size: 12px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 }
 /* All labels on charts */
 .labels {
   font-size: 12px;
-  font-weight: bold;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  font-family: Calibri,sans-serif;
 }
 
 .td-center {
@@ -72,7 +71,8 @@ body {
 <body>
   <center>
     <h1>28 Years of Jeopardy Questions!</h1>
-    <h2>Choose what types of visualizations you would like to see!</h2>
+    <h3>Choose what types of visualizations you would like to see! Then hover over a piece of data in one graph to see the data broken down further based on other categories.</h3>
+    <h3>Lastly, once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs.<br>When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
     <table id="dropdowns" class="td-center">
       <tr>
         <td class="td-center td-leftpadding">
@@ -241,7 +241,7 @@ body {
 
     // Adding y axis to screen
     svg.append("g")
-        .attr("class", "y axis")
+        .attr("class", "labels")
         .attr("transform", "translate(" + 10 + ",0)")
         .call(yAxis);
 
@@ -285,6 +285,8 @@ body {
             d3.select(".wordCloudLabel").remove();
             // Now make a new one:
             buildWordCloudVis(data[i], data[i].key);
+            d3.select(this)
+              .attr("fill", "#6dbd6f");
           }})
         .on("mouseout", function() {
           d3.select(this)
@@ -293,7 +295,7 @@ body {
 
     // Placing the label text for each bar
     bar.append("text")
-        .attr("class", "value")
+        .attr("class", "labels")
         .attr("x", function(d) { 
           return x(d.values.length); 
         })
