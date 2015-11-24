@@ -347,6 +347,9 @@ body {
         currentWord = currentWord.replace(/,$/, "");
         currentWord = currentWord.replace(/\)/, "");
         currentWord = currentWord.replace(/\(/, "");
+        currentWord = currentWord.replace(/\""/, "");
+        // And make it lowercase:
+        currentWord = currentWord.toLowerCase();
           // If it's not an empty word or a period:
         if((currentWord != " ")  && (currentWord != ".")){
           // If we haven't seen this word yet
@@ -391,7 +394,7 @@ body {
                 .attr("height", 800)
                 .attr("class", "wordCloud")
                 .append("g")
-                .attr("transform", "translate(400,300)")
+                .attr("transform", "translate(400,400)")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
