@@ -70,7 +70,7 @@ body {
 
 <body>
   <center>
-    <h1>28 Years of Jeopardy Questions!</h1>
+    <h1>29 Years of Jeopardy Questions!</h1>
     <h3>Choose what types of visualizations you would like to see! Then hover over a piece of data in one graph to see the data broken down further based on other categories.</h3>
     <h3>Lastly, once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs.<br>When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
     <table id="dropdowns" class="td-center">
@@ -136,7 +136,8 @@ body {
     // Aggregate data set
     data = aggregateByRound(data);
 
-    buildBarVis(data, 85, 1, "Round");
+    //buildBarVis(data, 85, 1, "Round");
+    buildPieVis(data, 85, 1, "Round");
   });
 
   /*
@@ -308,7 +309,7 @@ body {
           return format(d.values.length); 
         });
 
-    svg.append("text")      // text label for the x axis
+    svg.append("text")
         .attr("x", w / 2 - 50 )
         .attr("y", h - 30)
         .style("font-size","15px")
@@ -365,7 +366,7 @@ body {
         // And make it lowercase:
         currentWord = currentWord.toLowerCase();
         // If it's not an empty word or a period (or what I've deemed a plain word):
-        var arrayOfPlainWords = ["\s", "\.", "a", "an", "and", "the", "was", "this", "to", "for", "of", "is", "by", "on", "if", "like", "i", "\&", "it\'s", "from", "or", "with", "at", "as", "that", "these", "be", "it", "are", "in"];
+        var arrayOfPlainWords = ["\s", "\.", "a", "but", "an", "and", "the", "was", "this", "to", "for", "of", "is", "by", "on", "if", "like", "i", "\&", "it\'s", "from", "or", "with", "at", "as", "that", "these", "be", "it", "are", "in"];
         // If this word isn't in arrayOfPlainWords:
         if(arrayOfPlainWords.indexOf(currentWord) < 0){
           // If we haven't seen this word yet
@@ -435,13 +436,13 @@ body {
   }
 
 
-  function buildPieVis(data) {
+  function buildPieVis(data, translateXCoordinate, vizNumber, vizLabel) {
     var color = d3.scale.ordinal()
     .range(["#1c9ce9", "#679eea" , "#67d6ee", "#9becee", "#aceff1", "#9bc2ee", "#679eea" , "#69e2e5", "#1c9ce9", "#9bc2ee", "#67d6ee"]);
 
   // Width, height, and radius for pie chart
-  var width = 1800,
-  height = 800,
+  var width = 500,
+  height = 600,
   radius = Math.min(width, height) / 2;
 
   var centerPlacement = width / 2;
@@ -452,13 +453,14 @@ body {
 
   // Adding svg element to body, setting its width and height,
   // and moving it to a certain location on the screen
-  var vis = d3.select("body")
-  .data([data])
-  .append("svg:svg") 
-  .attr("width", width)
-  .attr("height", height)
-  .append("svg:g") 
-  .attr("transform", "translate(" + 200 + "," + 300 + ")");
+  var vis = d3.select("#locationOfSVGs")
+        .append("svg")
+        .attr("class", getVizName(vizNumber))
+        .data([data])
+        .attr("width", width)
+        .attr("height", height)
+        .append("svg:g") 
+        .attr("transform", "translate(" + 200 + "," + 300 + ")");
 
   // Setting inner and outer radii for each arc piece
   var arc = d3.svg.arc()
@@ -481,13 +483,35 @@ body {
    .append("svg:g")
    .attr("class", "slice")
    .on("mouseover", function(d, i) {
-      d3.select("svg.secondVisualization")
+      if(vizNumber == 1){
+      // First, remove the old second and third charts
+      d3.select("svg.secondChart")
       .remove();
-      d3.select("svg.thirdVisualization")
-      .remove();
-        // When we mouse over a part of the donut,
-        // build the inner donut chart with its data!!
-        buildSecondVis(data[i].values);
+      d3.select("svg.thirdChart")
+        .remove();
+        buildPieVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Year");
+      } else if (vizNumber == 2) {
+        d3.select("svg.thirdChart")
+          .remove();
+        buildPieVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
+      }
+      d3.select(this)
+        .attr("fill", "#ffffff");
+     })
+    .on("click", function(d, i) {
+      if(vizNumber == 3){
+        // First remove old word cloud:
+        d3.select(".wordCloud").remove();
+        // Remove its old label too:
+        d3.select(".wordCloudLabel").remove();
+        // Now make a new one:
+        buildWordCloudVis(data[i], data[i].key);
+        d3.select(this)
+          .attr("fill", "#6dbd6f");
+      }})
+    .on("mouseout", function() {
+      d3.select(this)
+        .attr("fill", "#000000");
       });
 
       // Setting slice colors and creating SVG path
@@ -510,6 +534,14 @@ body {
         .text(function(d, i) { 
           return data[i].key + ": " + data[i].values.length; 
         });
+
+      vis.append("text")
+          .attr("x", width / 2 - 50 )
+          .attr("y", height - 30)
+          .style("font-size","15px")
+          .style("font-weight","bold")
+          .attr("fill", "black")
+          .text(vizLabel);
       }
 
   // Computes the angle of an arc, converting from radians to degrees.
