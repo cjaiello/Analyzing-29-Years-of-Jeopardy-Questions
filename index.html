@@ -271,6 +271,9 @@ body {
          })
         .on("click", function(d, i) {
           if(vizNumber == 3){
+            // First remove old word cloud:
+            d3.select(".wordCloud").remove();
+            // Now make a new one:
             buildWordCloudVis(data[i], data[i].key);
           }})
         .on("mouseout", function() {
@@ -330,6 +333,7 @@ body {
     var wordMapList = []; // Just a list of all words (so, all keys)
     var questionList = []; // All questions in this data set
 
+    // These steps populate the above three variables
     for(var counter = 0; counter < data.values.length; counter++){
       // Set 'question' equal to each item's question
       var question = data.values[counter].Question;
@@ -374,7 +378,7 @@ body {
         .words(wordMapList.map(function(d) {
           return {text: d, size: 15 + wordMap[d]/2};
         }))
-        .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .rotate(function() { return (~~(Math.random() * 6) - 3) * 30; })
         .font("Impact")
         .fontSize(function(d) { return d.size; })
         .on("end", draw)
@@ -385,7 +389,7 @@ body {
         d3.select("#locationOfWordCloud").append("svg")
                 .attr("width", 1200)
                 .attr("height", 800)
-                .attr("class", "wordcloud")
+                .attr("class", "wordCloud")
                 .append("g")
                 .attr("transform", "translate(400,300)")
                 .selectAll("text")
