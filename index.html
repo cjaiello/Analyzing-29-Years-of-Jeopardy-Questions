@@ -107,8 +107,20 @@ body {
   <div id="locationOfSVGs">
   </div>
   <center>
-    <div id="locationOfWordCloud" align="center">
-    </div>
+    <table>
+      <tr>
+        <td>
+          <div id="locationOfWordCloud" align="center">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="locationOfWordCloudLabel" align="center">
+          </div>
+        </td>
+      </tr>
+    </table>
   </center>
 </body> 
 
@@ -176,8 +188,6 @@ body {
   // which is either 1, 2, or 3
   function getVizName(vizNumber){
     vizNumber = parseInt(vizNumber);
-    console.log("What the fuck?");
-    console.log(vizNumber);
     if(vizNumber == 1){
       return "firstChart";
     } else if(vizNumber == 2){
@@ -194,8 +204,6 @@ body {
   // @vizLabel: The label for the viz (what attribute it is)
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
-    console.log(data);
-
     var w = 365;
     var h = 600;
 
@@ -206,9 +214,6 @@ body {
 
     var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
-
-    console.log(vizNumber);
-    console.log("My viz name is: " + getVizName(vizNumber));
 
     var svg = d3.select("#locationOfSVGs").append("svg")
         .attr("class", getVizName(vizNumber))
@@ -241,7 +246,6 @@ body {
       .enter().append("g")
         .attr("class", "bar")
         .attr("transform", function(d) {
-          console.log(d.key);
           return "translate(1," + y(d.key) + ")"; 
         });
 
@@ -273,6 +277,8 @@ body {
           if(vizNumber == 3){
             // First remove old word cloud:
             d3.select(".wordCloud").remove();
+            // Remove its old label too:
+            d3.select(".wordCloudLabel").remove();
             // Now make a new one:
             buildWordCloudVis(data[i], data[i].key);
           }})
@@ -328,6 +334,8 @@ body {
   // Function to build a wordcloud for rows in the data set
   // @data: The data from the csv
   function buildWordCloudVis(data){
+
+    console.log(data);
 
     var wordMap = {}; // Key is word, value is number of times seen
     var wordMapList = []; // Just a list of all words (so, all keys)
@@ -406,6 +414,15 @@ body {
                 })
                 .text(function(d) { return d.text; });
     } 
+    // Lastly, label the word
+    d3.select("#locationOfWordCloudLabel").append("text")
+        .attr("class", "wordCloudLabel")
+        .attr("x", 300)
+        .attr("y", 300)
+        .style("font-size","25px")
+        .style("font-weight","bold")
+        .attr("fill", "black")
+        .text("Word Cloud for Questions from " + data.values[0].Round + " Round in the Year " + data.values[0].Year + " With a Value of " + data.values[0].Value);
   }
 
 
@@ -455,8 +472,6 @@ body {
    .append("svg:g")
    .attr("class", "slice")
    .on("mouseover", function(d, i) {
-    console.log("Building inner donut chart for: " + data[i].key);
-      console.log("Removing second and third charts for: " + data[i].key);
       d3.select("svg.secondVisualization")
       .remove();
       d3.select("svg.thirdVisualization")
