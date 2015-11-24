@@ -409,6 +409,7 @@ body {
                 .style("font-size", function(d) { return d.size + "px"; })
                 .style("fill", function(d, i) { 
                   return color(Math.random() * 12); })
+                .style("font-family", "\"Century Gothic\",CenturyGothic,AppleGothic,sans-serif")
                 .attr("transform", function(d) {
                     return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
                 })
@@ -422,7 +423,7 @@ body {
         .style("font-size","25px")
         .style("font-weight","bold")
         .attr("fill", "black")
-        .text("Word Cloud for Questions from " + data.values[0].Round + " Round in the Year " + data.values[0].Year + " With a Value of " + data.values[0].Value);
+        .text("Questions from " + data.values[0].Round + " Round in the Year " + data.values[0].Year + " With a Value of " + data.values[0].Value);
   }
 
 
