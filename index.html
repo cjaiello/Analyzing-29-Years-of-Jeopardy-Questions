@@ -20,7 +20,7 @@ h2 {
 /* Body text on page */
 body {
   background-color: #EBFAFF;
-  font-size: 12px;
+  font-size: 11px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 }
 /* All labels on charts */
@@ -71,8 +71,7 @@ body {
 <body>
   <center>
     <h1>29 Years of Jeopardy Questions!</h1>
-    <h3>Choose what types of visualizations you would like to see! Then hover over a piece of data in one graph to see the data broken down further based on other categories.</h3>
-    <h3>Lastly, once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs.<br>When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
+    <h3>Choose what types of visualizations you would like to see! Then hover over a piece of data in one graph to see the data broken down further based on other categories. Lastly, once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs. When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
     <table id="dropdowns" class="td-center">
       <tr>
         <td class="td-center td-leftpadding">
@@ -137,7 +136,7 @@ body {
     data = aggregateByRound(data);
 
     //buildBarVis(data, 85, 1, "Round");
-    buildPieVis(data, 85, 1, "Round");
+    buildBarVis(data, 85, 1, "Round");
   });
 
   /*
@@ -210,7 +209,7 @@ body {
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
     var w = 365;
-    var h = 600;
+    var h = 650;
 
     var format = d3.format(",.0f");
 
@@ -366,7 +365,7 @@ body {
         // And make it lowercase:
         currentWord = currentWord.toLowerCase();
         // If it's not an empty word or a period (or what I've deemed a plain word):
-        var arrayOfPlainWords = ["\s", "\.", "a", "but", "an", "and", "the", "was", "this", "to", "for", "of", "is", "by", "on", "if", "like", "i", "\&", "it\'s", "from", "or", "with", "at", "as", "that", "these", "be", "it", "are", "in"];
+        var arrayOfPlainWords = ["\s", "\.", "a", "but", "an", "and", "the", "was", "this", "had", "has", "can", "the", "too", "to", "for", "of", "is", "by", "on", "if", "like", "i", "\&", "it\'s", "from", "or", "with", "at", "as", "that", "these", "be", "it", "are", "in"];
         // If this word isn't in arrayOfPlainWords:
         if(arrayOfPlainWords.indexOf(currentWord) < 0){
           // If we haven't seen this word yet
@@ -438,7 +437,7 @@ body {
 
   function buildPieVis(data, translateXCoordinate, vizNumber, vizLabel) {
     var color = d3.scale.ordinal()
-    .range(["#1c9ce9", "#679eea" , "#67d6ee", "#9becee", "#aceff1", "#9bc2ee", "#679eea" , "#69e2e5", "#1c9ce9", "#9bc2ee", "#67d6ee"]);
+    .range(["#73a8d8", "#abe7e6" , "#67afae", "#509795", "#73d8d6", "#b2e7d6", "#d8f3ea" , "#8ccfdc", "#53b7ca", "#399db1", "#2c7a89", "#205762", "#8fc1cb", "#5f8187", "#64bfd0"]);
 
   // Width, height, and radius for pie chart
   var width = 500,
