@@ -7,7 +7,8 @@
     font-size: 20px;
     font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
     text-align: center;
-    line-height: 20px;
+    line-height: 15px;
+    margin-bottom: 0px;
     color: #399DB1;
   }
   h2 {
@@ -34,12 +35,12 @@
 
   .calendarBox {
     width: 650px;
-    height: 500px;
+    height: 650px;
     float: left;
   }
   /* All labels on charts */
   .labels {
-    font-size: 12px;
+    font-size: 11px;
     font-family: Calibri,sans-serif;
   }
 
@@ -136,7 +137,6 @@
 <body>
   <center>
     <h1>29 Years of Jeopardy Questions!</h1>
-    <h3>Hover over a piece of data in one graph to see the data broken down further based on other categories. Once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs. When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
   </center>
   <div id="wrapper">
     <div id="locationOfSVGs">
@@ -164,7 +164,7 @@
 
 <script>
 
-  d3.csv('data/jeopardy_questions_and_answers.csv', function(err, data) {
+  d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
     if(err) console.log(err);
 
     // Aggregate data set
@@ -244,12 +244,12 @@
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
     var w = 300;
-    var h = 625;
+    var h = 700;
 
     var format = d3.format(",.0f");
 
     var x = d3.scale.linear().range([10, w-50]),
-        y = d3.scale.ordinal().rangeRoundBands([0, h-50], .1);
+        y = d3.scale.ordinal().rangeBands([0, h-50], .1);
 
     var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
         yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
@@ -299,15 +299,17 @@
         .on("mouseover", function(d, i) {
           if(vizNumber == 1){
           // First, remove the old second and third charts
-          d3.select(".calendarBoxSVG")
+          d3.select("svg.secondChart")
           .remove();
           d3.select("svg.thirdChart")
             .remove();
-            buildCalendarViewVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Year");
-          } else if (vizNumber == 2) {
-            d3.select("svg.thirdChart")
-              .remove();
             buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
+          } else if (vizNumber == 2) {
+            d3.select(".calendarLabel")
+              .remove();
+            d3.select(".calendarBoxSVG")
+              .remove();
+            buildCalendarViewVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Air Date");
           }
           d3.select(this)
             .attr("fill", "#8dcad6");
@@ -617,8 +619,8 @@
   }*/
 
   function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
-    var width = 300,
-    height = 42,
+    var width = 325,
+    height = 45,
     cellSize = 5;
 
     var percent = d3.format(".1%"),
@@ -635,7 +637,7 @@
         .domain([-.05, .05])
         .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
 
-        d3.select(".calendarBox").append("div").attr("width", 300).attr("height", 900).attr("class", "calendarBoxSVG");
+        d3.select(".calendarBox").append("div").attr("width", 300).style("padding-top", "10px").attr("height", 900).attr("class", "calendarBoxSVG");
 
     var svg = d3.select(".calendarBoxSVG").selectAll("svg")
         .data(d3.range(1984, 2013))
@@ -643,6 +645,15 @@
         .attr("width", width)
         .attr("height", height)
         .attr("class", "RdYlGn")
+        .on("mouseover", function(d, i) {
+            d3.select("svg.thirdChart")
+              .remove();
+              console.log(data);
+            buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
+          
+          d3.select(this)
+            .attr("fill", "#8dcad6");
+         })
       .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
@@ -697,6 +708,20 @@
     }
 
     d3.select(self.frameElement).style("height", "2910px");
+
+
+    d3.select(".calendarBox")
+        .append("svg")
+        .attr("class", "calendarLabel")
+        .attr("width", 675)
+        .attr("height", 40).append("text")
+        .attr("x", 275)
+        .attr("y", height - 25)
+        .style("font-size","15px")
+        .style("font-weight","bold")
+        .attr("fill", "black")
+        .text(vizLabel);
+
   }
     </script>
 </body>
