@@ -2,69 +2,125 @@
 <script src="build/d3.layout.cloud.js" charset="utf-8"></script>
 
 <style>
-/* Title of Page */
-h1 {
-  font-size: 20px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
-  text-align: center;
-  line-height: 20px;
-  color: #399DB1;
-}
-h2 {
-  font-size: 15px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
-  text-align: center;
-  line-height: 17px;
-  color: #399DB1;
-}
-/* Body text on page */
-body {
-  background-color: #EBFAFF;
-  font-size: 12px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
-}
-/* All labels on charts */
-.labels {
-  font-size: 12px;
-  font-family: Calibri,sans-serif;
-}
+  /* Title of Page */
+  h1 {
+    font-size: 20px;
+    font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+    text-align: center;
+    line-height: 20px;
+    color: #399DB1;
+  }
+  h2 {
+    font-size: 15px;
+    font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+    text-align: center;
+    line-height: 17px;
+    color: #399DB1;
+  }
+  /* Body text on page */
+  body {
+    background-color: #EBFAFF;
+    font-size: 12px;
+    font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  }
 
-.td-center {
-  text-align: center;
-}
+  .calendarBox {
+    width: 500px;
+    height: 500px;
+  }
+  /* All labels on charts */
+  .labels {
+    font-size: 12px;
+    font-family: Calibri,sans-serif;
+  }
 
-.td-leftpadding {
-  padding-left: 50px;
-}
+  .td-center {
+    text-align: center;
+  }
 
-.td-rightpadding {
-  padding-right 50px;
-}
+  .td-leftpadding {
+    padding-left: 50px;
+  }
 
-#locationOfSVGs{
-  padding-bottom: 50px;
-}
+  .td-rightpadding {
+    padding-right 50px;
+  }
 
-.bar text.value {
-  fill: #000000;
-}
+  #locationOfSVGs{
+    padding-bottom: 50px;
+  }
 
-.axis {
-  shape-rendering: crispEdges;
-}
+  .bar text.value {
+    fill: #000000;
+  }
 
-.axis path {
-  fill: none;
-}
+  .axis {
+    shape-rendering: crispEdges;
+  }
 
-.x.axis line {
-  stroke: #000;
-  stroke-opacity: 0.2;
-}
+  .axis path {
+    fill: none;
+  }
 
-.y.axis path {
-  stroke: black;
-}
+  .x.axis line {
+    stroke: #000;
+    stroke-opacity: 0.2;
+  }
+
+  .y.axis path {
+    stroke: black;
+  }
+
+  /* Styling below used for Calendar view */
+  #chart{
+    width: 800px;
+    margin: 0 auto;
+  }
+  .background {
+    fill: #eee;
+  }
+
+  line {
+    stroke: #fff;
+  }
+
+  text.active {
+    fill: red;
+  }
+
+  .day {
+    fill: #fff;
+    stroke: #ccc;
+  }
+
+  .month {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 4px;
+  }
+  .year-title {
+    font-size: 1.5em;
+  }
+
+  /* color ranges */
+  .RdYlGn .q0-11{fill:rgb(165,0,38)}
+  .RdYlGn .q1-11{fill:rgb(215,48,39)}
+  .RdYlGn .q2-11{fill:rgb(244,109,67)}
+  .RdYlGn .q3-11{fill:rgb(253,174,97)}
+  .RdYlGn .q4-11{fill:rgb(254,224,139)}
+  .RdYlGn .q5-11{fill:rgb(255,255,191)}
+  .RdYlGn .q6-11{fill:rgb(217,239,139)}
+  .RdYlGn .q7-11{fill:rgb(166,217,106)}
+  .RdYlGn .q8-11{fill:rgb(102,189,99)}
+  .RdYlGn .q9-11{fill:rgb(26,152,80)}
+  .RdYlGn .q10-11{fill:rgb(0,104,55)}
+
+  /* hover info */
+  #tooltip {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    padding: 10px;
+  }
 
 </style>
 
@@ -74,6 +130,8 @@ body {
     <h3>Hover over a piece of data in one graph to see the data broken down further based on other categories. Once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs. When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
   </center>
   <div id="locationOfSVGs">
+  </div>
+  <div class="calendarBox">
   </div>
   <center>
     <table>
@@ -95,7 +153,7 @@ body {
 
 <script>
 
-  d3.csv('data/jeopardy_questions_and_answers_preprocessed_2.csv', function(err, data) {
+  d3.csv('data/jeopardy_questions_and_answers.csv', function(err, data) {
     if(err) console.log(err);
 
     // Aggregate data set
@@ -234,7 +292,7 @@ body {
           .remove();
           d3.select("svg.thirdChart")
             .remove();
-            buildBarVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Year");
+            buildCalendarViewVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Year");
           } else if (vizNumber == 2) {
             d3.select("svg.thirdChart")
               .remove();
@@ -546,5 +604,86 @@ body {
     var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
     return a > 90 ? a - 180 : a;
   }*/
+
+  function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
+    var width = 300,
+    height = 50,
+    cellSize = 5; // cell size
+
+    var percent = d3.format(".1%"),
+        format = d3.time.format("%m/%d/%Y");
+
+    var color = d3.scale.quantize()
+        .domain([-.05, .05])
+        .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+
+        d3.select(".calendarBox").append("div").attr("width", 300).attr("height", 900).attr("class", "calendarBoxSVG");
+
+    var svg = d3.select(".calendarBoxSVG").selectAll("svg")
+        .data(d3.range(1984, 2012))
+      .enter().append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("class", "RdYlGn")
+      .append("g")
+        .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+
+    svg.append("text")
+        .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d; });
+
+    var rect = svg.selectAll(".day")
+        .data(function(d) { 
+          return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+      .enter().append("rect")
+        .attr("class", "day")
+        .attr("width", cellSize)
+        .attr("height", cellSize)
+        .attr("x", function(d) { return d3.time.weekOfYear(d) * cellSize; })
+        .attr("y", function(d) { return d.getDay() * cellSize; })
+        .datum(format);
+
+    rect.append("title")
+        .text(function(d) { return d; });
+
+    svg.selectAll(".month")
+        .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+      .enter().append("path")
+        .attr("class", "month")
+        .attr("d", monthPath);
+
+        console.log("Hello?");
+        console.log(data[0].values);
+
+      var data = d3.nest()
+        .key(function(d) {
+          return d.Date; })
+        .rollup(function(d) { 
+          console.log("inside rollup, number of instances of date match:");
+          console.log(d.length);
+          return d.length; })
+        .map(data[0].values);
+
+      rect.filter(function(d) {
+        return d in data; })
+          .attr("class", function(d) { return "day " + color(data[d]); })
+        .select("title")
+          .text(function(d) { return d + ": " + percent(data[d]); });
+
+
+    function monthPath(t0) {
+      var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
+          d0 = t0.getDay(), w0 = d3.time.weekOfYear(t0),
+          d1 = t1.getDay(), w1 = d3.time.weekOfYear(t1);
+      return "M" + (w0 + 1) * cellSize + "," + d0 * cellSize
+          + "H" + w0 * cellSize + "V" + 7 * cellSize
+          + "H" + w1 * cellSize + "V" + (d1 + 1) * cellSize
+          + "H" + (w1 + 1) * cellSize + "V" + 0
+          + "H" + (w0 + 1) * cellSize + "Z";
+    }
+
+    d3.select(self.frameElement).style("height", "2910px");
+  }
     </script>
 </body>
