@@ -709,7 +709,7 @@
           .attr("class", function(d) { return "day " + color(data[d].length); })
         .select("title")
           .text(function(d) { 
-            return d + ": " + (data[d].length); });
+            return (data[d].length > 0) ? (d + ": " + (data[d].length) + " questions") : (d); });
 
 
     function monthPath(t0) {
