@@ -314,17 +314,6 @@
           d3.select(this)
             .attr("fill", "#8dcad6");
          })
-        .on("click", function(d, i) {
-          if(vizNumber == 3){
-            // First remove old word cloud:
-            d3.select(".wordCloud").remove();
-            // Remove its old label too:
-            d3.select(".wordCloudLabel").remove();
-            // Now make a new one:
-            buildWordCloudVis(data[i], data[i].key);
-            d3.select(this)
-              .attr("fill", "#81dbad");
-          }})
         .on("mouseout", function() {
           d3.select(this)
             .attr("fill", "#399DB1");
@@ -390,7 +379,6 @@
       if (re.test(key)){
         // Add it to our list of objects (data points) from the
         // correct year
-        console.log(data[key][0]);
         arrayOfDataPointsFromCorrectYear.push(data[key][0])
       }
     }
@@ -670,12 +658,16 @@
             d3.select(".wordCloud").remove();
             // Remove its old label too:
             d3.select(".wordCloudLabel").remove();
-            /*console.log(data[0]);
-            // Now make a new one:
-            console.log(data);
-            console.log(d);
-            console.log(data[d]);*/
             buildWordCloudVis(data, d);
+            // Turn blue to confirm it's loaded
+            d3.select(this)
+              .attr("fill", "#399DB1")
+              .style("font-weight", "bold");
+         })
+        .on("mouseout", function(d, i) {
+            d3.select(this)
+              .attr("fill", "#000000")
+              .style("font-weight", "normal");
          })
       .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
@@ -713,12 +705,10 @@
         .map(data[0].values);
 
       rect.filter(function(d) {
-        //console.log(d in data);
         return d in data; })
           .attr("class", function(d) { return "day " + color(data[d].length); })
         .select("title")
           .text(function(d) { 
-            //console.log(data);
             return d + ": " + (data[d].length); });
 
 
