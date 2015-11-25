@@ -8,19 +8,19 @@ h1 {
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
   text-align: center;
   line-height: 20px;
-  color: #7f7fc5;
+  color: #399DB1;
 }
 h2 {
-  font-size: 17px;
+  font-size: 15px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
   text-align: center;
   line-height: 17px;
-  color: #7f7fc5;
+  color: #399DB1;
 }
 /* Body text on page */
 body {
   background-color: #EBFAFF;
-  font-size: 11px;
+  font-size: 12px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 }
 /* All labels on charts */
@@ -136,7 +136,7 @@ body {
     data = aggregateByRound(data);
 
     //buildBarVis(data, 85, 1, "Round");
-    buildBarVis(data, 85, 1, "Round");
+    buildPieVis(data, 85, 1, "Round");
   });
 
   /*
@@ -209,7 +209,7 @@ body {
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
     var w = 365;
-    var h = 650;
+    var h = 625;
 
     var format = d3.format(",.0f");
 
@@ -255,7 +255,7 @@ body {
 
     // Putting the rectangles on the bar chart
     bar.append("rect")
-        .attr("fill", "#5c5cb5")
+        .attr("fill", "#399DB1")
         .attr("transform", "translate(" + 10 + ",0)")
         .attr("width", function(d, i) {
           return x(d.values.length); 
@@ -275,7 +275,7 @@ body {
             buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
           }
           d3.select(this)
-            .attr("fill", "#a2a2d5");
+            .attr("fill", "#8dcad6");
          })
         .on("click", function(d, i) {
           if(vizNumber == 3){
@@ -286,11 +286,11 @@ body {
             // Now make a new one:
             buildWordCloudVis(data[i], data[i].key);
             d3.select(this)
-              .attr("fill", "#6dbd6f");
+              .attr("fill", "#81dbad");
           }})
         .on("mouseout", function() {
           d3.select(this)
-            .attr("fill", "#5c5cb5");
+            .attr("fill", "#399DB1");
       });
 
     // Placing the label text for each bar
@@ -435,19 +435,20 @@ body {
   }
 
 
+  // Function will build a pie visualization for the data
   function buildPieVis(data, translateXCoordinate, vizNumber, vizLabel) {
     var color = d3.scale.ordinal()
-    .range(["#73a8d8", "#abe7e6" , "#67afae", "#509795", "#73d8d6", "#b2e7d6", "#d8f3ea" , "#8ccfdc", "#53b7ca", "#399db1", "#2c7a89", "#205762", "#8fc1cb", "#5f8187", "#64bfd0"]);
+    .range(["#73a8d8", "#abe7e6" , "#509795", "#67afae", "#73d8d6", "#b2e7d6", "#d8f3ea" , "#8ccfdc", "#53b7ca", "#399db1", "#2c7a89", "#205762", "#8fc1cb", "#5f8187", "#64bfd0"]);
 
   // Width, height, and radius for pie chart
   var width = 500,
-  height = 600,
+  height = 800,
   radius = Math.min(width, height) / 2;
 
   var centerPlacement = width / 2;
 
   // Outer and inner radii
-  var outerRadius = 200;
+  var outerRadius = 115;
   var innerRadius = 0;    
 
   // Adding svg element to body, setting its width and height,
@@ -495,7 +496,7 @@ body {
         buildPieVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
       }
       d3.select(this)
-        .attr("fill", "#ffffff");
+        .attr("fill", "#399DB1");
      })
     .on("click", function(d, i) {
       if(vizNumber == 3){
@@ -522,21 +523,27 @@ body {
       // Labeling each slice and placing label
       arcs.append("svg:text")
         .attr("class", "labels")
-        .attr("transform", function(d) {
-        // Source for the line of code below: 
-        // http://bl.ocks.org/Guerino1/2295263
-        return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")";
-        })
+        .attr("transform", function(d, i) {
+          var c = arc.centroid(d),
+          x = c[0],
+          y = c[1],
+          // pythagorean theorem for hypotenuse
+          h = Math.sqrt(x*x + y*y);
+          return "translate(" + (x/h * 150) +  ',' + (y/h * 150) + ")rotate(" + angle(d) + ")"})
         // Centering text on origin
-        .attr("text-anchor", "middle")
-        // Assigning the labels
+        .attr("text-anchor", function(d) {
+          // are we past the center?
+          return (d.endAngle + d.startAngle)/2 > Math.PI ? "end" : "start";})
         .text(function(d, i) { 
+          console.log(getVizName(vizNumber));
           return data[i].key + ": " + data[i].values.length; 
         });
 
-      vis.append("text")
-          .attr("x", width / 2 - 50 )
-          .attr("y", height - 30)
+      // Labeling each pie chart
+      d3.select("." + getVizName(vizNumber)).append("text")
+          .attr("x", 175 )
+          .attr("y", 550)
+          .attr("class", "pieLabel")
           .style("font-size","15px")
           .style("font-weight","bold")
           .attr("fill", "black")
