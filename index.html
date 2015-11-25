@@ -243,7 +243,7 @@
   // @vizLabel: The label for the viz (what attribute it is)
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
-    var w = 365;
+    var w = 300;
     var h = 625;
 
     var format = d3.format(",.0f");
@@ -258,7 +258,7 @@
         .attr("class", getVizName(vizNumber))
         .attr("padding-left", "20")
         .attr("margin-left", "20")
-        .attr("width", w+150)
+        .attr("width", w+125)
         .attr("height", h)
       .append("g")
         .attr("transform", "translate(" + translateXCoordinate + "," + 30 + ")");
@@ -299,7 +299,7 @@
         .on("mouseover", function(d, i) {
           if(vizNumber == 1){
           // First, remove the old second and third charts
-          d3.select("svg.secondChart")
+          d3.select(".calendarBoxSVG")
           .remove();
           d3.select("svg.thirdChart")
             .remove();
