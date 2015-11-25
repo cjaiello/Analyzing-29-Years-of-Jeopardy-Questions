@@ -243,7 +243,7 @@
   // @vizLabel: The label for the viz (what attribute it is)
   function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
-    var w = 300;
+    var w = 330;
     var h = 700;
 
     var format = d3.format(",.0f");
@@ -261,7 +261,7 @@
         .attr("width", w+125)
         .attr("height", h)
       .append("g")
-        .attr("transform", "translate(" + translateXCoordinate + "," + 30 + ")");
+        .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
     // Set the scale domain.
     x.domain([0, d3.max(data, function(d) {
