@@ -71,72 +71,20 @@ body {
 <body>
   <center>
     <h1>29 Years of Jeopardy Questions!</h1>
-    <h3>Choose what types of visualizations you would like to see! Then hover over a piece of data in one graph to see the data broken down further based on other categories. Lastly, once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs. When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
-    <table id="dropdowns" class="td-center">
-      <tr>
-        <td class="td-center td-leftpadding">
-          First Visualization:
-        </td>
-        <td class="td-center td-rightpadding">
-          <select id="firstVizDropdown">
-          <option value="bar">Bar Graph</option>
-          <option value="pie">Pie Chart</option>
-          <option value="treemap">Tree Map</option>
-        </select>
-        </td>
-        <td class="td-center td-leftpadding">
-          Second Visualization:
-        </td>
-        <td class="td-center td-rightpadding">
-          <select id="secondVizDropdown">
-          <option value="bar">Bar Graph</option>
-          <option value="pie">Pie Chart</option>
-          <option value="treemap">Tree Map</option>
-        </select>
-        </td>
-        <td class="td-center td-leftpadding">
-          Third Visualization:
-        </td>
-        <td class="td-center td-rightpadding">
-          <select id="thirdVizDropdown">
-          <option value="bar">Bar Graph</option>
-          <option value="pie">Pie Chart</option>
-          <option value="treemap">Tree Map</option>
-        </select>
-        </td>
-      </tr>
-    </table>
-  </center>
-  <div id="locationOfSVGs">
-  </div>
-  <center>
-    <table>
-      <tr>
-        <td>
-          <div id="locationOfWordCloud" align="center">
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div id="locationOfWordCloudLabel" align="center">
-          </div>
-        </td>
-      </tr>
-    </table>
+    <h3>Hover over a piece of data in one graph to see the data broken down further based on other categories. Once you have all three graphs on the screen, click one of the data points in the third graph (click, not hover) to have a word cloud appear below the three graphs. When the data point you clicked turns green, you'll know your word cloud has loaded.</h3>
   </center>
 </body> 
 
 <script>
 
-  d3.csv('data/jeopardy_questions_and_answers_preprocessed.csv', function(err, data) {
+  d3.csv('data/jeopardy_questions_and_answers_preprocessed_2.csv', function(err, data) {
     if(err) console.log(err);
 
     // Aggregate data set
     data = aggregateByRound(data);
 
     //buildBarVis(data, 85, 1, "Round");
-    buildPieVis(data, 85, 1, "Round");
+    buildBarVis(data, 85, 1, "Round");
   });
 
   /*
@@ -436,19 +384,19 @@ body {
 
 
   // Function will build a pie visualization for the data
-  function buildPieVis(data, translateXCoordinate, vizNumber, vizLabel) {
+  /*function buildPieVis(data, translateXCoordinate, vizNumber, vizLabel) {
     var color = d3.scale.ordinal()
     .range(["#73a8d8", "#abe7e6" , "#509795", "#67afae", "#73d8d6", "#b2e7d6", "#d8f3ea" , "#8ccfdc", "#53b7ca", "#399db1", "#2c7a89", "#205762", "#8fc1cb", "#5f8187", "#64bfd0"]);
 
   // Width, height, and radius for pie chart
-  var width = 500,
+  var width = 550,
   height = 800,
   radius = Math.min(width, height) / 2;
 
   var centerPlacement = width / 2;
 
   // Outer and inner radii
-  var outerRadius = 115;
+  var outerRadius = 195;
   var innerRadius = 0;    
 
   // Adding svg element to body, setting its width and height,
@@ -460,7 +408,7 @@ body {
         .attr("width", width)
         .attr("height", height)
         .append("svg:g") 
-        .attr("transform", "translate(" + 200 + "," + 300 + ")");
+        .attr("transform", "translate(" + 300 + "," + 300 + ")");
 
   // Setting inner and outer radii for each arc piece
   var arc = d3.svg.arc()
@@ -476,7 +424,7 @@ body {
    * creates groups to hold each slice,
    * and adds the class "slice" to each slice 
    * for styling purposes
-   */
+   */ /*
    var arcs = vis.selectAll("g.slice") 
    .data(pie)
    .enter()
@@ -529,8 +477,9 @@ body {
           y = c[1],
           // pythagorean theorem for hypotenuse
           h = Math.sqrt(x*x + y*y);
-          return "translate(" + (x/h * 150) +  ',' + (y/h * 150) + ")rotate(" + angle(d) + ")"})
+          return "translate(" + (x/h * 200) +  ',' + (y/h * 200) + ")rotate(" + angle(d) + ")"})
         // Centering text on origin
+        .style("font-size", "10.5px")
         .attr("text-anchor", function(d) {
           // are we past the center?
           return (d.endAngle + d.startAngle)/2 > Math.PI ? "end" : "start";})
@@ -538,6 +487,28 @@ body {
           console.log(getVizName(vizNumber));
           return data[i].key + ": " + data[i].values.length; 
         });
+
+      var polyline = svg.select(".lines").selectAll("polyline")
+        .data(pie(data), key);
+      
+      polyline.enter()
+        .append("polyline");
+
+      polyline.transition().duration(1000)
+        .attrTween("points", function(d){
+          this._current = this._current || d;
+          var interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function(t) {
+            var d2 = interpolate(t);
+            var pos = outerArc.centroid(d2);
+            pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+            return [arc.centroid(d2), outerArc.centroid(d2), pos];
+          };      
+        });
+      
+      polyline.exit()
+        .remove();
 
       // Labeling each pie chart
       d3.select("." + getVizName(vizNumber)).append("text")
@@ -556,7 +527,6 @@ body {
   function angle(d) {
     var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
     return a > 90 ? a - 180 : a;
-  }
-
+  }*/
     </script>
 </body>
