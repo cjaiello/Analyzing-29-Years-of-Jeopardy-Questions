@@ -64,7 +64,7 @@ function getVizName(vizNumber){
 // and prevents them from entering more than one word
 function validateForm() {
   var usersWord = document.getElementById("wordToSearchFor").value;
-  if (usersWord==null || usersWord== "" || usersWord.contains(" ")) {
+  if (usersWord==null || usersWord== "" || usersWord.indexOf(" ") > -1) {
     alert("Please enter a singular word to search for.");
     return false;
   } else return true;
@@ -73,8 +73,11 @@ function validateForm() {
 // Function to find the number of word matches in the data
 // set. Finds number of matches in questions, answers, and categories
 function findWordMatchesInDataSet(){
-  validateForm();
-  
+  // If form is invalid, don't do the search:
+  if(!validateForm()){
+    return;
+  }
+
   console.log("Starting now...");
   // First, load the data set
   d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
