@@ -147,7 +147,7 @@ function findMatches(input, wordToFind){
     currentCategory = currentCategory.replace(/\""/, "");
 
     // Regex to find how many matches for a particular word there are:
-    var regex = new RegExp("(?:^|\\s)" + wordToFind + "(?=\\s|$)");
+    var regex = new RegExp("(?:^|\\s)" + wordToFind.toLowerCase() + "(?=\\s|$)");
 
     // Compare this word to the current question
     var matches = currentQuestion.toLowerCase().match(regex);
