@@ -2,12 +2,12 @@
 
 /* Title of Page */
 h1 {
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
   text-align: center;
   line-height: 15px;
   margin-bottom: 0px;
-  color: #399DB1;
+  color: #AEB3D1;
   margin-top: 10px;
 }
 h2 {
@@ -15,11 +15,12 @@ h2 {
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
   text-align: center;
   line-height: 17px;
-  color: #399DB1;
+  color: #AEB3D1;
 }
 /* Body text on page */
 body {
-  background-color: #d2f4ff;
+  background-color: #0F114A;
+  color: #ffffff;
   font-size: 12px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 }
@@ -35,8 +36,13 @@ body {
   overflow: hidden;
 }
 
+#locationOfWordCloud{
+  color: #000000;
+}
+
 #locationOfSVGs{
   float:left;
+  height: 700px;
 }
 
 .calendarBox {
@@ -62,12 +68,8 @@ body {
   padding-right 50px;
 }
 
-#locationOfSVGs{
-  padding-bottom: 50px;
-}
-
 .bar text.value {
-  fill: #000000;
+  fill: #ffffff;
 }
 
 .axis {
@@ -143,5 +145,11 @@ text.active {
 #loadingBoxImage{
   width: auto;
   height: 30px;
-  visibility: hidden;
+  display: none;
+}
+
+#directionsBox{
+  width: auto;
+  height: 30px;
+  display: none;
 }

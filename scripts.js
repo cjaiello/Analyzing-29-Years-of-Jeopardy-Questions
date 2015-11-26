@@ -72,12 +72,14 @@ function validateForm() {
 
 // When called, this will show or hide the loading image
 function showLoadingImage(boolean){
-  var loadingBox = document.getElementById("loadingBoxImage");
+  var loadingBoxImage = document.getElementById("loadingBoxImage");
+  var directionsBox = document.getElementById("directionsBox");
   if(boolean == true) {
-    loadingBox.style.visibility = "visible";
+    loadingBoxImage.style.display = "block";
+    directionsBox.style.display = "none";
   } else {
-    console.log("hide image");
-    loadingBox.style.visibility = "hidden";
+    loadingBoxImage.style.display = "none";
+    directionsBox.style.display = "block";
   }
 }
 

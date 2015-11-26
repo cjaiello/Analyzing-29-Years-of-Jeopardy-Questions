@@ -8,7 +8,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   console.log("Going to be done loading");
   showLoadingImage(false);
 
-  var w = 330;
+  var w = 300;
   var h = 700;
 
   var format = d3.format(",.0f");
@@ -21,9 +21,10 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .attr("class", getVizName(vizNumber))
-      .attr("padding-left", "20")
-      .attr("margin-left", "20")
-      .attr("width", w+125)
+      .style("background-color", "#3a498c")
+      .style("padding-left", "10px")
+      .style("margin-right", "10px")
+      .attr("width", w+115)
       .attr("height", h)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
@@ -36,14 +37,19 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Adding x axis to screen
   svg.append("g")
-      .attr("class", "x axis")
+      .attr("class", "x axis, axis")
+      .attr("fill", "white")
+      .style("font-weight", "bold")
       .call(xAxis);
 
   // Adding y axis to screen
   svg.append("g")
-      .attr("class", "labels")
+      .attr("class", "labels, axis")
+      .attr("fill", "white")
+      .style("font-weight", "bold")
       .attr("transform", "translate(" + 10 + ",0)")
       .call(yAxis);
+
 
   var bar = svg.selectAll("g.bar")
       .data(data)
@@ -94,12 +100,14 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Placing the label text for each bar
   bar.append("text")
+      .attr("fill", "white")
       .attr("class", "labels")
+      .style("font-size", "14px")
       .attr("x", function(d) { 
         return x(d.values.length); 
       })
       .attr("y", y.rangeBand() / 2)
-      .attr("dx", 20)
+      .attr("dx", 40)
       .attr("dy", ".35em")
       .style("font-weight","bold")
       .attr("text-anchor", "end")
@@ -109,10 +117,10 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   svg.append("text")
       .attr("x", w / 2 - 50 )
-      .attr("y", h - 30)
+      .attr("y", h - 40)
       .style("font-size","15px")
       .style("font-weight","bold")
-      .attr("fill", "black")
+      .attr("fill", "white")
       .text(vizLabel);
 
 }
@@ -231,7 +239,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       .attr("y", h - 50)
       .style("font-size","20px")
       .style("font-weight","bold")
-      .attr("fill", "black")
+      .attr("fill", "white")
       .text(vizLabel);
 
 }

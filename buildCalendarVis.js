@@ -3,8 +3,8 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   // Hide loading image
   showLoadingImage(false);
 
-  var width = 325,
-  height = 45,
+  var width = 320,
+  height = 44,
   cellSize = 5.5;
 
   var percent = d3.format(".1%"),
@@ -22,11 +22,14 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .range(d3.range(11).map(function(d) {
         return "q" + d + "-11"; }));
 
-  d3.select(".calendarBox").append("div").attr("width", 300).style("padding-top", "10px").attr("height", 900).attr("class", "calendarBoxSVG");
+  d3.select(".calendarBox").append("div").attr("width", 450).style("padding-top", "10px").attr("height", 900)
+      .style("background-color", "#3a498c").attr("class", "calendarBoxSVG");
 
   var svg = d3.select(".calendarBoxSVG").selectAll("svg")
       .data(d3.range(1984, 2013))
     .enter().append("svg")
+      .attr("fill", "white")
+      .style("padding-left", "5px")
       .attr("width", width)
       .attr("height", height)
       .attr("class", "RdYlGn")
@@ -47,7 +50,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
        })
       .on("mouseout", function(d, i) {
           d3.select(this)
-            .attr("fill", "#000000")
+            .attr("fill", "#ffffff")
             .style("font-weight", "normal");
        })
     .append("g")
@@ -110,13 +113,14 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   d3.select(".calendarBox")
       .append("svg")
       .attr("class", "calendarLabel")
-      .attr("width", 675)
-      .attr("height", 40).append("text")
+      .style("background-color", "#3a498c")
+      .attr("width", 650)
+      .attr("height", 30).append("text")
       .attr("x", 275)
-      .attr("y", height - 25)
+      .attr("y", height - 20)
       .style("font-size","15px")
       .style("font-weight","bold")
-      .attr("fill", "black")
+      .attr("fill", "white")
       .text(vizLabel);
 
 }

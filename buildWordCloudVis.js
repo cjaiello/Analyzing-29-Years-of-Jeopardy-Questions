@@ -79,7 +79,6 @@ function buildWordCloudVis(data, year){
           return {text: d, size: wordMap[d] + 15};
         }))
         .rotate(function() { return (~~(Math.random() * 6) - 3) * 30; })
-        .font("Impact")
         .fontSize(function(d) { return d.size; })
         .on("end", draw)
         .start();
@@ -89,6 +88,7 @@ function buildWordCloudVis(data, year){
                 .attr("width", 1200)
                 .attr("height", 600)
                 .attr("class", "wordCloud")
+                .style("background-color", "#000000")
                 .append("g")
                 .attr("transform", "translate(600,300)")
                 .selectAll("text")
