@@ -350,8 +350,6 @@
   // @input: An array of strings
   // @ wordToFind: The word you want to find in the given input
   function findMatches(input, wordToFind){
-    console.log(input);
-    console.log(wordToFind);
     var numberOfMatches = 0; 
     // Go through all questions in this piece of data:
     for(var counter = 0; counter < input.length; counter++){
@@ -422,12 +420,12 @@
               wordMapList.push(currentWord);
               // And keep track of its count as well:
               wordMap[currentWord] = numberOfMatches;
-            }/* else {
+            } else {
               // Count its matches
               var numberOfMatches = findMatches(questionList, currentWord);
               // And keep track of its count as well:
               wordMap[currentWord] += numberOfMatches;
-            }*/
+            }
           }
         }
       }
