@@ -24,6 +24,13 @@ body {
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 }
 
+/* Labels for Word Search bars */
+.wordSearchLabel {
+  font-size: 15px;
+  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  text-align: center;
+}
+
 #wrapper {
   overflow: hidden;
 }

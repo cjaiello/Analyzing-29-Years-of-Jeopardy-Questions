@@ -149,8 +149,8 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   console.log(data);
 
-  var w = 700;
-  var h = 700;
+  var w = 1200;
+  var h = 500;
 
   var format = d3.format(",.0f");
 
@@ -186,7 +186,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   // Adding y axis to screen
   svg.append("g")
-      .attr("class", "labels")
+      .attr("class", "wordSearchLabel")
       .attr("transform", "translate(" + 10 + ",0)")
       .call(yAxis);
 
@@ -213,7 +213,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   // Placing the label text for each bar
   bar.append("text")
-      .attr("class", "labels")
+      .attr("class", "wordSearchLabel")
       .attr("x", function(d) { 
         return x(parseInt(d.Value)); 
       })
@@ -228,8 +228,8 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   svg.append("text")
       .attr("x", w / 2 - 50 )
-      .attr("y", h - 30)
-      .style("font-size","15px")
+      .attr("y", h - 50)
+      .style("font-size","20px")
       .style("font-weight","bold")
       .attr("fill", "black")
       .text(vizLabel);

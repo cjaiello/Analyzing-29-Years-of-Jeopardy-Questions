@@ -31,15 +31,19 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .attr("height", height)
       .attr("class", "RdYlGn")
       .on("click", function(d, i) {
-          // Remove old word cloud:
-          d3.select(".wordCloud").remove();
-          // Remove its old label too:
-          d3.select(".wordCloudLabel").remove();
-          buildWordCloudVis(data, d);
-          // Turn blue to confirm it's loaded
-          d3.select(this)
-            .attr("fill", "#399DB1")
-            .style("font-weight", "bold");
+          console.log("Show loading");
+          showLoadingImage(true);
+          setTimeout(function(){
+            // Remove old word cloud:
+            d3.select(".wordCloud").remove();
+            // Remove its old label too:
+            d3.select(".wordCloudLabel").remove();
+            buildWordCloudVis(data, d);
+            // Turn blue to confirm it's loaded
+            d3.select(this)
+              .attr("fill", "#399DB1")
+              .style("font-weight", "bold");
+          }, 10);
        })
       .on("mouseout", function(d, i) {
           d3.select(this)
