@@ -169,6 +169,9 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
   var svg = d3.select("#locationOfSVGs").append("svg")
+      .style("background-color", "#3a498c")
+      .style("padding", "30px")
+      .style("margin", "30px")
       .attr("class", "countWordsVis")
       .attr("padding-left", "20")
       .attr("margin-left", "20")
@@ -190,11 +193,13 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
   // Adding x axis to screen
   svg.append("g")
       .attr("class", "x axis")
+      .attr("fill", "white")
       .call(xAxis);
 
   // Adding y axis to screen
   svg.append("g")
       .attr("class", "wordSearchLabel")
+      .attr("fill", "white")
       .attr("transform", "translate(" + 10 + ",0)")
       .call(yAxis);
 
@@ -230,13 +235,14 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       .attr("dy", ".35em")
       .style("font-weight","bold")
       .attr("text-anchor", "end")
+      .attr("fill", "white")
       .text(function(d) {
         return d.Value; 
       });
 
   svg.append("text")
       .attr("x", w / 2 - 50 )
-      .attr("y", h - 50)
+      .attr("y", h - 40)
       .style("font-size","20px")
       .style("font-weight","bold")
       .attr("fill", "white")

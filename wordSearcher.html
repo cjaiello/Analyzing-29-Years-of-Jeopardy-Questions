@@ -12,13 +12,17 @@
 <body>
   <center>
     <h1>29 Years of Jeopardy Questions!</h1>
-    <h2>Want to see how frequently a word appears in questions, answers, and categories? Type the word below, and I can show you!</h2>
-    <input type="text" id="wordToSearchFor"><button type="submit" id="submitButton" onclick="findWordMatchesInDataSet()">Search</button>
   </center>
   <div id="wrapper">
     <center>
+      <div id="directionsBox">
+        <h2>Want to see how frequently a word appears in questions, answers, and categories? Type the word below, and I can show you!</h2>
+      </div>
       <div id="loadingBoxImage">
         <h2>Now loading...</h2>
+      </div>
+      <div id="inputDiv" width="1000px">
+        <input type="text" id="wordToSearchFor"><button type="submit" id="submitButton" onclick="findWordMatchesInDataSet()">Search</button>
       </div>
       <div id="locationOfSVGs" align="center">
       </div>
