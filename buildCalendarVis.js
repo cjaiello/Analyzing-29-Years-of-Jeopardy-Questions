@@ -82,7 +82,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
         .attr("class", function(d) { return "day " + color(data[d].length); })
       .select("title")
         .text(function(d) { 
-          return (data[d].length > 0) ? (d + ": " + (data[d].length) + " questions") : (d); });
+          return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions") : d + ": " + (data[d].length) + " question") : (d); });
 
 
   function monthPath(t0) {

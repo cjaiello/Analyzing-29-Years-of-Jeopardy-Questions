@@ -111,7 +111,7 @@ function buildWordCloudVis(data, year){
                 .append("svg:title")
                 .text(function(d) { 
                   // Added 15 previously, so subtract that to get the true number
-                  return d.size - 15 + " occurrences of " + d.text; 
+                  return ((d.size - 15) > 1) ? (d.size - 15 + " occurrences of " + d.text) : ("1 occurrence of " + d.text); 
                 });
     } 
     // Lastly, label the word
