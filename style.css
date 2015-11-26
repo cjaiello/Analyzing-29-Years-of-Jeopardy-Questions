@@ -142,7 +142,7 @@ html,body{
 /* Loading code below courtesy of user rdfriedl on codepen.io, posted at: http://codepen.io/rdfriedl/pen/zvbvMv */
 
 #loadingBoxImage{
-  width: 200px;
-  height: 200px;
-  display: none;
+  width: auto;
+  height: auto;
+  visibility: hidden;
 }

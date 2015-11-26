@@ -11,6 +11,9 @@
 <body>
   <center>
     <h1>29 Years of Jeopardy Questions!</h1>
+    <div id="loadingBoxImage">
+        <h2>Now loading...</h2>
+    </div>
   </center>
   <div id="wrapper">
     <div id="locationOfSVGs">
@@ -46,4 +49,8 @@
     //buildBarVis(data, 85, 1, "Round");
     buildBarVis(aggregatedData, 85, 1, "Round");
   });
+
+  // Initially show loading image
+  showLoadingImage(true);
+
 </script>

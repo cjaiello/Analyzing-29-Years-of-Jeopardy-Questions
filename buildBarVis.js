@@ -4,6 +4,9 @@
 // @vizNumber: The number of the viz, either 1 2 or 3
 // @vizLabel: The label for the viz (what attribute it is)
 function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
+  // We can now hide the loading image
+  console.log("Going to be done loading");
+  showLoadingImage(false);
 
   var w = 330;
   var h = 700;
@@ -60,18 +63,26 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .attr("height", y.rangeBand())
       .on("mouseover", function(d, i) {
         if(vizNumber == 1){
-        // First, remove the old second and third charts
-        d3.select("svg.secondChart")
-        .remove();
-        d3.select("svg.thirdChart")
-          .remove();
-          buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
+          console.log("Show loading");
+          showLoadingImage(true);
+          setTimeout(function(){
+          // Remove the old second and third charts
+            d3.select("svg.secondChart")
+            .remove();
+            d3.select("svg.thirdChart")
+              .remove();
+              buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
+          }, 10);
         } else if (vizNumber == 2) {
-          d3.select(".calendarLabel")
-            .remove();
-          d3.select(".calendarBoxSVG")
-            .remove();
-          buildCalendarViewVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Air Date");
+          // Show loading image
+          showLoadingImage(true);
+          setTimeout(function(){
+            d3.select(".calendarLabel")
+              .remove();
+            d3.select(".calendarBoxSVG")
+              .remove();
+            buildCalendarViewVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Air Date");
+          }, 10);
         }
         d3.select(this)
           .attr("fill", "#8dcad6");

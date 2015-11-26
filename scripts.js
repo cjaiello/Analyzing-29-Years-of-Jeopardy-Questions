@@ -74,9 +74,10 @@ function validateForm() {
 function showLoadingImage(boolean){
   var loadingBox = document.getElementById("loadingBoxImage");
   if(boolean == true) {
-    loadingBox.style.display = "block";
+    loadingBox.style.visibility = "visible";
   } else {
-    loadingBox.style.display = "none";
+    console.log("hide image");
+    loadingBox.style.visibility = "hidden";
   }
 }
 
@@ -95,19 +96,15 @@ function findWordMatchesInDataSet(){
   // Tell the user that something is loading
   showLoadingImage(true);
 
-  console.log("Starting now...");
   // First, load the data set
   d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
     if(err) console.log(err);
 
     // Next, get the word we need from the screen
     var wordToSearchFor = document.getElementById('wordToSearchFor').value;
-    console.log("Searching for: " + wordToSearchFor);
     // Array with number of matches
     var numberOfMatchesFound = findMatches(data, wordToSearchFor);
-    console.log(numberOfMatchesFound);
-    console.log("Matches found. Question: " + numberOfMatchesFound.Questions + " | Answer: " + numberOfMatchesFound.Answers + " | Category: " + numberOfMatchesFound.Categories);
-
+    
     // Now, build the visualization based on the data:
     buildWordMatchBarVis(numberOfMatchesFound, 50, 1, "Appearances of the Word \"" + wordToSearchFor + "\"");
   });

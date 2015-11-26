@@ -1,4 +1,8 @@
 function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
+
+  // Hide loading image
+  showLoadingImage(false);
+
   var width = 325,
   height = 45,
   cellSize = 5.5;
