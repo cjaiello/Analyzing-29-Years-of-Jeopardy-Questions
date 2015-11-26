@@ -1,0 +1,131 @@
+/* Christina Aiello, 11/25/2015 */
+
+/* Title of Page */
+h1 {
+  font-size: 20px;
+  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  text-align: center;
+  line-height: 15px;
+  margin-bottom: 0px;
+  color: #399DB1;
+}
+h2 {
+  font-size: 15px;
+  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  text-align: center;
+  line-height: 17px;
+  color: #399DB1;
+}
+/* Body text on page */
+body {
+  background-color: #EBFAFF;
+  font-size: 12px;
+  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+}
+
+#wrapper {
+  overflow: hidden;
+}
+
+#locationOfSVGs{
+  float:left;
+}
+
+.calendarBox {
+  width: 650px;
+  height: 650px;
+  float: left;
+}
+/* All labels on charts */
+.labels {
+  font-size: 11px;
+  font-family: Calibri,sans-serif;
+}
+
+.td-center {
+  text-align: center;
+}
+
+.td-leftpadding {
+  padding-left: 50px;
+}
+
+.td-rightpadding {
+  padding-right 50px;
+}
+
+#locationOfSVGs{
+  padding-bottom: 50px;
+}
+
+.bar text.value {
+  fill: #000000;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #000;
+  stroke-opacity: 0.2;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+/* Styling below used for Calendar view */
+#chart{
+  width: 800px;
+  margin: 0 auto;
+}
+.background {
+  fill: #eee;
+}
+
+line {
+  stroke: #fff;
+}
+
+text.active {
+  fill: red;
+}
+
+.day {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.month {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 4px;
+}
+.year-title {
+  font-size: 1.5em;
+}
+
+/* color ranges */
+.RdYlGn .q0-11{fill:rgb(139, 205, 217)}
+.RdYlGn .q1-11{fill:rgb(101, 189, 205)}
+.RdYlGn .q2-11{fill:rgb(62, 172, 192)}
+.RdYlGn .q3-11{fill:rgb(55, 155, 173)}
+.RdYlGn .q4-11{fill:rgb(49, 139, 155)}
+.RdYlGn .q5-11{fill:rgb(43, 121, 135)}
+.RdYlGn .q6-11{fill:rgb(37, 103, 115)}
+.RdYlGn .q7-11{fill:rgb(31, 85, 95)}
+.RdYlGn .q8-11{fill:rgb(25, 69, 77)}
+.RdYlGn .q9-11{fill:rgb(19, 51, 57)}
+.RdYlGn .q10-11{fill:rgb(9, 25, 29)}
+
+/* hover info */
+#tooltip {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px;
+}
