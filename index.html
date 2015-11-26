@@ -1,5 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 <script src="build/d3.layout.cloud.js" charset="utf-8"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
 <style>
   /* Title of Page */
@@ -349,15 +350,17 @@
   // @input: An array of strings
   // @ wordToFind: The word you want to find in the given input
   function findMatches(input, wordToFind){
+    console.log(input);
+    console.log(wordToFind);
     var numberOfMatches = 0; 
     // Go through all questions in this piece of data:
     for(var counter = 0; counter < input.length; counter++){
       var currentQuestion = input[counter];
       // And find how many matches for a particular word there are:
       var regex = new RegExp("(?:^|\\s)" + wordToFind + "(?=\\s|$)");
-      var matches = currentQuestion.match(regex);
+      var matches = currentQuestion.toLowerCase().match(regex);
       if(matches != null){
-        numberOfMatches = numberOfMatches + matches.length;
+        numberOfMatches += matches.length;
       }
     }
     return numberOfMatches;
@@ -419,12 +422,12 @@
               wordMapList.push(currentWord);
               // And keep track of its count as well:
               wordMap[currentWord] = numberOfMatches;
-            } else {
+            }/* else {
               // Count its matches
               var numberOfMatches = findMatches(questionList, currentWord);
               // And keep track of its count as well:
               wordMap[currentWord] += numberOfMatches;
-            }
+            }*/
           }
         }
       }
@@ -438,7 +441,9 @@
       // Actually building the word cloud
       d3.layout.cloud().size([1200, 600])
           .words(wordMapList.map(function(d) {
-            return {text: d, size: 15 + wordMap[d]/3};
+            // wordMap[d] gets the count for each 'd', so each word.
+            // I'm adding 15 so we don't have a font size of 1.
+            return {text: d, size: wordMap[d] + 15};
           }))
           .rotate(function() { return (~~(Math.random() * 6) - 3) * 30; })
           .font("Impact")
@@ -464,7 +469,12 @@
                   .attr("transform", function(d) {
                       return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
                   })
-                  .text(function(d) { return d.text; });
+                  .text(function(d) { return d.text; })
+                  .append("svg:title")
+                  .text(function(d) { 
+                    // Added 15 previously, so subtract that to get the true number
+                    return d.size - 15 + " occurrences of " + d.text; 
+                  });
       } 
       // Lastly, label the word
       d3.select("#locationOfWordCloudLabel").append("text")
