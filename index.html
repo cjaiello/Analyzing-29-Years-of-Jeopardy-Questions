@@ -36,5 +36,14 @@
   </center>
 </body> 
 
+<script>
+  d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
+    if(err) console.log(err);
 
-</body>
+    // Aggregate data set
+    aggregatedData = aggregateByRound(data);
+
+    //buildBarVis(data, 85, 1, "Round");
+    buildBarVis(aggregatedData, 85, 1, "Round");
+  });
+</script>
