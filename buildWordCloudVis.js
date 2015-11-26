@@ -87,6 +87,7 @@ function buildWordCloudVis(data, year){
         d3.select("#locationOfWordCloud").append("svg")
                 .attr("width", 1200)
                 .attr("height", 600)
+                .style("margin-top", "25px")
                 .attr("class", "wordCloud")
                 .style("background-color", "#000000")
                 .append("g")
