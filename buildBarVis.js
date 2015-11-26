@@ -61,7 +61,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
         return x(d.values.length); 
       })
       .attr("height", y.rangeBand())
-      .on("mouseover", function(d, i) {
+      .on("click", function(d, i) {
         if(vizNumber == 1){
           console.log("Show loading");
           showLoadingImage(true);

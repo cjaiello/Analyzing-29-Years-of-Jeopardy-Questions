@@ -31,7 +31,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .attr("height", height)
       .attr("class", "RdYlGn")
       .on("click", function(d, i) {
-          // First remove old word cloud:
+          // Remove old word cloud:
           d3.select(".wordCloud").remove();
           // Remove its old label too:
           d3.select(".wordCloudLabel").remove();

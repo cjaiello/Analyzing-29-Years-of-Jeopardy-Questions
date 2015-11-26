@@ -131,18 +131,10 @@ text.active {
   padding: 10px;
 }
 
-
-html,body{
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
 /* Loading code below courtesy of user rdfriedl on codepen.io, posted at: http://codepen.io/rdfriedl/pen/zvbvMv */
 
 #loadingBoxImage{
   width: auto;
-  height: auto;
+  height: 30px;
   visibility: hidden;
 }

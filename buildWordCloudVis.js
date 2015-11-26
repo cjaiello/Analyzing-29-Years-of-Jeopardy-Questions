@@ -1,6 +1,9 @@
 // Function to build a wordcloud for rows in the data set
 // @data: The data from the csv
 function buildWordCloudVis(data, year){
+  console.log("Building word cloud");
+  // Hide loading image
+  showLoadingImage(false);
 
   var re = new RegExp("^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](" + year + "))$"), key;
   var arrayOfDataPointsFromCorrectYear = [];
@@ -80,7 +83,6 @@ function buildWordCloudVis(data, year){
         .fontSize(function(d) { return d.size; })
         .on("end", draw)
         .start();
-
       
       function draw(words) {
         d3.select("#locationOfWordCloud").append("svg")
@@ -105,7 +107,7 @@ function buildWordCloudVis(data, year){
                   // Added 15 previously, so subtract that to get the true number
                   return ((d.size - 15) > 1) ? (d.size - 15 + " occurrences of " + d.text) : ("1 occurrence of " + d.text); 
                 });
-    } 
+        } 
     // Lastly, label the word
     d3.select("#locationOfWordCloudLabel").append("text")
         .attr("class", "wordCloudLabel")
@@ -115,5 +117,7 @@ function buildWordCloudVis(data, year){
         .style("font-weight","bold")
         .attr("fill", "black")
         .text("Questions from " + arrayOfDataPointsFromCorrectYear[0].Round + " Round in the Year " + year + " With a Value of $" + arrayOfDataPointsFromCorrectYear[0].Value);
+
+        console.log("Test!");
   }
 }
