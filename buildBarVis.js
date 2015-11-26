@@ -113,10 +113,11 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 // @vizLabel: The label for the viz (what attribute it is)
 function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLabel) {
 
-  d3.select(".countWordsVis")
-        .remove();
 
   console.log("Trying to make graph for word");
+
+  // Now we can hide the loading image
+  showLoadingImage(false);
 
   // Make an object for each attribute:
   var questionData = new Object();

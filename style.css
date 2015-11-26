@@ -8,6 +8,7 @@ h1 {
   line-height: 15px;
   margin-bottom: 0px;
   color: #399DB1;
+  margin-top: 10px;
 }
 h2 {
   font-size: 15px;
@@ -128,4 +129,20 @@ text.active {
   background-color: #fff;
   border: 2px solid #ccc;
   padding: 10px;
+}
+
+
+html,body{
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Loading code below courtesy of user rdfriedl on codepen.io, posted at: http://codepen.io/rdfriedl/pen/zvbvMv */
+
+#loadingBoxImage{
+  width: 200px;
+  height: 200px;
+  display: none;
 }

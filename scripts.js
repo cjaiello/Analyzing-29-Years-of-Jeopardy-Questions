@@ -70,6 +70,16 @@ function validateForm() {
   } else return true;
 }
 
+// When called, this will show or hide the loading image
+function showLoadingImage(boolean){
+  var loadingBox = document.getElementById("loadingBoxImage");
+  if(boolean == true) {
+    loadingBox.style.display = "block";
+  } else {
+    loadingBox.style.display = "none";
+  }
+}
+
 // Function to find the number of word matches in the data
 // set. Finds number of matches in questions, answers, and categories
 function findWordMatchesInDataSet(){
@@ -77,6 +87,13 @@ function findWordMatchesInDataSet(){
   if(!validateForm()){
     return;
   }
+
+  // Remove old visualization
+  d3.select(".countWordsVis")
+        .remove();
+
+  // Tell the user that something is loading
+  showLoadingImage(true);
 
   console.log("Starting now...");
   // First, load the data set
