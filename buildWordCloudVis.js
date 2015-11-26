@@ -23,16 +23,21 @@ function buildWordCloudVis(data, year){
 
     var wordMap = {}; // Key is word, value is number of times seen
     var wordMapList = []; // Just a list of all words (so, all keys)
-    var questionList = []; // All questions in this data set
 
-    // These steps populate the above three variables
+    // These steps populate the above two variables
     for(var counter = 0; counter < arrayOfDataPointsFromCorrectYear.length; counter++){
-      // Set 'question' equal to each item's question
+      // Set 'question' equal to each data point's question
       var question = arrayOfDataPointsFromCorrectYear[counter].Question;
-      questionList.push(question);
-      // Split each string into an array
-      var listOfWords = question.split(" ");
-      // For each word in the question
+      // Set 'answer' equal to each data point's answer
+      var answer = arrayOfDataPointsFromCorrectYear[counter].Answer;
+
+      // Split each string into an array of words
+      var listOfQuestionWords = question.split(" ");
+      var listOfAnswerWords = answer.split(" ");
+      // Create a list of all words from question and answer
+      var listOfWords = listOfQuestionWords.concat(listOfAnswerWords);
+
+      // For each word in the question or answer
       for(var innerCounter = 0; innerCounter < listOfWords.length; innerCounter++){
         var currentWord = listOfWords[innerCounter];
         // Trim away any commas and periods
@@ -48,23 +53,10 @@ function buildWordCloudVis(data, year){
         if(arrayOfPlainWords.indexOf(currentWord) < 0){
           // If we haven't seen this word yet
           if (!(currentWord in wordMap)){
-            // Count its matches
-            var numberOfMatches = findMatches(questionList, currentWord);
-            console.log("New word");
-            console.log(currentWord);
-            console.log(numberOfMatches);
-            // Add to our list of words seen:
             wordMapList.push(currentWord);
-            // And keep track of its count as well:
-            wordMap[currentWord] = numberOfMatches;
+            wordMap[currentWord] = 1;
           } else {
-            // Count its matches
-            var numberOfMatches = findMatches(questionList, currentWord);
-            // And keep track of its count as well:
-            wordMap[currentWord] += numberOfMatches;
-            console.log("Repeat word");
-            console.log(currentWord);
-            console.log(numberOfMatches);
+            wordMap[currentWord] += 1;
           }
         }
       }

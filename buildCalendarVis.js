@@ -1,7 +1,7 @@
 function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   var width = 325,
   height = 45,
-  cellSize = 5;
+  cellSize = 5.5;
 
   var percent = d3.format(".1%"),
       format = d3.time.format("%m/%d/%Y");
