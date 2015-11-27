@@ -1,6 +1,5 @@
 /* Christina Aiello, 11/25/2015 */
 
-/* Title of Page */
 h1 {
   font-size: 18px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
@@ -10,13 +9,23 @@ h1 {
   color: #AEB3D1;
   margin-top: 10px;
 }
+
 h2 {
   font-size: 15px;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
   text-align: center;
-  line-height: 17px;
+  line-height: 15px;
   color: #AEB3D1;
 }
+
+h3 {
+  font-size: 14px;
+  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  text-align: center;
+  line-height: 13px;
+  color: #AEB3D1;
+}
+
 /* Body text on page */
 body {
   background-color: #0F114A;
@@ -36,25 +45,45 @@ body {
   overflow: hidden;
 }
 
+/* Div that holds word cloud on index page */
 #locationOfWordCloud{
   color: #000000;
 }
 
+/* Div that holds two bar graphs on index page */
 #locationOfSVGs{
   float:left;
   height: 700px;
 }
 
-.calendarBox {
-  width: 650px;
-  height: 650px;
-  float: left;
-}
 /* All labels on charts */
 .labels {
   font-size: 11px;
   font-family: Calibri,sans-serif;
 }
+
+/* hover info */
+#tooltip {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px;
+}
+
+/* Div that holds loading message */
+#loadingBoxImage{
+  width: auto;
+  height: 30px;
+  display: none;
+}
+
+/* Div that holds directions */
+#directionsBox{
+  width: auto;
+  height: 30px;
+  display: visible;
+}
+
+/* --------- Below is for All Bar Graphs --------- */
 
 .td-center {
   text-align: center;
@@ -89,11 +118,19 @@ body {
   stroke: black;
 }
 
-/* Styling below used for Calendar view */
+/* --------- Below is for Calendar View --------- */
+
+.calendarBox {
+  width: 650px;
+  height: 650px;
+  float: left;
+}
+
 #chart{
   width: 800px;
   margin: 0 auto;
 }
+
 .background {
   fill: #eee;
 }
@@ -133,23 +170,50 @@ text.active {
 .RdYlGn .q9-11{fill:rgb(19, 51, 57)}
 .RdYlGn .q10-11{fill:rgb(9, 25, 29)}
 
-/* hover info */
-#tooltip {
-  background-color: #fff;
-  border: 2px solid #ccc;
-  padding: 10px;
+/* --------- Below is for Progress Book --------- */
+/* Used for the entire encompassing box for the progress book */
+.processBookMainBox{
+  margin: auto;
+  background-color: #AEB3D1;
+  width: 910px;
+  height: auto;
+  padding: 30px;
+  color: #000000;
 }
 
-/* Loading code below courtesy of user rdfriedl on codepen.io, posted at: http://codepen.io/rdfriedl/pen/zvbvMv */
-
-#loadingBoxImage{
-  width: auto;
-  height: 30px;
-  display: none;
+/* Used for each entry in the progress book */
+.processBookEntry{
+  background-color: #ffffff;
+  width: 850px;
+  height: auto;
+  margin: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #000000;
 }
 
-#directionsBox{
-  width: auto;
-  height: 30px;
-  display: visible;
+.processBookText{
+  font-size: 14px; 
+}
+
+.processBookSub {
+  font-size: 13px;
+  font-weight: bold;
+  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  text-align: center;
+  line-height: 13px;
+  color: #399DB1;
+}
+
+.processBookH1, .processBookH2 {
+  color: #0F114A;
+}
+
+.processBookTitle {
+  font-size: 25px;
+  color: #399DB1;
+  line-height: 24px;
 }
