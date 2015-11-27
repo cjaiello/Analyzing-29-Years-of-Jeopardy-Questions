@@ -5,7 +5,6 @@
 // @vizLabel: The label for the viz (what attribute it is)
 function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   // We can now hide the loading image
-  console.log("Going to be done loading");
   showLoadingImage(false);
 
   var w = 300;
@@ -69,7 +68,6 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .attr("height", y.rangeBand())
       .on("click", function(d, i) {
         if(vizNumber == 1){
-          console.log("Show loading");
           showLoadingImage(true);
           setTimeout(function(){
           // Remove the old second and third charts
@@ -131,10 +129,6 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 // @vizNumber: The number of the viz, either 1 2 or 3
 // @vizLabel: The label for the viz (what attribute it is)
 function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLabel) {
-
-
-  console.log("Trying to make graph for word");
-
   // Now we can hide the loading image
   showLoadingImage(false);
 
@@ -154,8 +148,6 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
   data.push(questionData);
   data.push(answerData);
   data.push(categoryData);
-
-  console.log(data);
 
   var w = 1200;
   var h = 500;
@@ -182,10 +174,6 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   // Set the scale domain.
   x.domain([0, d3.max(data, function(d) {
-    console.log("X Domain. D is:");
-    console.log(d);
-    console.log("X Domain. D.Value is:");
-    console.log(d.Value);
     return d.Value; 
   })]);
   y.domain(data.map(function(d) { return d.Attribute; }));
@@ -216,10 +204,6 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       .attr("fill", "#399DB1")
       .attr("transform", "translate(" + 10 + ",0)")
       .attr("width", function(d) {
-        console.log(d);
-        console.log(d.Value);
-        console.log(parseInt(d.Value));
-        console.log(x(parseInt(d.Value)));
         return x(parseInt(d.Value)); 
       })
       .attr("height", y.rangeBand());

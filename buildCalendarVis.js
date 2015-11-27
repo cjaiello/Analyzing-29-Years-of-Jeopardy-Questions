@@ -1,3 +1,5 @@
+// Reference: User mbostock, November 13, 2012, 
+// http://bl.ocks.org/mbostock/4063318
 function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 
   // Hide loading image
@@ -18,7 +20,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
        * digits for the month. */
 
   var color = d3.scale.quantize()
-      .domain([1, 10])
+      .domain([1, 11])
       .range(d3.range(11).map(function(d) {
         return "q" + d + "-11"; }));
 
@@ -34,7 +36,6 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .attr("height", height)
       .attr("class", "RdYlGn")
       .on("click", function(d, i) {
-          console.log("Show loading");
           showLoadingImage(true);
           setTimeout(function(){
             // Remove old word cloud:
@@ -93,8 +94,8 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
         .attr("class", function(d) { return "day " + color(data[d].length); })
       .select("title")
         .text(function(d) { 
-          return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions") : d + ": " + (data[d].length) + " question") : (d); });
-
+          console.log(data[d]);
+          return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
 
   function monthPath(t0) {
     var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
@@ -123,4 +124,18 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .attr("fill", "white")
       .text(vizLabel);
 
+}
+
+// This function can be used to create a string for all questions
+// and answers in an object
+function createStringForAllQuestionsAndAnswers(object){
+  console.log(object);
+  var finalString = "\n";
+  // For each data point in this object, which is a list of data points for this day
+  for(counter = 0; counter < object.length; counter++){
+    console.log(object[counter]);
+    // Get the question and its answer
+    finalString += "- " + object[counter].Question + " (" + object[counter].Answer + ")\n";
+  }
+  return finalString;
 }
