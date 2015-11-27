@@ -20,8 +20,10 @@ body {
   <div class="processBookEntry">
     <h1 class="processBookTitle">
       CS573 Data Visualization <br> 
-      Final Project Process Book (Draft) <br>
-      By Christina Aiello
+      Final Project Process Book<br>
+      <i>
+        By Christina Aiello
+      </i>
     </h1>
   </div>
 
@@ -31,7 +33,7 @@ body {
     <center>
       <img src="images/barandpie.png" width="500">
       <br>
-      <sub class="processBookSub">Bar graphs and pie charts?</sub><br><br><br>
+      <div class="processBookSub">Bar graphs and pie charts?</div>
     </center>
   </div>
 
@@ -53,13 +55,13 @@ body {
     <center>
       <img src="images/threebargraphs.png" width="500">
       <br>
-      <sub class="processBookSub">These three images show the process of making the various graphs appear on the screen. The leftmost image shows just the first graph that appears. The middle and rightmost images show how to make the second and third graphs appear on the screen.</sub><br><br><br>
+      <div class="processBookSub">These three images show the process of making the various graphs appear on the screen. The leftmost image shows just the first graph that appears. The middle and rightmost images show how to make the second and third graphs appear on the screen.</div>
     </center>
     <p class="processBookText">Below I show the three graphs in closer detail.</p>
     <center>
       <img src="images/threebargraphslarger.png" width="500">
       <br>
-      <sub class="processBookSub">The leftmost graph is broken down by the "round" attribute. The middle graph is broken down by year. The rightmost graph is broken down by the question's value.</sub><br><br><br>
+      <div class="processBookSub">The leftmost graph is broken down by the "round" attribute. The middle graph is broken down by year. The rightmost graph is broken down by the question's value.</div>
     </center>
   </div>
 
@@ -69,7 +71,7 @@ body {
     <center>
       <img src="images/piechartsarebad.png" width="500">
       <br>
-      <sub class="processBookSub">Unfortunately the labels are no longer readable. They need to be moved outside of the pie charts.</sub><br><br><br>
+      <div class="processBookSub">Unfortunately the labels are no longer readable. They need to be moved outside of the pie charts.</div>
     </center>
     <p class="processBookText">
       I tried a workaround to get the label for the pie chart to show up outside of the pie slices, however that didn't end well. The image below depicts the result. While I could create a legend for the data, this would require having a set of over 30 or so colors, and I feel as though legends with that many colors are overwhelming. I think I'll scrap the pie chart idea. Boo pie charts.
@@ -77,7 +79,7 @@ body {
     <center>
       <img src="images/piechartsarebadstill.png" width="500">
       <br>
-      <sub class="processBookSub">Even after moving the labels outside of the pie slices, the labels were unfortunately still unreadable.</sub><br><br><br>
+      <div class="processBookSub">Even after moving the labels outside of the pie slices, the labels were unfortunately still unreadable.</div>
     </center>
   </div>
 
@@ -87,7 +89,7 @@ body {
     <center>
       <img src="images/initialcalendarchart.png" width="500">
       <br>
-      <sub class="processBookSub">The figure above shows the resulting calendar chart that I have created.</sub><br><br><br>
+      <div class="processBookSub">The figure above shows the resulting calendar chart that I have created.</div>
     </center>
     <p class="processBookText">
       Once I got the Calendar Chart working, I needed to do some adjusting of the code to get it to correctly display the color scheme in regards to the values. In the above image, all squares were being assigned the darkest color green rather than being given a correct value. My changes to actually incorporate the number of occurrences of each date ended up looking like the following image:
@@ -95,7 +97,7 @@ body {
     <center>
       <img src="images/coloredcalendarcharts.png" width="500">
       <br>
-      <sub class="processBookSub">Red represents dates with smaller values, and green represents dates with bigger values. The scale goes red to orange to yellow to green.</sub><br><br><br>
+      <div class="processBookSub">Red represents dates with smaller values, and green represents dates with bigger values. The scale goes red to orange to yellow to green.</div>
     </center>
     <p class="processBookText">
       While I was happy with how this looked at first, we were taught in class that using a range of red -> orange -> yellow -> green colors as a scale is not the most effective method for coloring values, so I chose to make all colors blue instead. Lighter blue meant a smaller value, and darker blue meant a larger value. The resulting chart can be seen below:
@@ -103,7 +105,7 @@ body {
     <center>
       <img src="images/calendarchartbettercolors.png" width="500">
       <br>
-      <sub class="processBookSub">Shown above is my revised calendar graph. It only uses shades of blue.</sub><br><br><br>
+      <div class="processBookSub">Shown above is my revised calendar graph. It only uses shades of blue.</div>
     </center>
   </div>
 
@@ -113,14 +115,14 @@ body {
     <center>
       <img src="images/wordcloudexample.png" width="500">
       <br>
-      <sub class="processBookSub">I really liked how this looked, and I thought it could be an interesting way to show which words most frequently appear in Jeopardy questions.</sub><br><br><br>
+      <div class="processBookSub">I really liked how this looked, and I thought it could be an interesting way to show which words most frequently appear in Jeopardy questions.</div>
     </center>
     <p class="processBookText">
       Which lead me to the creator's website, which explained how the Word Cloud library he had created worked in more <a href="https://www.jasondavies.com/wordcloud/about/"><strong>detail</strong></a>.
       <center>
         <img src="images/wordcloudsite.png" width="500">
         <br>
-        <sub class="processBookSub">Jason's website about the Word Cloud he had created.</sub><br><br><br>
+        <div class="processBookSub">Jason's website about the Word Cloud he had created.</div>
       </center>
     </p>
     <p class="processBookText">
@@ -129,7 +131,7 @@ body {
     <center>
       <img src="images/wordcloudhelpfulexample.png" width="500">
       <br>
-      <sub class="processBookSub">This example Word Cloud was the most straightforward and understandable for me, so I used this as my reference.</sub><br><br><br>
+      <div class="processBookSub">This example Word Cloud was the most straightforward and understandable for me, so I used this as my reference.</div>
     </center>
     <p class="processBookText">
       My first attempt at getting the Word Cloud working was a bit... sad. Something was showing up in cloud form, but not words...
@@ -137,7 +139,7 @@ body {
     <center>
       <img src="images/sadwordcloud.png" width="500">
       <br>
-      <sub class="processBookSub">This should have had actual words in it. Well... it's something...</sub><br><br><br>
+      <div class="processBookSub">This should have had actual words in it. Well... it's something...</div>
     </center>
     <p class="processBookText">
       Eventually I did get the Word Cloud working, and it looked something like the image below. While I was happy with it, I realized that a lot of words I deemed "boring" (prepositions, for example) ended up being the most frequently seen words, and I feel as though these aren't words people are curious about.  Because of this, I chose to create an array of filtered words. If any of the words in any questions are in the filtered word list, they were skipped over and weren't added to the Word Cloud.
@@ -145,7 +147,7 @@ body {
     <center>
       <img src="images/myworkingwordcloud.png" width="500">
       <br>
-      <sub class="processBookSub">I was just so curious about how many times the word "a" appeared in questions, right?... Probably not.</sub><br><br><br>
+      <div class="processBookSub">I was just so curious about how many times the word "a" appeared in questions, right?... Probably not.</div>
     </center>
     <p class="processBookText">
       In addition to filtering out words, I also had to turn all words to lowercase using JavaScript's .toLowerCase() method due to the same word showing up in the Word Cloud in different cases (Example: "He" versus "he"). Next I wanted to give the Word Cloud some sort of title, so I chose to construct a title in the format "Questions from ROUND in the Year YEAR With a Value of VALUE," filling in "ROUND," "YEAR," and "VALUE" with their respective values from the data set. Eventually I had created the visualization below.
@@ -153,7 +155,7 @@ body {
     <center>
       <img src="images/myprunedwordcloud.png" width="500">
       <br>
-      <sub class="processBookSub">My eventual Word Cloud, which I felt was much more interesting after removing prepositions and other more "plain" (in my opinion) words. This is the same data set as the previous image, just with the filtered words removed.</sub><br><br><br>
+      <div class="processBookSub">My eventual Word Cloud, which I felt was much more interesting after removing prepositions and other more "plain" (in my opinion) words. This is the same data set as the previous image, just with the filtered words removed.</div>
     </center>
     <p class="processBookText">
       I then had to hook together the Word Cloud and the bar graphs I'd created. Hovering over a data point in the rightmost bar graph still changes its color to a lighter purple (which happens with all three graphs). However, when a user clicks (not hovers over, but actually clicks on) a data point (a bar) in the rightmost graph, a Word Cloud would be generated below. Once the Word Cloud had loaded, the selected bar will turn green:
@@ -161,7 +163,7 @@ body {
     <center>
       <img src="images/greenbargraph.png" width="500">
       <br>
-      <sub class="processBookSub">The left image shows what the bar graph looks like when the data is loading for the selected data point. The right image shows that the chosen data point turns green to confirm that the Word Cloud finished loading below.</sub><br><br><br>
+      <div class="processBookSub">The left image shows what the bar graph looks like when the data is loading for the selected data point. The right image shows that the chosen data point turns green to confirm that the Word Cloud finished loading below.</div>
     </center>
     <p class="processBookText">
       Originally my plan wasn't to add extra features, just implement the graphs, however this was a very trivial change that I was able to make in a few minutes due to previous code that I'd written.
@@ -178,13 +180,13 @@ body {
       <p class="processBookText">
         The calendar chart code that I referenced was originally rolling up the data that was aggregated by date, meaning that for every date in the data it would count up the number of occurrences rather than preserving the array of objects representing each question that had a matching day. Rolling up removed the extra data (question and answer) that I wanted to use in my calendar chart, so I changed a few lines to preserve this data. The line below is the line I changed:
       </p>
-      <p class="processBookText">
+      <p class="code">
         var data = d3.nest() .key(function(d) { return d.Date; }) .rollup(function(d) { return d.length; }).map(data[0].values);
       </p>
       <p class="processBookText">
         The line above became:
       </p>
-      <p class="processBookText">
+      <p class="code">
         var data = d3.nest() .key(function(d) { return d.Date; }).map(data[0].values);
       </p>
       <p class="processBookText">
@@ -201,7 +203,7 @@ body {
     <center>
       <img src="images/loadingmessage.png" width="500">
       <br>
-      <sub class="processBookSub">The top image shows the directions/explanation for the web application, and the bottom image shows the loading image for the page.</sub><br><br><br>
+      <div class="processBookSub">The top image shows the directions/explanation for the web application, and the bottom image shows the loading image for the page.</div>
     </center>
   </div>
 
@@ -211,17 +213,17 @@ body {
     <center>
       <img src="images/colorzilla.png" width="500">
       <br>
-      <sub class="processBookSub">This is the "Colorzilla" eyedropper application, which was a very useful tool in developing this project.</sub><br><br><br>
+      <div class="processBookSub">This is the "Colorzilla" eyedropper application, which was a very useful tool in developing this project.</div>
     </center>
     <center>
       <img src="images/newcolorscheme.png" width="500">
       <br>
-      <sub class="processBookSub">Shown above is my updated color scheme, meant to be closer to Jeopardy's actual color scheme.</sub><br><br><br>
+      <div class="processBookSub">Shown above is my updated color scheme, meant to be closer to Jeopardy's actual color scheme.</div>
     </center>
     <center>
       <img src="images/newwordcloudcolors.png" width="500">
       <br>
-      <sub class="processBookSub">The image above shows my updated color scheme for the Word Cloud.</sub><br><br><br>
+      <div class="processBookSub">The image above shows my updated color scheme for the Word Cloud.</div>
     </center>
   </div>
 
@@ -231,7 +233,7 @@ body {
     <center>
       <img src="images/searchfortest.png" width="500">
       <br>
-      <sub class="processBookSub">The resulting bar graph from searching for the word "test."</sub><br><br><br>
+      <div class="processBookSub">The resulting bar graph from searching for the word "test."</div>
     </center>
     <p class="processBookText">
       I added JavaScript validation to this tool to prevent the user from searching for empty words or strings with spaces. When a user tries to search for one of the aforementioned items, they are greeted with this message:
@@ -239,7 +241,7 @@ body {
     <center>
       <img src="images/errormessage.png" width="500">
       <br>
-      <sub class="processBookSub">The error message that is shown when a user tries to search for what I've deemed to be "invalid" input.</sub><br><br><br>
+      <div class="processBookSub">The error message that is shown when a user tries to search for what I've deemed to be "invalid" input.</div>
     </center>
     <p class="processBookText">
       For ease of use, I also included JavaScript code to let the user press "Enter" on his or her keyboard to submit the query, in addition to letting them use the "submit" button that I created.
@@ -257,7 +259,7 @@ body {
     <center>
       <img src="images/tooltip.png" width="500">
       <br>
-      <sub class="processBookSub">It's not pretty yet, but the content is there, and that is what I was concerned about at this point in time.</sub><br><br><br>
+      <div class="processBookSub">It's not pretty yet, but the content is there, and that is what I was concerned about at this point in time.</div>
     </center>
   </div>
 

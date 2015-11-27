@@ -200,20 +200,38 @@ text.active {
 }
 
 .processBookSub {
+  width: 500px;
+  height: auto;
   font-size: 13px;
   font-weight: bold;
   font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
   text-align: center;
   line-height: 13px;
   color: #399DB1;
+  padding: 10px;
+  margin-bottom: 50px;
 }
 
-.processBookH1, .processBookH2 {
+.processBookH1 {
   color: #0F114A;
+  font-size: 22px;
+}
+
+.processBookH2 {
+  color: #0F114A;
+  font-size: 20px;
 }
 
 .processBookTitle {
-  font-size: 25px;
+  font-size: 30px;
   color: #399DB1;
-  line-height: 24px;
+  line-height: 29px;
+}
+
+.code {
+  padding: 15px;
+  font-family: Consolas,monaco,monospace;
+  color: #32cd32;
+  font-size: 14px;
+  background-color: #000000;
 }
