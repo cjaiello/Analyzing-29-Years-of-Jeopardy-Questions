@@ -28,7 +28,32 @@ body {
   </div>
 
   <div class="processBookEntry">
-    <h1 class="processBookH1">Week 1: Just Implementing the Visualizations</h1 class="processBookH1">
+    <h1 class="processBookH1">Table of Contents</h1 class="processBookH1">
+    <p class="processBookText">
+      <ul>
+        <li><a href="#overview"><strong>Overview and Motivation</strong></a></li>
+        <li><a href="#week1"><strong>Week 1: Data Preprocessing and Implementing the Visualizations</strong></a></li>
+        <li><a href="#week2"><strong>Week 2: Post-Proposal-Feedback Work</strong></a></li>
+        
+    </p>
+  </div>
+
+  <div class="processBookEntry">
+    <a name="overview">
+      <h1 class="processBookH1">Overview and Motivation</h1 class="processBookH1">
+    </a>
+    <p class="processBookText">
+      My family has a fascination with trivia. They greatly enjoy watching Jeopardy and other trivia shows, they play Trivial Pursuit to show off their skills, and they'll even just end up browsing Wikipedia pages for hours to read about different random topics. Not only is trivia something that family members of mine enjoy, but my friends and acquaintances (and really, many people in general) have a love for trivia games. Many bars and other venues will have trivia nights (We even have one here at WPI every week) where participants form teams and try to correctly answer as many trivia questions as they can. With this love for trivia questions in mind, I searched for data sets related to trivia and stumbled upon this fantastic data set of 216,930 Jeopardy questions.
+    </p>
+    <p class="processBookText">
+      I would like to give users the ability to view the frequency of rounds, values, and air dates in this data set. In addition, I want to let the user see which questions end up being in the Double Jeopardy and Final Jeopardy rounds most often, potentially helping a user target his or her knowledge to categories that end up in these rounds. I plan to offer three different graphs (first a breakdown by round, then by value, then by air date), and finally I want to create a Word Cloud for the user to see. I would also like to create a special feature that lets a user search for a word in all categories, questions, and answers in the entire data set.
+    </p>
+  </div>
+
+  <div class="processBookEntry">
+    <a name="week1">
+      <h1 class="processBookH1">Week 1: Data Preprocessing and Implementing the Visualizations</h1 class="processBookH1">
+    </a>
     <p class="processBookText">During week 1 I wanted to just implement the basics for the visualizations I would be using (and not add in any extra features yet). Some of my code that I reused from previous assignments already had some extra features in it (ones I created previously), so I chose to keep those features in my code but didn't add any new features to start. The charts I've chosen to implement are bar graphs, pie charts, calendar charts, and Word Clouds.</p>
     <center>
       <img src="images/barandpie.png" width="500">
@@ -39,7 +64,7 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Preprocessing the Data</h2>
-    <p class="processBookText">The data I have had to be preprocessed to some extent. Changes I made were:</p>
+    <p class="processBookText"><strong>Data:</strong> The data I have had to be preprocessed to some extent. Changes I made were:</p>
     <ul>
       <li>Changing all instances of the ampersand (&) in the "Question" column to be the word "and."
       <li>Removing any quotation marks from all values in the "Question" column.
@@ -51,7 +76,7 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Bar Graphs</h2>
-    <p class="processBookText">I've worked with Bar Graphs this entire term, so getting these to work did not take much time thankfully. The bar graphs I had at this point would filter the data based on certain attributes (first by round, then by year, and lastly by value). If you hover over one of the bars in the first bar graph, the middle bar graph appears with a further breakdown of the data. The same occurs if you hover over the middle bar graph: A final bar graph appears to the right with even more specific data.</p>
+    <p class="processBookText"><strong>Exploratory Data Analysis:</strong> I've worked with Bar Graphs this entire term, so getting these to work did not take much time thankfully. The bar graphs I had at this point would filter the data based on certain attributes (first by round, then by year, and lastly by value). If you hover over one of the bars in the first bar graph, the middle bar graph appears with a further breakdown of the data. The same occurs if you hover over the middle bar graph: A final bar graph appears to the right with even more specific data.</p>
     <center>
       <img src="images/threebargraphs.png" width="500">
       <br>
@@ -67,7 +92,7 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Pie Charts</h2>
-    <p class="processBookText">I have also used pie charts in previous assignments, so getting these two work was also not too complicated. One change I did have to make was to, rather than change the color of a pie slice that is hovered over, change the color of that pie slice's label. (Changing the colors of a pie slice can get messy since not every pie slice is the same color to start with, which the way bar charts can be.) Another change I needed to make was in regards to the labels on my data in the pie charts. With some pie charts having dramatically different slice sizes (one value may be 400 and the other may be 1 or 2), the labels for the pie charts became very hard to read. The image below depicts this.</p>
+    <p class="processBookText"><strong>Exploratory Data Analysis:</strong> I have also used pie charts in previous assignments, so getting these two work was also not too complicated. One change I did have to make was to, rather than change the color of a pie slice that is hovered over, change the color of that pie slice's label. (Changing the colors of a pie slice can get messy since not every pie slice is the same color to start with, which the way bar charts can be.) Another change I needed to make was in regards to the labels on my data in the pie charts. With some pie charts having dramatically different slice sizes (one value may be 400 and the other may be 1 or 2), the labels for the pie charts became very hard to read. The image below depicts this.</p>
     <center>
       <img src="images/piechartsarebad.png" width="500">
       <br>
@@ -85,7 +110,11 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Calendar Charts</h2>
-    <p class="processBookText">After a bit of battling with d3, I was finally able to get my calendar chart to display properly (Protip: When you want to color something in, use CSS to color it… I thought d3 wasn't working and that was why my chart displayed in all black, but I was just missing some CSS). I realized that organizing the calendar view in a certain way (put two years next to each other and making them small) I was able to avoid having to aggregate the data by year and could keep the entire MM/DD/YYYY set of information. I chose to have the third chart in my set of 3 be a calendar chart.</p>
+    <p class="processBookText">
+      <strong>Related Work: </strong> I had seen calendar charts on <a href="https://github.com/mbostock/d3/wiki/Gallery"><strong>this</strong></a> website and liked the way they arranged/displayed data, so I chose to include them in my project. After a bit of battling with d3, I was finally able to get my calendar chart to display properly (Protip: When you want to color something in, use CSS to color it... I thought d3 wasn't working and that was why my chart displayed in all black, since that sometimes happens when d3 code isn't properly done, but I was just missing some CSS). I realized that organizing the calendar view in a certain way (put two years next to each other and making them small) I was able to avoid having to aggregate the data by year and could keep the entire MM/DD/YYYY set of information. I chose to have the third chart in my set of 3 be a calendar chart.
+    </p>
+    <p class="processBookText">
+    <strong>Exploratory Data Analysis:</strong> Once I got the calendar chart working, I realized not only that splitting the data by air date (rather than aggregating by month or year) was possible, but I also enjoyed the benefit the user gained from being able to see questions per day rather than grouped into an entire month or year.
     <center>
       <img src="images/initialcalendarchart.png" width="500">
       <br>
@@ -99,7 +128,7 @@ body {
       <br>
       <div class="processBookSub">Red represents dates with smaller values, and green represents dates with bigger values. The scale goes red to orange to yellow to green.</div>
     </center>
-    <p class="processBookText">
+    <p class="processBookText"><strong>Design Evolution:</strong> 
       While I was happy with how this looked at first, we were taught in class that using a range of red -> orange -> yellow -> green colors as a scale is not the most effective method for coloring values, so I chose to make all colors blue instead. Lighter blue meant a smaller value, and darker blue meant a larger value. The resulting chart can be seen below:
     </p>
     <center>
@@ -111,7 +140,7 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Word Clouds</h2>
-    <p class="processBookText">With words being such a valuable part of my data set, I knew I wanted to include a Word Cloud in my project in some way. I first found this Word Cloud instance, which was created by Jason Davies. <a href="https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F"><strong>Click to see his website</strong></a>.</p>
+    <p class="processBookText"><strong>Exploratory Data Analysis:</strong> With words being such a valuable part of my data set, I knew I wanted to include a Word Cloud in my project in some way. I first found this Word Cloud instance, which was created by Jason Davies. <a href="https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F"><strong>Click to see his website</strong></a>.</p>
     <center>
       <img src="images/wordcloudexample.png" width="500">
       <br>
@@ -171,14 +200,16 @@ body {
   </div>
 
   <div class="processBookEntry">
-    <h1 class="processBookH1">Week 2: Post Feedback from Proposal</h1 class="processBookH1">
+    <a name="week2">
+      <h1 class="processBookH1">Week 2: Post-Proposal-Feedback Work</h1 class="processBookH1">
+    </a>
     <p class="processBookText">Now that I have received feedback on my proposal, I have decided to not aggregate my "Air Date" data by year and instead keep the MM/DD/YYYY data in its entirety. In addition, I have chosen to not allow users to choose which visualization they want to see, and instead I will just offer bar graphs, calendar charts, and Word Clouds. I would also like to incorporate my extra feature (searching questions and answers) as well.</p>
   </div>
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Adding More Value to Calendar Chart - Word Cloud Incorporation</h2>
       <p class="processBookText">
-        The calendar chart code that I referenced was originally rolling up the data that was aggregated by date, meaning that for every date in the data it would count up the number of occurrences rather than preserving the array of objects representing each question that had a matching day. Rolling up removed the extra data (question and answer) that I wanted to use in my calendar chart, so I changed a few lines to preserve this data. The line below is the line I changed:
+        <strong>Implementation:</strong> The calendar chart code that I referenced was originally rolling up the data that was aggregated by date, meaning that for every date in the data it would count up the number of occurrences rather than preserving the array of objects representing each question that had a matching day. Rolling up removed the extra data (question and answer) that I wanted to use in my calendar chart, so I changed a few lines to preserve this data. The line below is the line I changed:
       </p>
       <p class="code">
         var data = d3.nest() .key(function(d) { return d.Date; }) .rollup(function(d) { return d.length; }).map(data[0].values);
@@ -193,7 +224,7 @@ body {
         Making this change matched up an array of data points (which contain the question, answer, air date, etc.) with a particular date in the calendar, rather than just counting the number of matching data points per date in the calendar.
       </p>
       <p class="processBookText">
-        Now, when users click anywhere in a year in the calendar chart, the same Word Cloud from before appears below. The downside to adding the Word Cloud in this way means that I now have to loop through all data points (from the entire group of points that was plotted in the calendar graph) to see which of them are of the correct year. I then have to do the same procedure as before to find word frequency: I have to look at each word in each question and count its occurrences in all questions from a particular year (well, round -> value -> year). This still gives me data sets of size 9,000-12,000 or so in some places, meaning that my algorithm will be slow to create the Word Cloud. This means I will need to optimize my word counting to speed up this process. I also should add in a loading message of some sort.
+        Now when users click anywhere in a year in the calendar chart, the same Word Cloud from before appears below. The downside to adding the Word Cloud in this way means that I now have to loop through all data points (from the entire group of points that was plotted in the calendar graph) to see which of them are of the correct year. I then have to do the same procedure as before to find word frequency: I have to look at each word in each question and count its occurrences in all questions from a particular year (well, round -> value -> year). This still gives me data sets of size 9,000-12,000 or so in some places, meaning that my algorithm will be slow to create the Word Cloud. This means I will need to optimize my word counting to speed up this process. I also should add in a loading message of some sort.
       </p>
   </div>
 
@@ -209,7 +240,7 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Updating Color Scheme</h2>
-    <p class="processBookText">Once I had developed the basic features for this application, I wanted to tackle the color scheme. While I liked the blueish color I had chosen previously, I felt that the color scheme was… boring. I decided to do a Google search for "Jeopardy" and used my "Colorzilla" eyedropper extension in Chrome to pick colors out of images from the Jeopardy show/logo. I then used those hex colors in my color scheme.</p>
+    <p class="processBookText"><strong>Design Evolution:</strong> Once I had developed the basic features for this application, I wanted to tackle the color scheme. While I liked the blueish color I had chosen previously, I felt that the color scheme was... boring. I decided to do a Google search for "Jeopardy" and used my "Colorzilla" eyedropper extension in Chrome to pick colors out of images from the Jeopardy show/logo. I then used those hex colors in my color scheme.</p>
     <center>
       <img src="images/colorzilla.png" width="500">
       <br>
@@ -229,7 +260,7 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Extra Feature: Search for a Word</h2>
-    <p class="processBookText">What I feel provides the most value to users is the content of questions, answers, and categories. While graphing those is particularly challenging (other than using a Word Cloud), I wanted some way to let users know how often a word appears in the entire data set and not just in a particular drilldown of round -> value -> year. I created an extra feature (a word searcher) which will take in a singular word and search for that word in all questions, answers, and categories in the entire data set. While a Word Cloud would be overwhelming for the entire data set in my opinion, I feel that a bar graph that shows the number of occurrences of a word in all questions, all answers, and all categories would be useful. Seen below is my implementation of this feature.</p>
+    <p class="processBookText"><strong>Implementation:</strong> What I feel provides the most value to users is the content of questions, answers, and categories. While graphing those is particularly challenging (other than using a Word Cloud), I wanted some way to let users know how often a word appears in the entire data set and not just in a particular drilldown of round -> value -> year. I created an extra feature (a word searcher) which will take in a singular word and search for that word in all questions, answers, and categories in the entire data set. While a Word Cloud would be overwhelming for the entire data set in my opinion, I feel that a bar graph that shows the number of occurrences of a word in all questions, all answers, and all categories would be useful. Seen below is my implementation of this feature.</p>
     <center>
       <img src="images/searchfortest.png" width="500">
       <br>
@@ -249,9 +280,9 @@ body {
   </div>
 
   <div class="processBookEntry">
-    <h2 class="processBookH2">Adding Tooltips</h2>
+    <h2 class="processBookH2">Adding Content for Tooltips</h2>
     <p class="processBookText">
-      While I find the two bar graphs and the calendar chart to be interesting, even with the addition of the Word Cloud I felt as though I wasn't using the actual question and answer data enough. Not having the questions and answers available for reading made it feel as though I had "detached" these attributes from the other attributes (round, value, and date), which just didn't feel "right." As I mentioned before, I feel as though much of the value of this project is in the content of the questions and answers, and not using them enough made me unsatisfied with the project as it was.
+      <strong>Data:</strong> While I find the two bar graphs and the calendar chart to be interesting, even with the addition of the Word Cloud I felt as though I wasn't using the actual question and answer data enough. Not having the questions and answers available for reading made it feel as though I had "detached" these attributes from the other attributes (round, value, and date), which just didn't feel "right." As I mentioned before, I feel as though much of the value of this project is in the content of the questions and answers, and not using them enough made me unsatisfied with the project as it was.
     </p>
     <p class="processBookText"> 
       Because of this, I chose to create a tooltip (for now, just the standard text box that appears when you hover over something in a browser) that contained all questions and answers for any specific date (MM/DD/YYYY) in the Calendar Chart. The tooltip contains the date, the number of questions from that round -> value -> date drilldown, and then the content of each question and answer. This required writing a very short helper function that would take in an array of data points and construct a string with each question and answer from that array. Adding in this feature lets the user see the actual content of the questions and answers. The image below depicts this feature.
@@ -261,146 +292,6 @@ body {
       <br>
       <div class="processBookSub">It's not pretty yet, but the content is there, and that is what I was concerned about at this point in time.</div>
     </center>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
-  </div>
-
-  <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
   </div>
 
   <div class="processBookEntry">
