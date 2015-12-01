@@ -67,11 +67,14 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       })
       .attr("height", y.rangeBand())
       .on("click", function(d, i) {
-        if(vizNumber == 1){
-          buildWordCloudVis(d.values, "Round");
-        } else {
-          buildWordCloudVis(d.values, "Value");
-        }
+        showLoadingImage(true);
+        setTimeout(function(){
+          if(vizNumber == 1){
+            buildWordCloudVis(d.values, "Round");
+          } else {
+            buildWordCloudVis(d.values, "Value");
+          }
+        }, 10);
       })
       .on("mouseover", function(d, i) {
         if(vizNumber == 1){
@@ -80,7 +83,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
           // Remove the old second and third charts
             d3.select("svg.secondChart")
             .remove();
-            d3.select("svg.thirdChart")
+            d3.select(".calendarBoxSVG")
               .remove();
               buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
           }, 10);
