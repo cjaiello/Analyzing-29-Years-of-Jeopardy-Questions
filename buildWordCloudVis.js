@@ -7,7 +7,7 @@ function buildWordCloudVis(data, year){
   d3.select(".wordCloud").remove();
   // Remove its old label too:
   d3.select(".wordCloudLabel").remove();
-  
+
   // Hide loading image
   showLoadingImage(false);
 
@@ -82,7 +82,7 @@ function buildWordCloudVis(data, year){
 
 // This function is used to create the label for the word cloud vis
 function createWordCloudLabel(dataPoint, year){
-  if(year != null){
+  if(!isNan(year)){
     return ("Questions from " + dataPoint.Round + " Round in the Year " + year + " With a Value of $" + dataPoint.Value);
   } else if (year == "Value") {
     return ("Questions from " + dataPoint.Round + " With a Value of $" + dataPoint.Value);
