@@ -1,3 +1,5 @@
+// By Christina Aiello
+
 // Creates a bar visualization
 // @data: the data from the csv
 // @translateXCoordinate: How far over (x-wise) the graph should go

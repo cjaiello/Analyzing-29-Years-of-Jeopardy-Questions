@@ -1,3 +1,5 @@
+// By Christina Aiello
+
 // Function to build a wordcloud for rows in the data set
 // @data: The data from the csv
 // @year: The specific year of data you're looking at

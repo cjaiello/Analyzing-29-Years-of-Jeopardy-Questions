@@ -1,3 +1,5 @@
+// By Christina Aiello
+
 // Reference: User mbostock, November 13, 2012, 
 // http://bl.ocks.org/mbostock/4063318
 function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){

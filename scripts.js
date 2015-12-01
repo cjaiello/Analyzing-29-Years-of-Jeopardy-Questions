@@ -1,3 +1,5 @@
+// By Christina Aiello
+
 /*
 * Helper for aggregating data
 * @data: The data from the csv to aggregate
