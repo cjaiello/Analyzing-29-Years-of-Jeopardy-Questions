@@ -38,10 +38,6 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .on("click", function(d, i) {
           showLoadingImage(true);
           setTimeout(function(){
-            // Remove old word cloud:
-            d3.select(".wordCloud").remove();
-            // Remove its old label too:
-            d3.select(".wordCloudLabel").remove();
             buildWordCloudVis(data, d);
           }, 10);
        })
@@ -90,7 +86,6 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
         .attr("class", function(d) { return "day " + color(data[d].length); })
       .select("title")
         .text(function(d) { 
-          console.log(data[d]);
           return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
 
   function monthPath(t0) {
@@ -125,11 +120,9 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 // This function can be used to create a string for all questions
 // and answers in an object
 function createStringForAllQuestionsAndAnswers(object){
-  console.log(object);
   var finalString = "\n";
   // For each data point in this object, which is a list of data points for this day
   for(counter = 0; counter < object.length; counter++){
-    console.log(object[counter]);
     // Get the question and its answer
     finalString += "- " + object[counter].Question + " (" + object[counter].Answer + ")\n";
   }

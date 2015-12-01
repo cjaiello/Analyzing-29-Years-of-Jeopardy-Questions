@@ -295,8 +295,17 @@ body {
   </div>
 
   <div class="processBookEntry">
-    <h2 class="processBookH2"></h2>
-    <p class="processBookText"></p>
+    <h2 class="processBookH2">Getting  More Use Out Of Word Cloud</h2>
+    <p class="processBookText">
+      In thinking of ways to improve this project, I realized that I wasn't getting as much as I was hoping to get out of the word cloud. The number of data points that were used to construc the word cloud was smaller than I'd liked, and this left the user seeing semi-boring visualizations. I wanted there to be dramatic differences in word counts (and therefor font sizes) of the words displayed. I then decided to change the functionality of the project so that if you hover over any bars in the bar graphs, the next graph (bar or calendar) is generated, and if you CLICK either of the bar graphs, a word cloud is made using that bar's data.
+    </p>
+    <center>
+      <img src="images/coolestwordcloud.png" width="500">
+      <br>
+      <div class="processBookSub">This is closer to what I was hoping for.</div>
+    </center>
+    <p class="processBookText">
+      One noticeable issue with this newly-added functionality is its speed. Going through all of these data points (and there were only around 3,600 of them) took a minute or two to complete. This left the user waiting longer than I'd like them to have to wait to see their data. I may either put a size limit on word clouds, or I may try to preprocess the data and create counts of words ahead of time (for example, count the frequency of all words from Jeopardy rounds, from Final Jeopardy rounds, from Double Jeopardy rounds, and from Tiebreaker rounds). I could do this for every data point in the set (for both bar graphs), which would completely eliminate the time needed to construct the mapping of words and their counts.
   </div>
 
   <div class="processBookEntry">

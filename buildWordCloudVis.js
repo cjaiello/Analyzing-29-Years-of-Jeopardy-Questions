@@ -3,13 +3,17 @@
 // @year: The specific year of data you're looking at
 // (Only used when clicking from Calendar vis)
 function buildWordCloudVis(data, year){
-  console.log("Building word cloud");
+  // Remove old word cloud:
+  d3.select(".wordCloud").remove();
+  // Remove its old label too:
+  d3.select(".wordCloudLabel").remove();
+  
   // Hide loading image
   showLoadingImage(false);
 
   // If we need to filter by year:
   // (Only when clicking from Calendar vis)
-  if(year != null){
+  if(!isNaN(year)){
     data = getQuestionsFromCorrectYear(data, year);
   }
   // Now, count the number of times every word appears:
@@ -72,7 +76,17 @@ function buildWordCloudVis(data, year){
       .style("font-size","25px")
       .style("font-weight","bold")
       .attr("fill", "black")
-      .text("Questions from " + data[0].Round + " Round in the Year " + year + " With a Value of $" + data[0].Value);
+      .text(createWordCloudLabel(data[0], year));
 
-      console.log("Test!");
+}
+
+// This function is used to create the label for the word cloud vis
+function createWordCloudLabel(dataPoint, year){
+  if(year != null){
+    return ("Questions from " + dataPoint.Round + " Round in the Year " + year + " With a Value of $" + dataPoint.Value);
+  } else if (year == "Value") {
+    return ("Questions from " + dataPoint.Round + " With a Value of $" + dataPoint.Value);
+  } else {
+    return ("Questions from " + dataPoint.Round);
+  }
 }

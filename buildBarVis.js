@@ -68,6 +68,13 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .attr("height", y.rangeBand())
       .on("click", function(d, i) {
         if(vizNumber == 1){
+          buildWordCloudVis(d.values, "Round");
+        } else {
+          buildWordCloudVis(d.values, "Value");
+        }
+      })
+      .on("mouseover", function(d, i) {
+        if(vizNumber == 1){
           showLoadingImage(true);
           setTimeout(function(){
           // Remove the old second and third charts
