@@ -83,6 +83,11 @@ body {
   display: visible;
 }
 
+/* Text at top of main page */
+#jeopardyTitle {
+  color: #FCC627;
+}
+
 /* --------- Below is for All Bar Graphs --------- */
 
 .td-center {
