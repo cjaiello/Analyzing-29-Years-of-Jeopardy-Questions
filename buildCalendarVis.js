@@ -43,10 +43,6 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
             // Remove its old label too:
             d3.select(".wordCloudLabel").remove();
             buildWordCloudVis(data, d);
-            // Turn blue to confirm it's loaded
-            d3.select(this)
-              .attr("fill", "#399DB1")
-              .style("font-weight", "bold");
           }, 10);
        })
       .on("mouseout", function(d, i) {

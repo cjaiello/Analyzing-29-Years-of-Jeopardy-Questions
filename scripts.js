@@ -180,6 +180,77 @@ function findMatches(input, wordToFind){
   return returnedArrayOfMatches;
 }
 
+// If using calendar vis, we need to get all data points associated with the
+// specific year that was clicked:
+function getQuestionsFromCorrectYear(data, year) {
+  // Parsing the year from the air date
+  var re = new RegExp("^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](" + year + "))$"), key;
+  var arrayOfDataPointsFromCorrectYear = [];
+
+  // The "data" object has all data from this round -> value, so
+  // we need to separate it by year. Find all data points that have
+  // a year that matches "year," the year we're currently hovering
+  // over in the calendar chart.
+  for (key in data){
+    // If this key in the object has the correct year
+    if (re.test(key)){
+      // Add it to our list of objects (data points) from the
+      // correct year
+      arrayOfDataPointsFromCorrectYear.push(data[key][0])
+    }
+  }
+  return arrayOfDataPointsFromCorrectYear;
+}
+
+// Actually counts words for word cloud construction:
+function createWordCountsForWordCloud(data){
+  var wordMap = {}; // Key is word, value is number of times seen
+
+  if(data.length > 0){
+
+    // These steps populate the above two variables
+    for(var counter = 0; counter < data.length; counter++){
+      var question = data[counter].Question;
+      var answer = data[counter].Answer;
+      var category = data[counter].Category;
+
+      // Split each string into an array of words
+      var listOfQuestionWords = question.split(" ");
+      var listOfAnswerWords = answer.split(" ");
+      var listOfCategoryWords = category.split(" ");
+      // Create a list of all words from question and answer and category
+      var listOfWords = listOfQuestionWords.concat(listOfAnswerWords.concat(listOfCategoryWords));
+
+      // For each word in the question or answer
+      for(var innerCounter = 0; innerCounter < listOfWords.length; innerCounter++){
+        var currentWord = listOfWords[innerCounter];
+        // Trim away any commas and periods
+        currentWord = currentWord.replace(/,$/, "");
+        currentWord = currentWord.replace(/\)/, "");
+        currentWord = currentWord.replace(/\(/, "");
+        currentWord = currentWord.replace(/\""/, "");
+        // And make it lowercase:
+        currentWord = currentWord.toLowerCase();
+        // If it's not an empty word or a period (or what I've deemed a plain word):
+        var arrayOfPlainWords = ["\s", "\.", "a", "but", "an", "and", "the", "was", "this", "had", "its", "only", "now", "were", "has", "can", "the", "too", "to", "for", "of", "is", "by", "on", "if", "like", "i", "\&", "it\'s", "from", "or", "with", "at", "as", "that", "these", "be", "it", "are", "in"];
+        // If this word isn't in arrayOfPlainWords:
+        if(arrayOfPlainWords.indexOf(currentWord) < 0){
+          // If we haven't seen this word yet
+          if (!(currentWord in wordMap)){
+            wordMap[currentWord] = 1;
+          } else {
+            wordMap[currentWord] += 1;
+          }
+        }
+      }
+    }
+    return wordMap;
+  } else {
+    // You goofed
+    return null;
+  }
+}
+
 
 
 
