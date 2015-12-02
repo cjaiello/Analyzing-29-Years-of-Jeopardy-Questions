@@ -69,6 +69,11 @@ body {
   padding: 10px;
 }
 
+.smallPadding {
+  margin: 5px;
+  padding: 5px;
+}
+
 /* Div that holds loading message */
 #loadingBoxImage{
   width: auto;

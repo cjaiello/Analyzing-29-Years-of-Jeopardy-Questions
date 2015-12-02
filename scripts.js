@@ -64,8 +64,8 @@ function getVizName(vizNumber){
 
 // This prevents the user from leaving the box blank
 // and prevents them from entering more than one word
-function validateForm() {
-  var usersWord = document.getElementById("wordToSearchFor").value;
+function validateForm(shouldNotBeEmpty) {
+  var usersWord = document.getElementById(shouldNotBeEmpty).value;
   if (usersWord==null || usersWord== "" || usersWord.indexOf(" ") > -1) {
     alert("Please enter a singular word to search for.");
     return false;
@@ -111,6 +111,42 @@ function findWordMatchesInDataSet(){
     
     // Now, build the visualization based on the data:
     buildWordMatchBarVis(numberOfMatchesFound, 50, 1, "Appearances of the Word \"" + wordToSearchFor + "\"");
+  });
+}
+
+
+// Function to find the number of word matches in the data
+// set. Finds number of matches in questions, answers, and categories
+function findWordPairMatchesInDataSet(){
+  // If form is invalid, don't do the search:
+  if(!validateForm("wordToSearchFor1") || !validateForm("wordToSearchFor2")){
+    return;
+  }
+
+  // Remove old visualization
+  d3.selectAll(".countWordsVis")
+        .remove();
+
+  // Tell the user that something is loading
+  showLoadingImage(true);
+
+  // First, load the data set
+  d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
+    if(err) console.log(err);
+
+    // Next, get the word we need from the screen
+    var wordToSearchFor1 = document.getElementById('wordToSearchFor1').value;
+    // Array with number of matches
+    var numberOfMatchesFound1 = findMatches(data, wordToSearchFor1);
+
+    // Next, get the word we need from the screen
+    var wordToSearchFor2 = document.getElementById('wordToSearchFor2').value;
+    // Array with number of matches
+    var numberOfMatchesFound2 = findMatches(data, wordToSearchFor2);
+    
+    // Now, build the visualization based on the data:
+    buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
+    buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2);
   });
 }
 
@@ -210,7 +246,7 @@ function createWordCountsForWordCloud(data){
 
   if(data.length > 0){
 
-    // These steps populate the above two variables
+    // These steps populate the above variable
     for(var counter = 0; counter < data.length; counter++){
       var question = data[counter].Question;
       var answer = data[counter].Answer;
