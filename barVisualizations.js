@@ -167,8 +167,8 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
   var x = d3.scale.linear().range([10, w-50]),
       y = d3.scale.ordinal().rangeBands([0, h-50], .1);
 
-  var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
-      yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+  var xAxis = d3.svg.axis().scale(x).orient("left").ticks(4).tickSize(0),
+      yAxis = d3.svg.axis().scale(y).orient("bottom").tickSize(-h + 60);
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .style("background-color", "#3a498c")
@@ -278,8 +278,8 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
   var x = d3.scale.linear().range([10, w-50]),
       y = d3.scale.ordinal().rangeBands([0, h-50], .1);
 
-  var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
-      yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
+  var xAxis = d3.svg.axis().scale(x).orient("left").ticks(4).tickSize(-h + 60),
+      yAxis = d3.svg.axis().scale(y).orient("bottom").tickSize(0);
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .style("background-color", "#3a498c")
