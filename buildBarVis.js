@@ -9,7 +9,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   // We can now hide the loading image
   showLoadingImage(false);
 
-  var w = 300;
+  var w = 275;
   var h = 700;
 
   var format = d3.format(",.0f");
@@ -17,7 +17,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   var x = d3.scale.linear().range([10, w-50]),
       y = d3.scale.ordinal().rangeBands([0, h-50], .1);
 
-  var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60),
+  var xAxis = d3.svg.axis().scale(x).orient("top").ticks(4).tickSize(-h + 60).tickFormat(d3.format("s")),
       yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
   var svg = d3.select("#locationOfSVGs").append("svg")
