@@ -30,7 +30,7 @@ body {
   <div class="processBookEntry">
     <h1 class="processBookH1">Table of Contents</h1 class="processBookH1">
     <p class="processBookText">
-      <ul>
+      <ul class="processBookText">
         <li><a href="#overview"><strong>Overview and Motivation</strong></a></li>
         <li><a href="#week1"><strong>Week 1: Data Preprocessing and Implementing the Visualizations</strong></a></li>
         <li><a href="#week2"><strong>Week 2: Post-Proposal-Feedback Work</strong></a></li>
@@ -65,7 +65,7 @@ body {
   <div class="processBookEntry">
     <h2 class="processBookH2">Preprocessing the Data</h2>
     <p class="processBookText"><strong>Data:</strong> The data I have had to be preprocessed to some extent. Changes I made were:</p>
-    <ul>
+    <ul class="processBookText">
       <li>Changing all instances of the ampersand (&) in the "Question" column to be the word "and."
       <li>Removing any quotation marks from all values in the "Question" column.
       <li>Removing the dollar signs from the values of questions to allow d3 to sort the values in numerical order.
@@ -310,18 +310,24 @@ body {
 
   <div class="processBookEntry">
     <h2 class="processBookH2">Feedback from Project Presentation</h2>
-    <p class="processBookText"><strong>Design Evolution and Implementation:</strong> The feedback that I received from the project presentations in class last night (12/1) was wonderful. The suggestions I received werel:
-      <ul>
+    <p class="processBookText">
+      <strong>Design Evolution and Implementation:</strong> The feedback that I received from the project presentations in class last night (12/1) was wonderful. The suggestions I received were:
+    </p>
+      <ul class="processBookText">
         <li>Let the user compare the frequencies of two words, so allow for side-by-side searching.</li>
         <li>Show trends over time, meaning show how often words appear in questions as time has passed.</li>
       </ul>
-      I really liked both of these suggestions and have already implemented one:
+      <p class="processBookText">
+        The first suggestion was made after someone asked me what interesting things I noticed in the data, and I noted how the word "he" appears in many more questions than the word "she." This lead to the idea of comparing side by side, in addition to searching for just one word. I really liked both of these suggestions and have already implemented one (you can still search for just one word, but now you have the option to compare the results for two words as well):
+      </p>
       <center>
         <img src="images/comparingwordfrequencies.png" width="500">
         <br>
         <div class="processBookSub">You can now see how often a word appears in the data set and compare it to another word's number of appearances.</div>
       </center>
-      I plan on implementing the second suggested feature as soon as I can.
+      <p class="processBookText">
+        I plan on implementing the second suggested feature as soon as I can.
+      </p>
     </p>
   </div>
 

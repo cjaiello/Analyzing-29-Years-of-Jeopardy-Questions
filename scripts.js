@@ -67,7 +67,6 @@ function getVizName(vizNumber){
 function validateForm(shouldNotBeEmpty) {
   var usersWord = document.getElementById(shouldNotBeEmpty).value;
   if (usersWord==null || usersWord== "" || usersWord.indexOf(" ") > -1) {
-    alert("Please enter a singular word to search for.");
     return false;
   } else return true;
 }
@@ -119,9 +118,10 @@ function findWordMatchesInDataSet(){
 // set. Finds number of matches in questions, answers, and categories
 function findWordPairMatchesInDataSet(){
   // If form is invalid, don't do the search:
-  if(!validateForm("wordToSearchFor1") || !validateForm("wordToSearchFor2")){
+  if(!validateForm("wordToSearchFor1") && !validateForm("wordToSearchFor2")){
+    alert("Please enter a singular word to search for.");
     return;
-  }
+  } 
 
   // Remove old visualization
   d3.selectAll(".countWordsVis")
@@ -143,10 +143,19 @@ function findWordPairMatchesInDataSet(){
     var wordToSearchFor2 = document.getElementById('wordToSearchFor2').value;
     // Array with number of matches
     var numberOfMatchesFound2 = findMatches(data, wordToSearchFor2);
-    
-    // Now, build the visualization based on the data:
-    buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
-    buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2);
+
+    // How many words did they search for, one or two?
+    if(!validateForm("wordToSearchFor1")) {
+      // Just build one visualization
+      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2);
+    } else if(!validateForm("wordToSearchFor2")) {
+      // Just build one visualization
+      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
+    } else {
+      // Build both visualizations based on the data:
+      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2);
+    }
   });
 }
 
