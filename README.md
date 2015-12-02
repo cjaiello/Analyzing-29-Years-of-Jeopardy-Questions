@@ -8,7 +8,7 @@ CS573 Final Project Proposal:
 [“29 Years of Jeopardy Questions” - Process Book](http://cjaiello.github.io/DataVisFinal/processBook.html)
 
 
-[“29 Years of Jeopardy Questions” - Compare Word Frequencies](http://cjaiello.github.io/DataVisFinal/compareWordFrequencies.html)
+[“29 Years of Jeopardy Questions” - Word Frequencies](http://cjaiello.github.io/DataVisFinal/wordFrequencies.html)
 
 
 
