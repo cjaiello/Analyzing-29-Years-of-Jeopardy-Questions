@@ -142,6 +142,8 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
   // Now we can hide the loading image
   showLoadingImage(false);
 
+  console.log("Hello? 1");
+
   // Make an object for each attribute:
   var questionData = new Object();
   questionData.Attribute = "Question";
@@ -152,6 +154,8 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
   var categoryData = new Object();
   categoryData.Attribute = "Category";
   categoryData.Value = dataObject.Categories;
+
+  console.log("Hello? 2");
 
   // Creating a list of this data:
   var data = [];
@@ -164,11 +168,19 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
 
   var format = d3.format(",.0f");
 
-  var x = d3.scale.linear().range([10, w-50]),
-      y = d3.scale.ordinal().rangeBands([0, h-50], .1);
+  var x = d3.scale.ordinal().rangeRoundBands([0, w], .1);
 
-  var xAxis = d3.svg.axis().scale(x).orient("left").ticks(4).tickSize(0),
-      yAxis = d3.svg.axis().scale(y).orient("bottom").tickSize(-h + 60);
+  var y = d3.scale.linear().range([h, 0]);
+
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    //.tickSize(0);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .style("background-color", "#3a498c")
@@ -178,35 +190,70 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
       .attr("padding-left", "20")
       .attr("margin-left", "20")
       .attr("width", w+125)
-      .attr("height", h)
+      .attr("height", h + 50)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
-  // Set the scale domain.
-  x.domain([0, d3.max(data, function(d) {
+  // Set the domain
+  x.domain(data.map(function(d) { return d.Attribute; }));
+  y.domain([0, d3.max(data, function(d) {
+    console.log(d.Value);
     return d.Value; 
   })]);
-  y.domain(data.map(function(d) { return d.Attribute; }));
 
   // Adding x axis to screen
   svg.append("g")
       .attr("class", "x axis")
       .attr("fill", "white")
+      .attr("transform", "translate(0," + h + ")")
       .call(xAxis);
 
   // Adding y axis to screen
   svg.append("g")
       .attr("class", "wordSearchLabel")
       .attr("fill", "white")
-      .attr("transform", "translate(" + 10 + ",0)")
       .call(yAxis);
+
+  var bar = svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("fill", "#399DB1")
+      .attr("class", "bar")
+      .attr("x", function(d) { 
+        console.log("x data:");
+        console.log(d);
+        console.log("x placement:");
+        console.log(x(d.Attribute));
+        return x(d.Attribute); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { 
+        console.log("y data:");
+        console.log(d);
+        console.log("y placement:");
+        console.log(y(parseInt(d.Value)));
+        return y(parseInt(d.Value)); })
+      .attr("height", function(d) { 
+        console.log("h data:");
+        console.log(d);
+        console.log("d.value");
+        console.log(parseInt(d.Value));
+        console.log("height - value");
+        console.log(h - parseInt(d.Value));
+        return h - parseInt(y(d.Value)) });
+
+      console.log("Done");
+
+    /*function type(d) {
+      d.frequency = +d.frequency;
+      return d;
+    }
 
   var bar = svg.selectAll("g.bar")
       .data(data)
     .enter().append("g")
       .attr("class", "bar")
       .attr("transform", function(d) {
-        return "translate(1," + y(d.Attribute) + ")"; 
+        return "translate(" + y(d.Attribute) + ", 1)"; 
       });
 
   // Putting the rectangles on the bar chart
@@ -232,7 +279,7 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
       .attr("fill", "white")
       .text(function(d) {
         return d.Value; 
-      });
+      });*//*
 
   svg.append("text")
       .attr("x", w * (1/5) )
@@ -240,7 +287,7 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
       .style("font-size","20px")
       .style("font-weight","bold")
       .attr("fill", "white")
-      .text("Number of Appearances of the Word \"" + word + "\"");
+      .text("Number of Appearances of the Word \"" + word + "\"");*/
 
 }
 
@@ -279,7 +326,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       y = d3.scale.ordinal().rangeBands([0, h-50], .1);
 
   var xAxis = d3.svg.axis().scale(x).orient("left").ticks(4).tickSize(-h + 60),
-      yAxis = d3.svg.axis().scale(y).orient("bottom").tickSize(0);
+      yAxis = d3.svg.axis().scale(y).orient("top").tickSize(0);
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .style("background-color", "#3a498c")
