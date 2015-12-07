@@ -50,7 +50,7 @@ function buildWordCloudVis(data, year){
               .attr("height", 600)
               .style("margin-top", "25px")
               .attr("class", "wordCloud")
-              .style("background-color", "#ffffff")
+              .style("background-color", "#CFF09E")
               .append("g")
               .attr("transform", "translate(600,300)")
               .selectAll("text")

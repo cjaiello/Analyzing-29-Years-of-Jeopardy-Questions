@@ -10,7 +10,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   showLoadingImage(false);
 
   var w = 275;
-  var h = 450;
+  var h = 550;
 
   var format = d3.format(",.0f");
 
@@ -49,6 +49,8 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   svg.append("g")
       .attr("class", "labels, axis")
       .attr("fill", "#3b6c88")
+      .style("font-weight", "bold")
+      .style("font-size", "10px")
       .attr("transform", "translate(" + 10 + ",0)")
       .call(yAxis);
 
