@@ -58,8 +58,13 @@ body {
 
 /* Div that holds two bar graphs on index page */
 #locationOfSVGsWordComparison{
-  float:left;
+  margin: 0 auto;
+  width: auto;
   height: 400px;
+}
+
+.countWordVis{
+  margin: 0 auto;
 }
 
 /* All labels on charts */
@@ -90,13 +95,19 @@ body {
 /* Div that holds directions */
 #directionsBox{
   width: auto;
-  height: 30px;
+  height: 100px;
   display: visible;
+  float: center;
 }
 
 /* Text at top of main page */
 #jeopardyTitle {
   color: #FCC627;
+}
+
+#inputDiv{
+  width: 500px;
+  margin: 0 auto;
 }
 
 /* --------- Below is for All Bar Graphs --------- */
@@ -139,7 +150,7 @@ body {
 .calendarBox {
   width: 650px;
   height: 650px;
-  float: left;
+  float: center;
 }
 
 .calendarBoxWordComparisons1, .calendarBoxWordComparisons2 {
@@ -147,6 +158,11 @@ body {
   height: 1000px;
   padding: 10px;
   float: left;
+}
+
+.calendars {
+  width: 1400px;
+  margin: 0 auto;
 }
 
 #chart{
