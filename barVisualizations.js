@@ -163,8 +163,8 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
   data.push(answerData);
   data.push(categoryData);
 
-  var w = 500;
-  var h = 500;
+  var w = 300;
+  var h = 250;
 
   var format = d3.format(",.0f");
 
@@ -184,8 +184,9 @@ var yAxis = d3.svg.axis()
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .style("background-color", "#3a498c")
-      .style("padding", "30px")
-      .style("margin", "30px")
+      .style("padding", "10px")
+      .style("padding-bottom", "30px")
+      .style("margin", "10px")
       .attr("class", "countWordsVis")
       .attr("padding-left", "20")
       .attr("margin-left", "20")
@@ -196,10 +197,7 @@ var yAxis = d3.svg.axis()
 
   // Set the domain
   x.domain(data.map(function(d) { return d.Attribute; }));
-  y.domain([0, d3.max(data, function(d) {
-    console.log(d.Value);
-    return d.Value; 
-  })]);
+  y.domain([0, 15000]);
 
   // Adding x axis to screen
   svg.append("g")
@@ -279,15 +277,15 @@ var yAxis = d3.svg.axis()
       .attr("fill", "white")
       .text(function(d) {
         return d.Value; 
-      });*//*
+      });*/
 
   svg.append("text")
-      .attr("x", w * (1/5) )
-      .attr("y", h - 40)
-      .style("font-size","20px")
+      .attr("x", w * (1/10)-50 )
+      .attr("y", h+40)
+      .style("font-size","15px")
       .style("font-weight","bold")
       .attr("fill", "white")
-      .text("Number of Appearances of the Word \"" + word + "\"");*/
+      .text("Number of Appearances of the Word \"" + word + "\"");
 
 }
 
