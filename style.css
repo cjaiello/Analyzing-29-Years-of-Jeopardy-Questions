@@ -56,6 +56,12 @@ body {
   height: 700px;
 }
 
+/* Div that holds two bar graphs on index page */
+#locationOfSVGsWordComparison{
+  float:left;
+  height: 400px;
+}
+
 /* All labels on charts */
 .labels {
   font-size: 11px;
@@ -133,6 +139,13 @@ body {
 .calendarBox {
   width: 650px;
   height: 650px;
+  float: left;
+}
+
+.calendarBoxWordComparisons1, .calendarBoxWordComparisons2 {
+  width: 650px;
+  height: 1000px;
+  padding: 10px;
   float: left;
 }
 

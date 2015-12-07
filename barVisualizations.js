@@ -10,7 +10,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   showLoadingImage(false);
 
   var w = 275;
-  var h = 700;
+  var h = 750;
 
   var format = d3.format(",.0f");
 
@@ -138,21 +138,25 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 // Creates a bar visualization
 // @dataObject: the data from the csv
 // @translateXCoordinate: How far over (x-wise) the graph should go
-function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) {
+function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word, vizNumber) {
+
   // Now we can hide the loading image
   showLoadingImage(false);
+
+  var combinedMapAndCounts = combineHashmapsAndTotalUpCountsInHashmap(dataObject.Questions, dataObject.Answers, dataObject.Categories);
+  var hashMapOfDatesAndCounts = combinedMapAndCounts[0];
 
   // Make an object for each attribute:
   var questionData = new Object();
   questionData.Attribute = "Question";
-  questionData.Value = dataObject.Questions;
+  questionData.Value = combinedMapAndCounts[1];
   var answerData = new Object();
   answerData.Attribute = "Answer";
-  answerData.Value = dataObject.Answers;
+  answerData.Value = combinedMapAndCounts[2];
   var categoryData = new Object();
   categoryData.Attribute = "Category";
-  categoryData.Value = dataObject.Categories;
-
+  categoryData.Value = combinedMapAndCounts[3];
+  
   // Creating a list of this data:
   var data = [];
   data.push(questionData);
@@ -164,7 +168,7 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
 
   var format = d3.format(",.0f");
 
-  var x = d3.scale.ordinal().rangeRoundBands([0, w], .05);
+  var x = d3.scale.ordinal().rangeRoundBands([0, w], .1);
 
   var y = d3.scale.linear().range([h, 0]);
 
@@ -178,7 +182,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(10);
 
-  var svg = d3.select("#locationOfSVGs").append("svg")
+  var svg = d3.select("#locationOfSVGsWordComparison").append("svg")
       .style("background-color", "#3a498c")
       .style("padding", "10px")
       .style("padding-bottom", "30px")
@@ -219,29 +223,18 @@ var yAxis = d3.svg.axis()
       .attr("y", function(d) { 
         return y(parseInt(d.Value)); })
       .attr("height", function(d) { 
-        return h - parseInt(y(d.Value)) })/*
-      .append("text")
-      .attr("class", "wordSearchLabel")
-      .attr("x", function(d) { 
-        return x(d.Attribute); 
-      })
-      .attr("y", function(d) { 
-        return h- y(parseInt(d.Value)); })
-      .style("font-weight","bold")
-      .style("font-size","15px")
-      .attr("fill", "white")
-      .text(function(d) {
-        console.log(d.Value);
-        return d.Value; 
-      });*/
+        return h - parseInt(y(d.Value)) });
 
   svg.append("text")
-      .attr("x", w * (1/10)-50 )
+      .attr("x", w * (1/10) )
       .attr("y", h+40)
       .style("font-size","15px")
       .style("font-weight","bold")
       .attr("fill", "white")
-      .text("Number of Appearances of the Word \"" + word + "\"");
+      .attr("class", "barChartLabel")
+      .text("Appearances of the Word \"" + word + "\"");
+
+  buildCalendarViewVisForWordComparisons(hashMapOfDatesAndCounts, 25, vizNumber, "Air Date of Show When Word \"" + word + "\" Occurred");
 
 }
 

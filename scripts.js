@@ -124,8 +124,16 @@ function findWordPairMatchesInDataSet(){
   } 
 
   // Remove old visualization
+  d3.selectAll(".calendarBoxSVG1")
+    .remove();
+  d3.selectAll(".calendarBoxSVG2")
+    .remove();
   d3.selectAll(".countWordsVis")
-        .remove();
+    .remove();
+  d3.selectAll(".barChartLabel")
+    .remove();
+  d3.selectAll(".calendarLabel")
+    .remove();
 
   // Tell the user that something is loading
   showLoadingImage(true);
@@ -137,12 +145,12 @@ function findWordPairMatchesInDataSet(){
     // Next, get the word we need from the screen
     var wordToSearchFor1 = document.getElementById('wordToSearchFor1').value;
     // Array with number of matches
-    var numberOfMatchesFound1 = findMatches(data, wordToSearchFor1);
+    var numberOfMatchesFound1 = findMatchesAggregatedByAirDate(data, wordToSearchFor1);
 
     // Next, get the word we need from the screen
     var wordToSearchFor2 = document.getElementById('wordToSearchFor2').value;
     // Array with number of matches
-    var numberOfMatchesFound2 = findMatches(data, wordToSearchFor2);
+    var numberOfMatchesFound2 = findMatchesAggregatedByAirDate(data, wordToSearchFor2);
 
     // How many words did they search for, one or two?
     if(!validateForm("wordToSearchFor1")) {
@@ -153,12 +161,142 @@ function findWordPairMatchesInDataSet(){
       buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
     } else {
       // Build both visualizations based on the data:
-      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
-      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2, 2);
     }
   });
 }
 
+
+// Combines the question, answer, and category hashmaps into one
+function combineHashmapsAndTotalUpCountsInHashmap(questionHashmap, answerHashmap, categoryHashmap){
+  var finalResult = {};
+  var combinedHashmap = {};
+  var questionRunningTotal = 0;
+  var answerRunningTotal = 0;
+  var categoryRunningTotal = 0;
+
+  for(key in questionHashmap){
+    if(combinedHashmap[key] != null){
+      combinedHashmap[key] += questionHashmap[key];
+      questionRunningTotal += questionHashmap[key];
+    } else {
+      combinedHashmap[key] = questionHashmap[key];
+      questionRunningTotal += questionHashmap[key];
+    }
+  }
+
+  for(key in answerHashmap){
+    if(combinedHashmap[key] != null){
+      combinedHashmap[key] += answerHashmap[key];
+      answerRunningTotal += answerHashmap[key];
+    } else {
+      combinedHashmap[key] = answerHashmap[key];
+      answerRunningTotal += answerHashmap[key];
+    }
+  }
+
+  for(key in categoryHashmap){
+    if(combinedHashmap[key] != null){
+      combinedHashmap[key] += categoryHashmap[key];
+      categoryRunningTotal += categoryHashmap[key];
+    } else {
+      combinedHashmap[key] = categoryHashmap[key];
+      categoryRunningTotal += categoryHashmap[key];
+    }
+  }
+
+  finalResult = [combinedHashmap, questionRunningTotal, answerRunningTotal, categoryRunningTotal];
+  return finalResult;
+}
+
+
+
+// This function will find matches for a specific word in a given
+// array of input.
+// @input: An array of strings
+// @wordToFind: The word you want to find in the given input
+function findMatchesAggregatedByAirDate(input, wordToFind){
+  // Holds number of matches in entire data set:
+  var questionMatchesMap = {}; 
+  var answerMatchesMap = {}; 
+  var categoryMatchesMap = {}; 
+
+  // Loop through the data set:
+  for(var counter = 0; counter < input.length; counter++){
+    // Getting our current data point, aka a row in the data
+    var dataPoint = input[counter];
+    var currentQuestion = removeSpecialCharacters(dataPoint.Question);
+    var currentAnswer = removeSpecialCharacters(dataPoint.Answer);
+    var currentCategory = removeSpecialCharacters(dataPoint.Category);
+
+    // Prepending those zeroes since they're getting stripped somehow
+    var newDate = prependZeroToNumbersLessThanTen(dataPoint.Date);
+
+    // Adding data to each map:
+    questionMatchesMap = putDataIntoMapBasedOnDate(dataPoint.Question, questionMatchesMap, newDate, wordToFind);
+    answerMatchesMap = putDataIntoMapBasedOnDate(dataPoint.Answer, answerMatchesMap, newDate, wordToFind);
+    categoryMatchesMap = putDataIntoMapBasedOnDate(dataPoint.Category, categoryMatchesMap, newDate, wordToFind);
+  }
+
+  // This will hold the number of matches for each attribute
+  var returnedMapsOfMatches = {};
+  returnedMapsOfMatches["Questions"] = questionMatchesMap;
+  returnedMapsOfMatches["Answers"] = answerMatchesMap;
+  returnedMapsOfMatches["Categories"] = categoryMatchesMap;
+  return returnedMapsOfMatches;
+}
+
+// Function will turn a string to all lowercase, count matches
+// of a word, and put them in the map based on the date
+function putDataIntoMapBasedOnDate(dataAttribute, mapToPutDataInto, newDate, wordToFind){
+  // Regex to find how many matches for a particular word there are:
+  var regex = new RegExp("(?:^|\\s)" + wordToFind.toLowerCase() + "(?=\\s|$)");
+
+  // Compare this word to the current category
+  var matches = dataAttribute.toLowerCase().match(regex);
+  if(matches != null){
+    // If key (date) already exists:
+    if(mapToPutDataInto[newDate] != null){
+      mapToPutDataInto[newDate] += matches.length;
+    } else {
+      // If a key for this date doesn't exist yet
+      mapToPutDataInto[newDate] = matches.length;
+    }
+  }
+
+  return mapToPutDataInto;
+}
+
+
+// Removing special characters from strings
+function removeSpecialCharacters(string){
+  // Remove commas and parentheses
+  string = string.replace(/,/, "");
+  string = string.replace(/\)/, "");
+  string = string.replace(/\(/, "");
+  string = string.replace(/\""/, "");
+
+  return string;
+}
+
+
+// Puts zeroes in front of any parts of a date that are less than ten
+function prependZeroToNumbersLessThanTen(date){
+  // Prepending those zeroes since they're getting stripped somehow
+  var dateRegex = new RegExp("^(0?[1-9]|1[012])[/](0?[1-9]|[12][0-9]|3[01])[/]([0-9]+)$");
+  var matches = dateRegex.exec(date);
+
+  var newDate; // Will hold new date with zeroes
+  if(matches != null){
+    var month =  (matches[1] < 10 ? '0' : '') + matches[1];
+    var day =  (matches[2] < 10 ? '0' : '') + matches[2];
+    var year =  matches[3];
+    newDate = month + "/" + day + "/" + year;
+  }
+
+  return newDate;
+}
 
 
 // This function will find matches for a specific word in a given
@@ -174,57 +312,39 @@ function findMatches(input, wordToFind){
   // Loop through the data set:
   for(var counter = 0; counter < input.length; counter++){
     var dataPoint = input[counter];
-    var currentQuestion = dataPoint.Question;
-    var currentAnswer = dataPoint.Answer;
-    var currentCategory = dataPoint.Category;
+    var currentQuestion = removeSpecialCharacters(dataPoint.Question);
+    var currentAnswer = removeSpecialCharacters(dataPoint.Answer);
+    var currentCategory = removeSpecialCharacters(dataPoint.Category);
 
-    // Remove commas and parentheses
-    currentQuestion = currentQuestion.replace(/,/, "");
-    currentQuestion = currentQuestion.replace(/\)/, "");
-    currentQuestion = currentQuestion.replace(/\(/, "");
-    currentQuestion = currentQuestion.replace(/\""/, "");
-    currentAnswer = currentAnswer.replace(/,/, "");
-    currentAnswer = currentAnswer.replace(/\)/, "");
-    currentAnswer = currentAnswer.replace(/\(/, "");
-    currentAnswer = currentAnswer.replace(/\""/, "");
-    currentCategory = currentCategory.replace(/,/, "");
-    currentCategory = currentCategory.replace(/\)/, "");
-    currentCategory = currentCategory.replace(/\(/, "");
-    currentCategory = currentCategory.replace(/\""/, "");
-
-    // Regex to find how many matches for a particular word there are:
-    var regex = new RegExp("(?:^|\\s)" + wordToFind.toLowerCase() + "(?=\\s|$)");
-
-    // Compare this word to the current question
-    var matches = currentQuestion.toLowerCase().match(regex);
-    if(matches != null){
-      numberOfQuestionMatches += matches.length;
-    }
-
-    // Compare this word to the current answer
-    var matches = currentAnswer.toLowerCase().match(regex);
-    if(matches != null){
-      numberOfAnswerMatches += matches.length;
-    }
-
-    // Compare this word to the current category
-    var matches = currentCategory.toLowerCase().match(regex);
-    if(matches != null){
-      numberOfCategoryMatches += matches.length;
-    }
-
-    // Now, for this data point (in regards to the question, answer, and category)
-    // we have the number of matches in numberOfMatches. Continue looping through
-    // the entire data set, and return the final counts.
+    // Count the number of matches for this word in this data point's
+    // question, answer, and category
+    numberOfQuestionMatches = putDataIntoMap(dataPoint.Question, currentQuestion, wordToFind);
+    numberOfAnswerMatches = putDataIntoMap(dataPoint.Answer, currentAnswer, wordToFind);
+    numberOfCategoryMatches = putDataIntoMap(dataPoint.Category, currentCategory, wordToFind);
 
   }
 
   // This will hold the number of matches for each attribute
-  var returnedArrayOfMatches = {};
-  returnedArrayOfMatches["Questions"] = numberOfQuestionMatches;
-  returnedArrayOfMatches["Answers"] = numberOfAnswerMatches;
-  returnedArrayOfMatches["Categories"] = numberOfCategoryMatches;
-  return returnedArrayOfMatches;
+  var returnedMapsOfMatches = {};
+  returnedMapsOfMatches["Questions"] = numberOfQuestionMatches;
+  returnedMapsOfMatches["Answers"] = numberOfAnswerMatches;
+  returnedMapsOfMatches["Categories"] = numberOfCategoryMatches;
+  return returnedMapsOfMatches;
+}
+
+// Counts number of matches in an attribute, in addition to 
+// turning a data point to all lowercase
+function putDataIntoMap(dataAttribute, counter, wordToFind){
+  // Regex to find how many matches for a particular word there are:
+    var regex = new RegExp("(?:^|\\s)" + wordToFind.toLowerCase() + "(?=\\s|$)");
+
+    // Compare this word to the current question
+    var matches = dataAttribute.toLowerCase().match(regex);
+    if(matches != null){
+      counter += matches.length;
+    }
+
+  return counter;
 }
 
 // If using calendar vis, we need to get all data points associated with the
