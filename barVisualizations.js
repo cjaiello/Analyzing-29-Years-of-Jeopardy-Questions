@@ -142,8 +142,6 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
   // Now we can hide the loading image
   showLoadingImage(false);
 
-  console.log("Hello? 1");
-
   // Make an object for each attribute:
   var questionData = new Object();
   questionData.Attribute = "Question";
@@ -154,8 +152,6 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
   var categoryData = new Object();
   categoryData.Attribute = "Category";
   categoryData.Value = dataObject.Categories;
-
-  console.log("Hello? 2");
 
   // Creating a list of this data:
   var data = [];
@@ -168,7 +164,7 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word) 
 
   var format = d3.format(",.0f");
 
-  var x = d3.scale.ordinal().rangeRoundBands([0, w], .1);
+  var x = d3.scale.ordinal().rangeRoundBands([0, w], .05);
 
   var y = d3.scale.linear().range([h, 0]);
 
@@ -218,64 +214,24 @@ var yAxis = d3.svg.axis()
       .attr("fill", "#399DB1")
       .attr("class", "bar")
       .attr("x", function(d) { 
-        console.log("x data:");
-        console.log(d);
-        console.log("x placement:");
-        console.log(x(d.Attribute));
         return x(d.Attribute); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { 
-        console.log("y data:");
-        console.log(d);
-        console.log("y placement:");
-        console.log(y(parseInt(d.Value)));
         return y(parseInt(d.Value)); })
       .attr("height", function(d) { 
-        console.log("h data:");
-        console.log(d);
-        console.log("d.value");
-        console.log(parseInt(d.Value));
-        console.log("height - value");
-        console.log(h - parseInt(d.Value));
-        return h - parseInt(y(d.Value)) });
-
-      console.log("Done");
-
-    /*function type(d) {
-      d.frequency = +d.frequency;
-      return d;
-    }
-
-  var bar = svg.selectAll("g.bar")
-      .data(data)
-    .enter().append("g")
-      .attr("class", "bar")
-      .attr("transform", function(d) {
-        return "translate(" + y(d.Attribute) + ", 1)"; 
-      });
-
-  // Putting the rectangles on the bar chart
-  bar.append("rect")
-      .attr("fill", "#399DB1")
-      .attr("transform", "translate(" + 10 + ",0)")
-      .attr("width", function(d) {
-        return x(parseInt(d.Value)); 
-      })
-      .attr("height", y.rangeBand());
-
-  // Placing the label text for each bar
-  bar.append("text")
+        return h - parseInt(y(d.Value)) })/*
+      .append("text")
       .attr("class", "wordSearchLabel")
       .attr("x", function(d) { 
-        return x(parseInt(d.Value)); 
+        return x(d.Attribute); 
       })
-      .attr("y", y.rangeBand() / 2)
-      .attr("dx", 20)
-      .attr("dy", ".35em")
+      .attr("y", function(d) { 
+        return h- y(parseInt(d.Value)); })
       .style("font-weight","bold")
-      .attr("text-anchor", "end")
+      .style("font-size","15px")
       .attr("fill", "white")
       .text(function(d) {
+        console.log(d.Value);
         return d.Value; 
       });*/
 
