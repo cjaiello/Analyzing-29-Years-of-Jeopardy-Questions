@@ -146,11 +146,13 @@ function findWordPairMatchesInDataSet(){
     var wordToSearchFor1 = document.getElementById('wordToSearchFor1').value;
     // Array with number of matches
     var numberOfMatchesFound1 = findMatchesAggregatedByAirDate(data, wordToSearchFor1);
-
     // Next, get the word we need from the screen
     var wordToSearchFor2 = document.getElementById('wordToSearchFor2').value;
     // Array with number of matches
     var numberOfMatchesFound2 = findMatchesAggregatedByAirDate(data, wordToSearchFor2);
+
+    var topBoundForGraphs = (numberOfMatchesFound1["LargestSeen"] > numberOfMatchesFound2["LargestSeen"]) ? numberOfMatchesFound1["LargestSeen"] : numberOfMatchesFound2["LargestSeen"];
+    console.log("Top bound for graphs is: " + topBoundForGraphs);
 
     // How many words did they search for, one or two?
     if(!validateForm("wordToSearchFor1")) {
@@ -161,8 +163,8 @@ function findWordPairMatchesInDataSet(){
       buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
     } else {
       // Build both visualizations based on the data:
-      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1);
-      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2, 2);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1, topBoundForGraphs);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2, 2, topBoundForGraphs);
     }
   });
 }
@@ -219,8 +221,11 @@ function combineHashmapsAndTotalUpCountsInHashmap(questionHashmap, answerHashmap
 function findMatchesAggregatedByAirDate(input, wordToFind){
   // Holds number of matches in entire data set:
   var questionMatchesMap = {}; 
+  var questionCount = 0;
   var answerMatchesMap = {}; 
-  var categoryMatchesMap = {}; 
+  var answerCount = 0;
+  var categoryMatchesMap = {};
+  var categoryCount = 0; 
 
   // Loop through the data set:
   for(var counter = 0; counter < input.length; counter++){
@@ -234,9 +239,15 @@ function findMatchesAggregatedByAirDate(input, wordToFind){
     var newDate = prependZeroToNumbersLessThanTen(dataPoint.Date);
 
     // Adding data to each map:
-    questionMatchesMap = putDataIntoMapBasedOnDate(dataPoint.Question, questionMatchesMap, newDate, wordToFind);
-    answerMatchesMap = putDataIntoMapBasedOnDate(dataPoint.Answer, answerMatchesMap, newDate, wordToFind);
-    categoryMatchesMap = putDataIntoMapBasedOnDate(dataPoint.Category, categoryMatchesMap, newDate, wordToFind);
+    questionData = putDataIntoMapBasedOnDate(dataPoint.Question, questionMatchesMap, newDate, wordToFind);
+    questionMatchesMap = questionData[0];
+    questionCount += questionData[1];
+    answerData = putDataIntoMapBasedOnDate(dataPoint.Answer, answerMatchesMap, newDate, wordToFind);
+    answerMatchesMap = answerData[0];
+    answerCount += answerData[1];
+    categoryData = putDataIntoMapBasedOnDate(dataPoint.Category, categoryMatchesMap, newDate, wordToFind);
+    categoryMatchesMap = categoryData[0];
+    categoryCount += categoryData[1];
   }
 
   // This will hold the number of matches for each attribute
@@ -244,6 +255,7 @@ function findMatchesAggregatedByAirDate(input, wordToFind){
   returnedMapsOfMatches["Questions"] = questionMatchesMap;
   returnedMapsOfMatches["Answers"] = answerMatchesMap;
   returnedMapsOfMatches["Categories"] = categoryMatchesMap;
+  returnedMapsOfMatches["LargestSeen"] = (questionCount > answerCount) ? ((questionCount > categoryCount) ? questionCount : categoryCount) : ((answerCount > categoryCount) ? answerCount : categoryCount);
   return returnedMapsOfMatches;
 }
 
@@ -252,10 +264,13 @@ function findMatchesAggregatedByAirDate(input, wordToFind){
 function putDataIntoMapBasedOnDate(dataAttribute, mapToPutDataInto, newDate, wordToFind){
   // Regex to find how many matches for a particular word there are:
   var regex = new RegExp("(?:^|\\s)" + wordToFind.toLowerCase() + "(?=\\s|$)");
+  var counter = 0;
 
   // Compare this word to the current category
   var matches = dataAttribute.toLowerCase().match(regex);
   if(matches != null){
+    // Keeping a general count, used to choose height of graph later
+    counter += matches.length;
     // If key (date) already exists:
     if(mapToPutDataInto[newDate] != null){
       mapToPutDataInto[newDate] += matches.length;
@@ -265,7 +280,7 @@ function putDataIntoMapBasedOnDate(dataAttribute, mapToPutDataInto, newDate, wor
     }
   }
 
-  return mapToPutDataInto;
+  return [mapToPutDataInto, counter];
 }
 
 

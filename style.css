@@ -155,7 +155,7 @@ body {
 
 .calendarBoxWordComparisons1, .calendarBoxWordComparisons2 {
   width: 650px;
-  height: 1000px;
+  height: auto;
   padding: 10px;
   float: left;
 }

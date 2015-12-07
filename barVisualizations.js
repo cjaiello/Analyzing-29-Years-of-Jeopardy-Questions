@@ -138,7 +138,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 // Creates a bar visualization
 // @dataObject: the data from the csv
 // @translateXCoordinate: How far over (x-wise) the graph should go
-function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word, vizNumber) {
+function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word, vizNumber, topBoundForGraphs) {
 
   // Now we can hide the loading image
   showLoadingImage(false);
@@ -195,9 +195,9 @@ var yAxis = d3.svg.axis()
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
-  // Set the domain
+  // Set the domains
   x.domain(data.map(function(d) { return d.Attribute; }));
-  y.domain([0, 15000]);
+  y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : 15000]);
 
   // Adding x axis to screen
   svg.append("g")
@@ -223,7 +223,9 @@ var yAxis = d3.svg.axis()
       .attr("y", function(d) { 
         return y(parseInt(d.Value)); })
       .attr("height", function(d) { 
-        return h - parseInt(y(d.Value)) });
+        return h - parseInt(y(d.Value)) })
+      .append("title")
+      .text(function(d) { return d.Value; });
 
   svg.append("text")
       .attr("x", w * (1/10) )
