@@ -10,7 +10,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   showLoadingImage(false);
 
   var w = 275;
-  var h = 750;
+  var h = 450;
 
   var format = d3.format(",.0f");
 
@@ -22,11 +22,13 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .attr("class", getVizName(vizNumber))
-      .style("background-color", "#3a498c")
+      .style("background-color", "#CFF09E")
       .style("padding-left", "10px")
+      .style("padding-top", "50px")
+      .style("padding-bottom", "50px")
       .style("margin-right", "10px")
       .attr("width", w+115)
-      .attr("height", h)
+      .attr("height", "600px")
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
@@ -39,15 +41,14 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   // Adding x axis to screen
   svg.append("g")
       .attr("class", "x axis, axis")
-      .attr("fill", "white")
+      .attr("fill", "#3b6c88")
       .style("font-weight", "bold")
       .call(xAxis);
 
   // Adding y axis to screen
   svg.append("g")
       .attr("class", "labels, axis")
-      .attr("fill", "white")
-      .style("font-weight", "bold")
+      .attr("fill", "#3b6c88")
       .attr("transform", "translate(" + 10 + ",0)")
       .call(yAxis);
 
@@ -62,7 +63,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Putting the rectangles on the bar chart
   bar.append("rect")
-      .attr("fill", "#399DB1")
+      .attr("fill", "#79BD9A")
       .attr("transform", "translate(" + 10 + ",0)")
       .attr("width", function(d, i) {
         return x(d.values.length); 
@@ -83,9 +84,11 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
           showLoadingImage(true);
           setTimeout(function(){
           // Remove the old second and third charts
-            d3.select("svg.secondChart")
+            d3.selectAll("svg.secondChart")
             .remove();
-            d3.select(".calendarBoxSVG")
+            d3.selectAll(".calendarBoxSVG")
+              .remove();
+            d3.selectAll(".calendarLabel")
               .remove();
               buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
           }, 10);
@@ -93,26 +96,26 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
           // Show loading image
           showLoadingImage(true);
           setTimeout(function(){
-            d3.select(".calendarLabel")
+            d3.selectAll(".calendarLabel")
               .remove();
-            d3.select(".calendarBoxSVG")
+            d3.selectAll(".calendarBoxSVG")
               .remove();
             buildCalendarViewVis(aggregateByYear(data[i].values), 25, vizNumber + 1, "Air Date");
           }, 10);
         }
         d3.select(this)
-          .attr("fill", "#8dcad6");
+          .attr("fill", "#A8DBA8");
        })
       .on("mouseout", function() {
         d3.select(this)
-          .attr("fill", "#399DB1");
+          .attr("fill", "#79BD9A");
     });
 
   // Placing the label text for each bar
   bar.append("text")
-      .attr("fill", "white")
+      .attr("fill", "#3b6c88")
       .attr("class", "labels")
-      .style("font-size", "14px")
+      .style("font-size", "12px")
       .attr("x", function(d) { 
         return x(d.values.length); 
       })
@@ -128,9 +131,9 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   svg.append("text")
       .attr("x", w / 2 - 50 )
       .attr("y", h - 40)
-      .style("font-size","15px")
+      .style("font-size","14px")
       .style("font-weight","bold")
-      .attr("fill", "white")
+      .attr("fill", "#3b6c88")
       .text(vizLabel);
 
 }
@@ -183,7 +186,7 @@ var yAxis = d3.svg.axis()
     .ticks(10);
 
   var svg = d3.select("#locationOfSVGsWordComparison").append("svg")
-      .style("background-color", "#3a498c")
+      .style("background-color", "#CFF09E")
       .style("padding", "10px")
       .style("padding-bottom", "30px")
       .style("margin", "10px")
@@ -197,25 +200,25 @@ var yAxis = d3.svg.axis()
 
   // Set the domains
   x.domain(data.map(function(d) { return d.Attribute; }));
-  y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : 15000]);
+  y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : 217000]);
 
   // Adding x axis to screen
   svg.append("g")
       .attr("class", "x axis")
-      .attr("fill", "white")
+      .attr("fill", "#0B486B")
       .attr("transform", "translate(0," + h + ")")
       .call(xAxis);
 
   // Adding y axis to screen
   svg.append("g")
       .attr("class", "wordSearchLabel")
-      .attr("fill", "white")
+      .attr("fill", "#0B486B")
       .call(yAxis);
 
   var bar = svg.selectAll(".bar")
       .data(data)
     .enter().append("rect")
-      .attr("fill", "#399DB1")
+      .attr("fill", "#79BD9A")
       .attr("class", "bar")
       .attr("x", function(d) { 
         return x(d.Attribute); })
@@ -228,15 +231,15 @@ var yAxis = d3.svg.axis()
       .text(function(d) { return d.Value; });
 
   svg.append("text")
-      .attr("x", w * (1/10) )
-      .attr("y", h+40)
-      .style("font-size","15px")
+      .attr("x", w * (1/20))
+      .attr("y", h+45)
+      .style("font-size","18px")
       .style("font-weight","bold")
-      .attr("fill", "white")
+      .attr("fill", "#0B486B")
       .attr("class", "barChartLabel")
       .text("Appearances of the Word \"" + word + "\"");
 
-  buildCalendarViewVisForWordComparisons(hashMapOfDatesAndCounts, 25, vizNumber, "Air Date of Show When Word \"" + word + "\" Occurred");
+  buildCalendarViewVisForWordComparisons(hashMapOfDatesAndCounts, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred");
 
 }
 

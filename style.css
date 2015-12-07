@@ -1,43 +1,43 @@
 /* Christina Aiello, 11/25/2015 */
 
+/* Body text on page */
+body {
+  background-color: #f0fae1;
+  color: #000000;
+  font-size: 12px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
+}
+
 h1 {
   font-size: 18px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
   text-align: center;
   line-height: 15px;
   margin-bottom: 5px;
-  color: #AEB3D1;
+  color: #0B486B;
   margin-top: 10px;
 }
 
 h2 {
   font-size: 15px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
   text-align: center;
   line-height: 15px;
-  color: #AEB3D1;
+  color: #3B8686;
 }
 
 h3 {
   font-size: 14px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
   text-align: center;
   line-height: 13px;
-  color: #AEB3D1;
-}
-
-/* Body text on page */
-body {
-  background-color: #0F114A;
-  color: #ffffff;
-  font-size: 12px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  color: #3B8686;
 }
 
 /* Labels for Word Search bars */
 .wordSearchLabel {
   font-size: 15px;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
   text-align: center;
 }
 
@@ -52,8 +52,7 @@ body {
 
 /* Div that holds two bar graphs on index page */
 #locationOfSVGs{
-  float:left;
-  height: 700px;
+  float: left;
 }
 
 /* Div that holds two bar graphs on index page */
@@ -90,19 +89,16 @@ body {
   width: auto;
   height: 30px;
   display: none;
+  padding-bottom: 5px;
 }
 
 /* Div that holds directions */
 #directionsBox{
   width: auto;
-  height: 100px;
+  height: 30px;
   display: visible;
   float: center;
-}
-
-/* Text at top of main page */
-#jeopardyTitle {
-  color: #FCC627;
+  padding-bottom: 5px;
 }
 
 #inputDiv{
@@ -125,7 +121,7 @@ body {
 }
 
 .bar text.value {
-  fill: #ffffff;
+  fill: #0B486B;
 }
 
 .axis {
@@ -151,6 +147,12 @@ body {
   width: 650px;
   height: 650px;
   float: center;
+}
+
+.calendarBoxIndex {
+  width: 650px;
+  height: 700px;
+  float: left;
 }
 
 .calendarBoxWordComparisons1, .calendarBoxWordComparisons2 {

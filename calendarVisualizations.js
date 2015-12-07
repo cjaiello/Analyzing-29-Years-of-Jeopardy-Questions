@@ -7,8 +7,8 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
   showLoadingImage(false);
 
   var width = 320,
-  height = 44,
-  cellSize = 5.5;
+  height = 42,
+  cellSize = 5;
 
   var percent = d3.format(".1%"),
       format = d3.time.format("%m/%d/%Y");
@@ -25,19 +25,33 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .range(d3.range(11).map(function(d) {
         return "q" + d + "-11"; }));
 
+    
+  d3.select(".calendarBoxWordComparisons" + vizNumber)
+      .append("svg")
+      .attr("class", "calendarLabel")
+      .style("background-color", "#3b6c88")
+      .attr("width", 650)
+      .attr("height", 30).append("text")
+      .attr("x", 110)
+      .attr("y", height - 20)
+      .style("font-size","18px")
+      .style("font-weight","bold")
+      .attr("fill", "#CFF09E")
+      .text(vizLabel);
+
   d3.select(".calendarBoxWordComparisons" + vizNumber)
     .append("div")
     .attr("width", 650)
     .style("padding-bottom", "15px")
     .style("padding-top", "10px")
     .attr("height", 1300)
-    .style("background-color", "#3a498c")
+    .style("background-color", "#3b6c88")
     .attr("class", "calendarBoxSVG" + vizNumber);
 
   var svg = d3.select(".calendarBoxSVG" + vizNumber).selectAll("svg")
       .data(d3.range(1984, 2013))
     .enter().append("svg")
-      .attr("fill", "white")
+      .attr("fill", "#CFF09E")
       .style("padding-left", "5px")
       .attr("width", width)
       .attr("height", height)
@@ -91,20 +105,6 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
 
   d3.select(self.frameElement).style("height", "2910px");
 
-
-  d3.select(".calendarBoxWordComparisons" + vizNumber)
-      .append("svg")
-      .attr("class", "calendarLabel")
-      .style("background-color", "#3a498c")
-      .attr("width", 650)
-      .attr("height", 30).append("text")
-      .attr("x", 150)
-      .attr("y", height - 20)
-      .style("font-size","15px")
-      .style("font-weight","bold")
-      .attr("fill", "white")
-      .text(vizLabel);
-
 }
 
 // Reference: User mbostock, November 13, 2012, 
@@ -133,17 +133,29 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .range(d3.range(11).map(function(d) {
         return "q" + d + "-11"; }));
 
-  d3.select(".calendarBox").append("div").attr("width", 450).style("padding-top", "10px").attr("height", 900)
-      .style("background-color", "#3a498c").attr("class", "calendarBoxSVG");
+  d3.select(".calendarBoxIndex").append("div").attr("width", 450).style("padding-top", "10px").attr("height", 1200)
+      .style("background-color", "#3b6c88").attr("class", "calendarBoxSVG");
 
   var svg = d3.select(".calendarBoxSVG").selectAll("svg")
       .data(d3.range(1984, 2013))
     .enter().append("svg")
-      .attr("fill", "white")
+      .attr("fill", "#ffffff")
       .style("padding-left", "5px")
       .attr("width", width)
       .attr("height", height)
       .attr("class", "RdYlGn")
+      .on("click", function(d, i) {
+            // First remove old word cloud:
+            d3.select(".wordCloud").remove();
+            // Remove its old label too:
+            d3.select(".wordCloudLabel").remove();
+            /*console.log(data[0]);
+            // Now make a new one:
+            console.log(data);
+            console.log(d);
+            console.log(data[d]);*/
+            buildWordCloudVis(data, d);
+          })
     .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
@@ -200,10 +212,10 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   d3.select(self.frameElement).style("height", "2910px");
 
 
-  d3.select(".calendarBox")
+  d3.select(".calendarBoxIndex")
       .append("svg")
       .attr("class", "calendarLabel")
-      .style("background-color", "#3a498c")
+      .style("background-color", "#3b6c88")
       .attr("width", 650)
       .attr("height", 30).append("text")
       .attr("x", 275)
