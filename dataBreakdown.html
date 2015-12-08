@@ -1,0 +1,61 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="build/d3.layout.cloud.js" charset="utf-8"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src="scripts.js" charset="utf-8"></script>
+<script src="barVisualizations.js" charset="utf-8"></script>
+<script src="calendarVisualizations.js" charset="utf-8"></script>
+<script src="wordCloudVisualizations.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<body>
+  <center>
+    <h1 id="jeopardyTitle">29 Years of Jeopardy Questions!</h1>
+    <div id="loadingBoxImage">
+        <h2>Now loading...</h2>
+    </div>
+    <div id="directionsBox">
+        <h2>Hover over a data point in the leftmost or middle chart to bring up a new chart to the right of it! 
+          <br>
+          At any point in time, you can click on a data point to generate a Word Cloud below based on the data you selected.</h2>
+    </div>
+  </center>
+  <div id="wrapper">
+    <div id="locationOfSVGs">
+    </div>
+    <div class="calendarBoxIndex">
+    </div>
+  </div>
+  <center>
+    <table>
+      <tr>
+        <td>
+          <div id="locationOfWordCloud" align="center">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="locationOfWordCloudLabel" align="center">
+          </div>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body> 
+
+<script>
+  d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
+    if(err) console.log(err);
+
+    // Aggregate data set
+    aggregatedData = aggregateByRound(data);
+
+    //buildBarVis(data, 85, 1, "Round");
+    buildBarVis(aggregatedData, 85, 1, "Round");
+  });
+
+  // Initially show loading image
+  showLoadingImage(true);
+
+</script>

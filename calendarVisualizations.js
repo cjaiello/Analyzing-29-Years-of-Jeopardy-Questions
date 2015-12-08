@@ -5,6 +5,20 @@
 function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizNumber, vizLabel){
   // Hide loading image
   showLoadingImage(false);
+  /*var secondCalendarBox = document.getElementById("calendarBoxWordComparisons2");
+  var secondWordToSearchFor = document.getElementById("wordToSearchFor2").innerHTML;
+  var firstWordToSearchFor = document.getElementById("wordToSearchFor1").innerHTML;
+
+  console.log(firstWordToSearchFor);
+  console.log(secondWordToSearchFor);
+  
+  // Remove other calendar viz box if they only searched for one word
+  if(firstWordToSearchFor.length>0 && secondWordToSearchFor.length>0){
+    secondCalendarBox.style.display = "block";
+  } else {
+    secondCalendarBox.style.display = "none";
+  }*/
+  
 
   var width = 320,
   height = 42,

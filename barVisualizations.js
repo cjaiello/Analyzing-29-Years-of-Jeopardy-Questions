@@ -10,7 +10,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   showLoadingImage(false);
 
   var w = 275;
-  var h = 550;
+  var h = 600;
 
   var format = d3.format(",.0f");
 
@@ -22,13 +22,13 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .attr("class", getVizName(vizNumber))
-      .style("background-color", "#CFF09E")
+      .style("background-color", "#e2f6c4")
       .style("padding-left", "10px")
-      .style("padding-top", "50px")
-      .style("padding-bottom", "50px")
+      .style("padding-top", "10px")
+      .style("padding-bottom", "10px")
       .style("margin-right", "10px")
       .attr("width", w+115)
-      .attr("height", "600px")
+      .attr("height", h)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
@@ -188,7 +188,7 @@ var yAxis = d3.svg.axis()
     .ticks(10);
 
   var svg = d3.select("#locationOfSVGsWordComparison").append("svg")
-      .style("background-color", "#CFF09E")
+      .style("background-color", "#e2f6c4")
       .style("padding", "10px")
       .style("padding-bottom", "30px")
       .style("margin", "10px")
@@ -202,7 +202,11 @@ var yAxis = d3.svg.axis()
 
   // Set the domains
   x.domain(data.map(function(d) { return d.Attribute; }));
-  y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : 217000]);
+  // Use either the max of the two graphs if you're viewing two words,
+  // or just use the max of one word if only viewing one
+  y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : d3.max(data, function(d) {
+    return d.Value; 
+  })]);
 
   // Adding x axis to screen
   svg.append("g")

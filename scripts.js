@@ -75,7 +75,7 @@ function validateForm(shouldNotBeEmpty) {
 function showLoadingImage(boolean){
   var loadingBoxImage = document.getElementById("loadingBoxImage");
   var directionsBox = document.getElementById("directionsBox");
-  if(boolean == true) {
+  if(boolean) {
     loadingBoxImage.style.display = "block";
     directionsBox.style.display = "none";
   } else {
@@ -152,15 +152,14 @@ function findWordPairMatchesInDataSet(){
     var numberOfMatchesFound2 = findMatchesAggregatedByAirDate(data, wordToSearchFor2);
 
     var topBoundForGraphs = (numberOfMatchesFound1["LargestSeen"] > numberOfMatchesFound2["LargestSeen"]) ? numberOfMatchesFound1["LargestSeen"] : numberOfMatchesFound2["LargestSeen"];
-    console.log("Top bound for graphs is: " + topBoundForGraphs);
 
     // How many words did they search for, one or two?
     if(!validateForm("wordToSearchFor1")) {
       // Just build one visualization
-      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2, 1);
     } else if(!validateForm("wordToSearchFor2")) {
       // Just build one visualization
-      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1);
     } else {
       // Build both visualizations based on the data:
       buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1, topBoundForGraphs);
@@ -236,16 +235,17 @@ function findMatchesAggregatedByAirDate(input, wordToFind){
     var currentCategory = removeSpecialCharacters(dataPoint.Category);
 
     // Prepending those zeroes since they're getting stripped somehow
-    var newDate = prependZeroToNumbersLessThanTen(dataPoint.Date);
+    //var newDate = prependZeroToNumbersLessThanTen(dataPoint.Date);
+    //console.log(newDate);
 
     // Adding data to each map:
-    questionData = putDataIntoMapBasedOnDate(dataPoint.Question, questionMatchesMap, newDate, wordToFind);
+    questionData = putDataIntoMapBasedOnDate(dataPoint.Question, questionMatchesMap, dataPoint.Date, wordToFind);
     questionMatchesMap = questionData[0];
     questionCount += questionData[1];
-    answerData = putDataIntoMapBasedOnDate(dataPoint.Answer, answerMatchesMap, newDate, wordToFind);
+    answerData = putDataIntoMapBasedOnDate(dataPoint.Answer, answerMatchesMap, dataPoint.Date, wordToFind);
     answerMatchesMap = answerData[0];
     answerCount += answerData[1];
-    categoryData = putDataIntoMapBasedOnDate(dataPoint.Category, categoryMatchesMap, newDate, wordToFind);
+    categoryData = putDataIntoMapBasedOnDate(dataPoint.Category, categoryMatchesMap, dataPoint.Date, wordToFind);
     categoryMatchesMap = categoryData[0];
     categoryCount += categoryData[1];
   }

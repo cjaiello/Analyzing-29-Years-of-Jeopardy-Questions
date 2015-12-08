@@ -10,52 +10,22 @@
 
 <body>
   <center>
-    <h1 id="jeopardyTitle">29 Years of Jeopardy Questions!</h1>
-    <div id="loadingBoxImage">
-        <h2>Now loading...</h2>
-    </div>
-    <div id="directionsBox">
-        <h2>Hover over a data point in the leftmost or middle chart to bring up a new chart to the right of it! 
-          <br>
-          At any point in time, you can click on a data point to generate a Word Cloud below based on the data you selected.</h2>
-    </div>
-  </center>
-  <div id="wrapper">
-    <div id="locationOfSVGs">
-    </div>
-    <div class="calendarBoxIndex">
-    </div>
+    <div class="processBookEntry">
+      <h1 id="jeopardyTitle">29 Years of Jeopardy Questions!</h1>
+      <p class="processBookText">
+         The dataset for this project contains 216,931 Jeopardy question/answer/category combinations from the years 1984 to 2012. 
+      </p>
+      <p class="processBookText">
+        You have the ability to break down the data (first by category, then by value the question was worth, and finally by air date of the show during which a question occurred).
+      </p>
+      <p class="processBookText">
+        You can also compare the frequencies of two words of your choice throughout the entire data set. You are also able to see a calendar chart that shows when the words you searched appeared in shows over this 29-year timespan. Lastly, you can read my process book which details the creation of this project. If you only want to see how often one word appeared, just type one word in either of the text boxes on that page.
+       </p>
+
+      <a href="dataBreakdown.html">Data Breakdown</a> | 
+      <a href="compareWordFrequencies.html">Comparing Word Frequencies</a> | 
+      <a href="processBook.html">Process Book</a>
+    </p>
   </div>
-  <center>
-    <table>
-      <tr>
-        <td>
-          <div id="locationOfWordCloud" align="center">
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div id="locationOfWordCloudLabel" align="center">
-          </div>
-        </td>
-      </tr>
-    </table>
   </center>
 </body> 
-
-<script>
-  d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
-    if(err) console.log(err);
-
-    // Aggregate data set
-    aggregatedData = aggregateByRound(data);
-
-    //buildBarVis(data, 85, 1, "Round");
-    buildBarVis(aggregatedData, 85, 1, "Round");
-  });
-
-  // Initially show loading image
-  showLoadingImage(true);
-
-</script>
