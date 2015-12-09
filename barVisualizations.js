@@ -249,7 +249,7 @@ var yAxis = d3.svg.axis()
       .attr("class", "barChartLabel")
       .text("Appearances of the Word \"" + word + "\"");
 
-  buildCalendarViewVisForWordComparisons(dateMapOfMatches, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred");
+  buildCalendarViewVisForWordComparisons(dateMapOfMatches, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred", word);
 
 }
 

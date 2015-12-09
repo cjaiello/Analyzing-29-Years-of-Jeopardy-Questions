@@ -134,6 +134,8 @@ function findWordPairMatchesInDataSet(){
     .remove();
   d3.selectAll(".calendarLabel")
     .remove();
+  d3.selectAll("#locationOfJustOneCalendar")
+    .remove();
 
   // Tell the user that something is loading
   showLoadingImage(true);
@@ -156,10 +158,10 @@ function findWordPairMatchesInDataSet(){
     // How many words did they search for, one or two?
     if(!validateForm("wordToSearchFor1")) {
       // Just build one visualization
-      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2, 1);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound2, 50, wordToSearchFor2, 3);
     } else if(!validateForm("wordToSearchFor2")) {
       // Just build one visualization
-      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1);
+      buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 3);
     } else {
       // Build both visualizations based on the data:
       buildWordMatchComparisonBarVis(numberOfMatchesFound1, 50, wordToSearchFor1, 1, topBoundForGraphs);
@@ -293,10 +295,10 @@ function putDataIntoMapBasedOnDate(dataPoint, wordToFind, mapOfMatchesByDate){
       // Getting previous array
       tempDataArray = mapOfMatchesByDate["MatchesMap"][dataPoint.Date];
       // Add this current data attribute
-      tempDataArray.push(dataPoint.Question + "? " + dataPoint.Answer + " (" + dataPoint.Category + ")")
+      tempDataArray.push(dataPoint.Question + ": " + dataPoint.Answer + " (" + dataPoint.Category + ")")
       mapOfMatchesByDate["MatchesMap"][dataPoint.Date] = tempDataArray;
     } else {
-      tempDataArray.push(dataPoint.Question + "? " + dataPoint.Answer + " (" + dataPoint.Category + ")")
+      tempDataArray.push(dataPoint.Question + ": " + dataPoint.Answer + " (" + dataPoint.Category + ")")
       mapOfMatchesByDate["MatchesMap"][dataPoint.Date] = tempDataArray;
     }
   }
@@ -456,16 +458,16 @@ function createWordCountsForWordCloud(data){
 
 
 
-// This function can be used to create a string for all questions
-// and answers in an object
+// Creates a string for all question/answer/category groups
+// in an entry in the hashmap
 function createStringForAllQuestionsAndAnswers(object){
-  var finalString = "<br>";
+  var finalString = "<ul>";
   // For each data point in this object, which is a list of data points for this day
   for(counter = 0; counter < object.length; counter++){
     // Get the question and its answer
-    finalString += "- " + object[counter] + "<br>";
+    finalString += "<li>" + object[counter] + "</li>";
   }
-  return finalString;
+  return finalString + "</ul>";
 }
 
 

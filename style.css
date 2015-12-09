@@ -5,12 +5,12 @@ body {
   background-color: #ffffff;
   color: #000000;
   font-size: 12px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
 }
 
 h1 {
   font-size: 18px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
   line-height: 15px;
   margin-bottom: 5px;
@@ -20,7 +20,7 @@ h1 {
 
 h2 {
   font-size: 15px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
   line-height: 15px;
   color: #3B8686;
@@ -28,10 +28,10 @@ h2 {
 
 h3 {
   font-size: 14px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
   line-height: 13px;
-  color: #3B8686;
+  color: #CFF09E;
 }
 
 /* Labels for Word Search bars */
@@ -281,10 +281,11 @@ text.active {
 
 /* From: http://bl.ocks.org/Caged/6476579 */
 .d3-tip {
-  line-height: 1;
-  font-weight: bold;
+  line-height: 1.5;
   padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: #15262f;
   color: #fff;
+  font-size: 12px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   border-radius: 2px;
 }

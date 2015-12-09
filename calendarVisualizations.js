@@ -2,25 +2,9 @@
 
 // Reference: User mbostock, November 13, 2012, 
 // http://bl.ocks.org/mbostock/4063318
-function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizNumber, vizLabel){
+function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizNumber, vizLabel, word){
   // Hide loading image
   showLoadingImage(false);
-  /*var secondCalendarBox = document.getElementById("calendarBoxWordComparisons2");
-  var secondWordToSearchFor = document.getElementById("wordToSearchFor2").innerHTML;
-  var firstWordToSearchFor = document.getElementById("wordToSearchFor1").innerHTML;
-
-  console.log(firstWordToSearchFor);
-  console.log(secondWordToSearchFor);
-  
-  // Remove other calendar viz box if they only searched for one word
-  if(firstWordToSearchFor.length>0 && secondWordToSearchFor.length>0){
-    secondCalendarBox.style.display = "block";
-  } else {
-    secondCalendarBox.style.display = "none";
-  }*/
-
-  console.log(data);
-  
 
   var width = 320,
   height = 42,
@@ -41,30 +25,19 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .range(d3.range(11).map(function(d) {
         return "q" + d + "-11"; }));
 
-    
-  d3.select(".calendarBoxWordComparisons" + vizNumber)
-      .append("svg")
-      .attr("class", "calendarLabel")
-      .style("background-color", "#3b6c88")
-      .attr("width", 650)
-      .attr("height", 30).append("text")
-      .attr("x", 110)
-      .attr("y", height - 20)
-      .style("font-size","18px")
-      .style("font-weight","bold")
-      .attr("fill", "#CFF09E")
-      .text(vizLabel);
+  var svg;
 
-  d3.select(".calendarBoxWordComparisons" + vizNumber)
+  if(vizNumber == 3){
+  d3.select("#locationOfJustOneCalendar")
     .append("div")
     .attr("width", 650)
     .style("padding-bottom", "15px")
     .style("padding-top", "10px")
     .attr("height", 1300)
     .style("background-color", "#3b6c88")
-    .attr("class", "calendarBoxSVG" + vizNumber);
+    .attr("class", "locationOfJustOneCalendar-calendarBoxSVG");
 
-  var svg = d3.select(".calendarBoxSVG" + vizNumber).selectAll("svg")
+  var svg = d3.select(".locationOfJustOneCalendar-calendarBoxSVG").selectAll("svg")
       .data(d3.range(1984, 2013))
     .enter().append("svg")
       .attr("fill", "#CFF09E")
@@ -74,12 +47,53 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .attr("class", "RdYlGn")
     .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+  } else {  
+    d3.select(".calendarBoxWordComparisons" + vizNumber)
+        .append("svg")
+        .attr("class", "calendarLabel")
+        .style("background-color", "#3b6c88")
+        .attr("width", 650)
+        .attr("height", 30).append("text")
+        .attr("x", 110)
+        .attr("y", height - 20)
+        .style("font-size","18px")
+        .style("font-weight","bold")
+        .attr("fill", "#CFF09E")
+        .text(vizLabel);
+
+    d3.select(".calendarBoxWordComparisons" + vizNumber)
+      .append("div")
+      .attr("width", 650)
+      .style("padding-bottom", "15px")
+      .style("padding-top", "10px")
+      .attr("height", 1300)
+      .style("background-color", "#3b6c88")
+      .attr("class", "calendarBoxSVG" + vizNumber);
+
+    var svg = d3.select(".calendarBoxSVG" + vizNumber).selectAll("svg")
+        .data(d3.range(1984, 2013))
+      .enter().append("svg")
+        .attr("fill", "#CFF09E")
+        .style("padding-left", "5px")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("class", "RdYlGn")
+      .append("g")
+        .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+  }
 
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d) {
-            return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
+            return makeToolTipText(data, d);
+          });
+  // Setting direction of the tooltip based on if it's the left
+  // chart, right chard, or just one chart from one word search
+  tip.direction(function(d) {
+    console.log(d);
+    return chooseToolTipDirection(d, word);
+  });
   svg.call(tip);
 
   svg.append("text")
@@ -98,8 +112,9 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .attr("y", function(d) { return d.getDay() * cellSize; })
       .datum(format);
 
-  rect.append("title")
-      .text(function(d) { return d; })
+  // No longer needed since we have the tooltip
+  /*rect.append("title")
+      .text(function(d) { return d; })*/
 
   svg.selectAll(".month")
       .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
@@ -180,6 +195,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
     .offset([-10, 0])
     .html(function(d) { 
             return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
+
   svg.call(tip);
 
   svg.append("text")
@@ -249,4 +265,39 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 
 
 
+}
+
+// Constructs text for tool tip
+function makeToolTipText(data, d){
+  return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions </h3>" + createStringForAllQuestionsAndAnswers(data[d])) : ("<h3>" + d + ": " + (data[d].length) + " Question </h3>" + createStringForAllQuestionsAndAnswers(data[d]))) : (d);
+}
+
+// Chooses where to place tool tip
+function chooseToolTipDirection(date, word){
+    // This will hold our final direction string
+    var directionString = "";
+
+    // Find the year of the tool tip for positioning:
+    var dateRegex = new RegExp("^(0?[1-9]|1[012])[/](0?[1-9]|[12][0-9]|3[01])[/]([0-9]+)$");
+    var matches = dateRegex.exec(date);
+    var year = matches[3];
+
+    // First, choose if the tooltip is north or south
+    // based on the year of the data
+    if(year > 1999){
+      directionString += 'n';
+    } else directionString += 's';
+
+    // Getting the words searched for:
+    var wordToSearchFor1 = document.getElementById('wordToSearchFor1').value;
+    var wordToSearchFor2 = document.getElementById('wordToSearchFor2').value;
+    // If we're the chart on the left, put it to the right:
+    if(word == wordToSearchFor1){
+      directionString += 'e';
+    } else if(word == wordToSearchFor2){
+      // We're the chart on the right, so put it to the left
+      directionString += 'w';
+    }
+
+    return directionString;
 }
