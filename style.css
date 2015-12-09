@@ -9,28 +9,25 @@ body {
 }
 
 h1 {
-  font-size: 18px;
+  font-size: 15px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
-  line-height: 15px;
   margin-bottom: 5px;
   color: #0B486B;
   margin-top: 10px;
 }
 
 h2 {
-  font-size: 15px;
+  font-size: 13px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
-  line-height: 15px;
   color: #3B8686;
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 11px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
-  line-height: 13px;
   color: #CFF09E;
 }
 
@@ -39,6 +36,24 @@ h3 {
   font-size: 15px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
   text-align: center;
+}
+
+.otherHeaderLink {
+  font-size: 15px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #0B486B;
+  margin-top: 10px;
+}
+
+.activeHeaderLink {
+  font-size: 15px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #44a644;
+  margin-top: 10px;
 }
 
 #wrapper {
@@ -95,7 +110,7 @@ h3 {
 /* Div that holds directions */
 #directionsBox{
   width: auto;
-  height: 30px;
+  height: 45px;
   display: visible;
   float: center;
   padding-bottom: 5px;
@@ -104,6 +119,32 @@ h3 {
 #inputDiv{
   width: 500px;
   margin: 0 auto;
+}
+
+/* Turns code green with a black background */
+.code {
+  padding: 15px;
+  font-family: Consolas,monaco,monospace;
+  color: #32cd32;
+  font-size: 14px;
+  background-color: #000000;
+}
+
+
+/* From: http://bl.ocks.org/Caged/6476579 */
+.d3-tip {
+  line-height: 1.5;
+  padding: 12px;
+  background-color: #15262f;
+  color: #fff;
+  font-size: 12px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+  border-radius: 2px;
+  width: 750px;
+}
+
+.indexPageBody {
+  background-color: #def1f4;
 }
 
 /* --------- Below is for All Bar Graphs --------- */
@@ -212,10 +253,13 @@ text.active {
 .RdYlGn .q10-11{fill:rgb(9, 25, 29)}
 
 /* --------- Below is for Progress Book --------- */
+.processBookPage {
+  background-color: #266a77;
+}
 /* Used for the entire encompassing box for the progress book */
 .processBookMainBox{
   margin: auto;
-  background-color: #AEB3D1;
+  background-color: #399DB1;
   width: 910px;
   height: auto;
   padding: 30px;
@@ -254,38 +298,17 @@ text.active {
 }
 
 .processBookH1 {
-  color: #0F114A;
+  color: #266a77;
   font-size: 22px;
 }
 
 .processBookH2 {
-  color: #0F114A;
+  color: #44a644;
   font-size: 20px;
 }
 
 .processBookTitle {
   font-size: 30px;
-  color: #399DB1;
+  color: #266a77;
   line-height: 29px;
-}
-
-/* Turns code green with a black background */
-.code {
-  padding: 15px;
-  font-family: Consolas,monaco,monospace;
-  color: #32cd32;
-  font-size: 14px;
-  background-color: #000000;
-}
-
-
-/* From: http://bl.ocks.org/Caged/6476579 */
-.d3-tip {
-  line-height: 1.5;
-  padding: 12px;
-  background-color: #15262f;
-  color: #fff;
-  font-size: 12px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  border-radius: 2px;
 }

@@ -8,23 +8,21 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 
 
-<body>
+<body class="indexPageBody">
   <center>
     <div class="processBookEntry">
       <h1 id="jeopardyTitle">29 Years of Jeopardy Questions!</h1>
       <p class="processBookText">
-         The dataset for this project contains 216,931 Jeopardy question/answer/category combinations from the years 1984 to 2012. 
+         This <a href="data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv" target="_blank"><strong>data set of 216,931 data points</strong></a> contains every question, answer, and category for all Jeopardy questions from the year 1984 to 2012. Each row in the data set is a question, an answer, a category, the air date of the show where the question occurred, the round (Jeopardy, Double Jeopardy, Final Jeopardy, or Tiebreaker), and the question's value.
       </p>
       <p class="processBookText">
-        You have the ability to break down the data (first by category, then by value the question was worth, and finally by air date of the show during which a question occurred).
+        In the <a href="compareWordFrequencies.html" target="_blank"><strong>Comparing Word Frequencies</strong></a> page, you can compare the frequencies of two words of your choice throughout the entire data set (or if you only want to search for one word, you can do that as well). You are also able to see a calendar chart that shows when the words you searched appeared in shows over this 29-year timespan. This page allows to you see trends over time regarding the appearances of certain keywords.
       </p>
       <p class="processBookText">
-        You can also compare the frequencies of two words of your choice throughout the entire data set. You are also able to see a calendar chart that shows when the words you searched appeared in shows over this 29-year timespan. Lastly, you can read my process book which details the creation of this project. If you only want to see how often one word appeared, just type one word in either of the text boxes on that page.
-       </p>
-
-      <a href="dataBreakdown.html">Data Breakdown</a> | 
-      <a href="compareWordFrequencies.html">Comparing Word Frequencies</a> | 
-      <a href="processBook.html">Process Book</a>
+        In the <a href="dataBreakdown.html" target="_blank"><strong>Data Breakdown</strong></a> page, you have the ability to break down the data (first by category, then by value the question was worth, and finally by air date of the show during which a question occurred), and you can then view a word cloud of all words from a specific combination of round + value + year of air date. This can help trivia game fanatics discover trends in popular keywords found in questions.
+      <p class="processBookText">
+        Lastly, my <a href="processBook.html" target="_blank"><strong>Process Book</strong></a> details the construction and development of this project.
+      </p>
     </p>
   </div>
   </center>
