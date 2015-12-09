@@ -148,19 +148,23 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word, 
   // Now we can hide the loading image
   showLoadingImage(false);
 
-  var combinedMapAndCounts = combineHashmapsAndTotalUpCountsInHashmap(dataObject.Questions, dataObject.Answers, dataObject.Categories);
-  var hashMapOfDatesAndCounts = combinedMapAndCounts[0];
+  //var combinedMapAndCounts = combineHashmapsAndTotalUpCountsInHashmap(dataObject.Questions, dataObject.Answers, dataObject.Categories);
+  //var hashMapOfDatesAndCounts = combinedMapAndCounts[0];
 
   // Make an object for each attribute:
   var questionData = new Object();
   questionData.Attribute = "Question";
-  questionData.Value = combinedMapAndCounts[1];
+  questionData.Value = dataObject["QuestionCounter"];
   var answerData = new Object();
   answerData.Attribute = "Answer";
-  answerData.Value = combinedMapAndCounts[2];
+  answerData.Value = dataObject["AnswerCounter"];
   var categoryData = new Object();
   categoryData.Attribute = "Category";
-  categoryData.Value = combinedMapAndCounts[3];
+  categoryData.Value = dataObject["CategoryCounter"];
+  var dateMapOfMatches = dataObject["MatchesMap"];
+  console.log(dateMapOfMatches);
+
+
   
   // Creating a list of this data:
   var data = [];
@@ -245,7 +249,7 @@ var yAxis = d3.svg.axis()
       .attr("class", "barChartLabel")
       .text("Appearances of the Word \"" + word + "\"");
 
-  buildCalendarViewVisForWordComparisons(hashMapOfDatesAndCounts, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred");
+  buildCalendarViewVisForWordComparisons(dateMapOfMatches, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred");
 
 }
 

@@ -269,10 +269,22 @@ text.active {
   line-height: 29px;
 }
 
+/* Turns code green with a black background */
 .code {
   padding: 15px;
   font-family: Consolas,monaco,monospace;
   color: #32cd32;
   font-size: 14px;
   background-color: #000000;
+}
+
+
+/* From: http://bl.ocks.org/Caged/6476579 */
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
 }

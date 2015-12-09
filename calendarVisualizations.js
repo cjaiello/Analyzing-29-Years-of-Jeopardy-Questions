@@ -18,6 +18,8 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
   } else {
     secondCalendarBox.style.display = "none";
   }*/
+
+  console.log(data);
   
 
   var width = 320,
@@ -73,6 +75,13 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
     .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+            return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
+  svg.call(tip);
+
   svg.append("text")
       .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
       .style("text-anchor", "middle")
@@ -90,7 +99,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .datum(format);
 
   rect.append("title")
-      .text(function(d) { return d; });
+      .text(function(d) { return d; })
 
   svg.selectAll(".month")
       .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
@@ -100,11 +109,9 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
 
     rect.filter(function(d) {
       return d in data; })
-        .attr("class", function(d) { return "day " + color(data[d]); })
-      .select("title")
-        .text(function(d) { 
-          return (data[d] > 0) ? ((data[d] > 1) ? (d + ": " + (data[d]) + " questions") : (d + ": " + (data[d]) + " question")) : data[d]; 
-        });
+        .attr("class", function(d) { return "day " + color(data[d].length); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
   function monthPath(t0) {
     var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
@@ -163,15 +170,17 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
             d3.select(".wordCloud").remove();
             // Remove its old label too:
             d3.select(".wordCloudLabel").remove();
-            /*console.log(data[0]);
-            // Now make a new one:
-            console.log(data);
-            console.log(d);
-            console.log(data[d]);*/
             buildWordCloudVis(data, d);
           })
     .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) { 
+            return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
+  svg.call(tip);
 
   svg.append("text")
       .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
@@ -208,9 +217,8 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
     rect.filter(function(d) {
       return d in data; })
         .attr("class", function(d) { return "day " + color(data[d].length); })
-      .select("title")
-        .text(function(d) { 
-          return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
   function monthPath(t0) {
     var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
@@ -239,16 +247,6 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .attr("fill", "white")
       .text(vizLabel);
 
-}
 
-// This function can be used to create a string for all questions
-// and answers in an object
-function createStringForAllQuestionsAndAnswers(object){
-  var finalString = "\n";
-  // For each data point in this object, which is a list of data points for this day
-  for(counter = 0; counter < object.length; counter++){
-    // Get the question and its answer
-    finalString += "- " + object[counter].Question + " (" + object[counter].Answer + ")\n";
-  }
-  return finalString;
+
 }

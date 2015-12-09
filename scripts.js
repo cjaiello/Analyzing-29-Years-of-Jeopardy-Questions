@@ -218,69 +218,90 @@ function combineHashmapsAndTotalUpCountsInHashmap(questionHashmap, answerHashmap
 // @input: An array of strings
 // @wordToFind: The word you want to find in the given input
 function findMatchesAggregatedByAirDate(input, wordToFind){
-  // Holds number of matches in entire data set:
-  var questionMatchesMap = {}; 
-  var questionCount = 0;
-  var answerMatchesMap = {}; 
-  var answerCount = 0;
-  var categoryMatchesMap = {};
-  var categoryCount = 0; 
+  // Creating an object to hold match data
+  var returnedMapOfMatches = {};
+  returnedMapOfMatches['QuestionCounter'] = 0;
+  returnedMapOfMatches['AnswerCounter'] = 0;
+  returnedMapOfMatches['CategoryCounter'] = 0;
+  // Map that will have strings for dates as the key
+  // and the value is an array of question/answer/category combos:
+  matchesByDateMap = {};
+  // Yo dawg, I heard you like maps,
+  // So we put a map in your map
+  // So you can map while you map:
+  returnedMapOfMatches['MatchesMap'] = matchesByDateMap;
 
   // Loop through the data set:
   for(var counter = 0; counter < input.length; counter++){
     // Getting our current data point, aka a row in the data
     var dataPoint = input[counter];
-    var currentQuestion = removeSpecialCharacters(dataPoint.Question);
-    var currentAnswer = removeSpecialCharacters(dataPoint.Answer);
-    var currentCategory = removeSpecialCharacters(dataPoint.Category);
 
     // Prepending those zeroes since they're getting stripped somehow
     //var newDate = prependZeroToNumbersLessThanTen(dataPoint.Date);
     //console.log(newDate);
 
     // Adding data to each map:
-    questionData = putDataIntoMapBasedOnDate(dataPoint.Question, questionMatchesMap, dataPoint.Date, wordToFind);
-    questionMatchesMap = questionData[0];
-    questionCount += questionData[1];
-    answerData = putDataIntoMapBasedOnDate(dataPoint.Answer, answerMatchesMap, dataPoint.Date, wordToFind);
-    answerMatchesMap = answerData[0];
-    answerCount += answerData[1];
-    categoryData = putDataIntoMapBasedOnDate(dataPoint.Category, categoryMatchesMap, dataPoint.Date, wordToFind);
-    categoryMatchesMap = categoryData[0];
-    categoryCount += categoryData[1];
+    returnedMapOfMatches = putDataIntoMapBasedOnDate(dataPoint, wordToFind, returnedMapOfMatches);
   }
 
-  // This will hold the number of matches for each attribute
-  var returnedMapsOfMatches = {};
-  returnedMapsOfMatches["Questions"] = questionMatchesMap;
-  returnedMapsOfMatches["Answers"] = answerMatchesMap;
-  returnedMapsOfMatches["Categories"] = categoryMatchesMap;
-  returnedMapsOfMatches["LargestSeen"] = (questionCount > answerCount) ? ((questionCount > categoryCount) ? questionCount : categoryCount) : ((answerCount > categoryCount) ? answerCount : categoryCount);
-  return returnedMapsOfMatches;
+  // Pulling out these counts to get the largest seen
+  var questionCount = returnedMapOfMatches['QuestionCounter'];
+  var answerCount = returnedMapOfMatches['AnswerCounter'];
+  var categoryCount = returnedMapOfMatches['CategoryCounter'];
+  returnedMapOfMatches["LargestSeen"] = (questionCount > answerCount) ? ((questionCount > categoryCount) ? questionCount : categoryCount) : ((answerCount > categoryCount) ? answerCount : categoryCount);
+  return returnedMapOfMatches;
 }
 
 // Function will turn a string to all lowercase, count matches
 // of a word, and put them in the map based on the date
-function putDataIntoMapBasedOnDate(dataAttribute, mapToPutDataInto, newDate, wordToFind){
+function putDataIntoMapBasedOnDate(dataPoint, wordToFind, mapOfMatchesByDate){
   // Regex to find how many matches for a particular word there are:
   var regex = new RegExp("(?:^|\\s)" + wordToFind.toLowerCase() + "(?=\\s|$)");
-  var counter = 0;
+  var questionMatchCount = 0;
+  var answerMatchCount = 0;
+  var categoryMatchCount = 0;
 
-  // Compare this word to the current category
-  var matches = dataAttribute.toLowerCase().match(regex);
-  if(matches != null){
-    // Keeping a general count, used to choose height of graph later
-    counter += matches.length;
+  // Compare this word to the current question, answer, and category:
+  var questionMatches = removeSpecialCharacters(dataPoint["Question"]).toLowerCase().match(regex);
+  var answerMatches = removeSpecialCharacters(dataPoint["Answer"]).toLowerCase().match(regex);
+  var categoryMatches = removeSpecialCharacters(dataPoint["Category"]).toLowerCase().match(regex);
+
+  // Seeing if we got any matches, and if so, how many:
+  if(questionMatches != null){
+    questionMatchCount = questionMatches.length;
+  }
+  if(answerMatches != null){
+    answerMatchCount = answerMatches.length;
+  }
+  if(categoryMatches != null){
+    categoryMatchCount = categoryMatches.length;
+  }
+
+  // Totaling up all matches for this data point:
+  var matches = questionMatchCount + answerMatchCount + categoryMatchCount;
+
+  // If this data point had any sort of match:
+  if(matches != 0){
+    // Track the count for matches for each question, answer, or category:
+    mapOfMatchesByDate['QuestionCounter'] = mapOfMatchesByDate['QuestionCounter'] + questionMatchCount;
+    mapOfMatchesByDate['AnswerCounter'] = mapOfMatchesByDate['AnswerCounter'] + answerMatchCount;
+    mapOfMatchesByDate['CategoryCounter'] = mapOfMatchesByDate['CategoryCounter'] + categoryMatchCount;
+    // Will hold the questions already stored here:
+    var tempDataArray = [];
     // If key (date) already exists:
-    if(mapToPutDataInto[newDate] != null){
-      mapToPutDataInto[newDate] += matches.length;
+    if(mapOfMatchesByDate["MatchesMap"][dataPoint.Date] != null){
+      // Getting previous array
+      tempDataArray = mapOfMatchesByDate["MatchesMap"][dataPoint.Date];
+      // Add this current data attribute
+      tempDataArray.push(dataPoint.Question + "? " + dataPoint.Answer + " (" + dataPoint.Category + ")")
+      mapOfMatchesByDate["MatchesMap"][dataPoint.Date] = tempDataArray;
     } else {
-      // If a key for this date doesn't exist yet
-      mapToPutDataInto[newDate] = matches.length;
+      tempDataArray.push(dataPoint.Question + "? " + dataPoint.Answer + " (" + dataPoint.Category + ")")
+      mapOfMatchesByDate["MatchesMap"][dataPoint.Date] = tempDataArray;
     }
   }
 
-  return [mapToPutDataInto, counter];
+  return mapOfMatchesByDate;
 }
 
 
@@ -340,11 +361,11 @@ function findMatches(input, wordToFind){
   }
 
   // This will hold the number of matches for each attribute
-  var returnedMapsOfMatches = {};
-  returnedMapsOfMatches["Questions"] = numberOfQuestionMatches;
-  returnedMapsOfMatches["Answers"] = numberOfAnswerMatches;
-  returnedMapsOfMatches["Categories"] = numberOfCategoryMatches;
-  return returnedMapsOfMatches;
+  var returnedMapOfMatches = {};
+  returnedMapOfMatches["Questions"] = numberOfQuestionMatches;
+  returnedMapOfMatches["Answers"] = numberOfAnswerMatches;
+  returnedMapOfMatches["Categories"] = numberOfCategoryMatches;
+  return returnedMapOfMatches;
 }
 
 // Counts number of matches in an attribute, in addition to 
@@ -434,6 +455,18 @@ function createWordCountsForWordCloud(data){
 }
 
 
+
+// This function can be used to create a string for all questions
+// and answers in an object
+function createStringForAllQuestionsAndAnswers(object){
+  var finalString = "<br>";
+  // For each data point in this object, which is a list of data points for this day
+  for(counter = 0; counter < object.length; counter++){
+    // Get the question and its answer
+    finalString += "- " + object[counter] + "<br>";
+  }
+  return finalString;
+}
 
 
 
