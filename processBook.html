@@ -335,19 +335,32 @@ body {
   <div class="processBookEntry">
     <h2 class="processBookH2">Changing the Focus to Comparisons and Time</h2>
     <p class="processBookText">
-      <strong>Design Evolution and Implementation:</strong> It was suggested to me to try to focus the project more on comparing the appearances of words (comparing the number of times one word appears versus another), and then also showing a calendar chart of when those appearances took place. I have updated my project now to do this:
+      <strong>Design Evolution and Implementation:</strong> It was suggested to me to try to focus the project more on comparing the appearances of words (comparing the number of times one word appears versus another), and then also showing a calendar chart of when those appearances took place. This lets the user gain an insight into what was going on in the world at different points in time: What were some of the news headlines? What was the "gossip"? What events were currently unfolding and worthy of being mentioned on a show like Jeopardy?
+    </p>
+    <center>
+      <img src="images/wordcountcomparison1.PNG" width="700">
+      <br>
+      <div class="processBookSub">At the top of the screen you can type in two words. You are then shown two bar graphs with these words' frequencies, and calendar charts for the words are shown below.</div>
+    </center>
+
+
+    <center>
+      <img src="images/wordcountcomparison2.PNG" width="700">
+      <br>
+      <div class="processBookSub">Here we can see the frequencies of the two words we searched for, over time.</div>
+    </center>
+    </p>
+  </div>
+
+  <div class="processBookEntry">
+    <h2 class="processBookH2">Prettier and More Detailed ToolTips</h2>
+    <p class="processBookText">
+      <strong>Design Evolution and Implementation and Data:</strong> Previously these calendar charts only let the user see the number of times a word occurred on a particular day. I rewrote my code to (on mouseover) display the questions/categories/answers that this word was found in, which I feel improves the project by giving the user more access to the data. In seeing what questions a certain word was found in, one can get a better understand of what was going on in the world at that point in time.
       </p>
       <center>
-        <img src="images/wordcountcomparison1.PNG" width="700">
+        <img src="images/tooltip-prettier.png" width="700">
         <br>
-        <div class="processBookSub">At the top of the screen you can type in two words. You are then shown two bar graphs with these words' frequencies, and calendar charts for the words are shown below.</div>
-      </center>
-
-
-      <center>
-        <img src="images/wordcountcomparison2.PNG" width="700">
-        <br>
-        <div class="processBookSub">Here we can see the frequencies of the two words we searched for, over time.</div>
+        <div class="processBookSub">The tooltip shows the date, the number of questions, and finally lists each question.</div>
       </center>
     </p>
   </div>
