@@ -134,7 +134,7 @@ function findWordPairMatchesInDataSet(){
     .remove();
   d3.selectAll(".calendarLabel")
     .remove();
-  d3.selectAll("#locationOfJustOneCalendar")
+  d3.selectAll(".locationOfJustOneCalendar-calendarBoxSVG")
     .remove();
 
   // Tell the user that something is loading
@@ -295,10 +295,10 @@ function putDataIntoMapBasedOnDate(dataPoint, wordToFind, mapOfMatchesByDate){
       // Getting previous array
       tempDataArray = mapOfMatchesByDate["MatchesMap"][dataPoint.Date];
       // Add this current data attribute
-      tempDataArray.push(dataPoint.Question + ": " + dataPoint.Answer + " (" + dataPoint.Category + ")")
+      tempDataArray.push(dataPoint.Question + ": <i>" + dataPoint.Answer + "</i> (" + dataPoint.Category + ")")
       mapOfMatchesByDate["MatchesMap"][dataPoint.Date] = tempDataArray;
     } else {
-      tempDataArray.push(dataPoint.Question + ": " + dataPoint.Answer + " (" + dataPoint.Category + ")")
+      tempDataArray.push(dataPoint.Question + ": <i>" + dataPoint.Answer + "</i> (" + dataPoint.Category + ")")
       mapOfMatchesByDate["MatchesMap"][dataPoint.Date] = tempDataArray;
     }
   }

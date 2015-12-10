@@ -3,6 +3,8 @@
 // Reference: User mbostock, November 13, 2012, 
 // http://bl.ocks.org/mbostock/4063318
 function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizNumber, vizLabel, word){
+  console.log("buildCalendarViewVisForWordComparisons");
+
   // Hide loading image
   showLoadingImage(false);
 
@@ -26,28 +28,49 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
         return "q" + d + "-11"; }));
 
   var svg;
+  var tip;
 
   if(vizNumber == 3){
-  d3.select("#locationOfJustOneCalendar")
-    .append("div")
-    .attr("width", 650)
-    .style("padding-bottom", "15px")
-    .style("padding-top", "10px")
-    .attr("height", 1300)
-    .style("background-color", "#3b6c88")
-    .attr("class", "locationOfJustOneCalendar-calendarBoxSVG");
 
-  var svg = d3.select(".locationOfJustOneCalendar-calendarBoxSVG").selectAll("svg")
-      .data(d3.range(1984, 2013))
-    .enter().append("svg")
-      .attr("fill", "#CFF09E")
-      .style("padding-left", "5px")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("class", "RdYlGn")
-    .append("g")
-      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+  var tip = d3.tip()
+    .attr('class', 'd3-tip-smaller')
+    .offset([-10, 0])
+    .html(function(d) {
+            return makeToolTipText(data, d);
+          });
+
+    d3.select("#locationOfJustOneCalendar")
+      .append("div")
+      .attr("width", 650)
+      .style("padding-bottom", "15px")
+      .style("padding-top", "10px")
+      .attr("height", 1300)
+      .style("background-color", "#3b6c88")
+      .attr("class", "locationOfJustOneCalendar-calendarBoxSVG");
+
+    var svg = d3.select(".locationOfJustOneCalendar-calendarBoxSVG").selectAll("svg")
+        .data(d3.range(1984, 2013))
+      .enter().append("svg")
+        .attr("fill", "#CFF09E")
+        .style("padding-left", "5px")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("class", "RdYlGn")
+      .append("g")
+        .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+
+    // If there's only one, always set it to be just above
+    tip.direction('n');
+
   } else {  
+
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+            return makeToolTipText(data, d);
+          });
+
     d3.select(".calendarBoxWordComparisons" + vizNumber)
         .append("svg")
         .attr("class", "calendarLabel")
@@ -80,20 +103,15 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
         .attr("class", "RdYlGn")
       .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
-  }
 
-  var tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .offset([-10, 0])
-    .html(function(d) {
-            return makeToolTipText(data, d);
-          });
-  // Setting direction of the tooltip based on if it's the left
-  // chart, right chard, or just one chart from one word search
-  tip.direction(function(d) {
-    console.log(d);
-    return chooseToolTipDirection(d, word);
-  });
+    // Setting direction of the tooltip based on if it's the left
+    // chart, right chard, or just one chart from one word search
+    tip.direction(function(d) {
+      console.log(d);
+      return chooseToolTipDirection(d, word);
+    });
+  }
+  
   svg.call(tip);
 
   svg.append("text")

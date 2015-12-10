@@ -225,6 +225,15 @@ var yAxis = d3.svg.axis()
       .attr("fill", "#0B486B")
       .call(yAxis);
 
+  var tip = d3.tip()
+    .attr('class', 'd3-tip-barvis')
+    .offset([-10, 0])
+    .html(function(d) { 
+            return d.Value;
+          });
+
+  svg.call(tip);
+
   var bar = svg.selectAll(".bar")
       .data(data)
     .enter().append("rect")
@@ -237,8 +246,8 @@ var yAxis = d3.svg.axis()
         return y(parseInt(d.Value)); })
       .attr("height", function(d) { 
         return h - parseInt(y(d.Value)) })
-      .append("title")
-      .text(function(d) { return d.Value; });
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
   svg.append("text")
       .attr("x", w * (1/20))

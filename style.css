@@ -143,6 +143,26 @@ h3 {
   width: 750px;
 }
 
+/* Tooltip that shows up on the bar visualizations */
+.d3-tip-barvis {
+  color: #0B486B;
+  font-weight: bold;
+  font-size: 11px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+}
+
+/* For smaller-sized tooltips */
+.d3-tip-smaller {
+  line-height: 1.5;
+  padding: 12px;
+  background-color: #15262f;
+  color: #fff;
+  font-size: 12px;
+  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+  border-radius: 2px;
+  width: 400px;
+}
+
 .indexPageBody {
   background-color: #def1f4;
 }
