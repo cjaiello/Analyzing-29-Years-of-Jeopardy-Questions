@@ -304,10 +304,19 @@ text.active {
   color: #000000;
 }
 
+/* Body text for process book page */
 .processBookText{
   font-size: 14px; 
 }
 
+/* Styling the text of the index page */
+.mainPageText{
+  font-size: 14px; 
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Used for subtitles on images in process book */
 .processBookSub {
   width: 500px;
   height: auto;
