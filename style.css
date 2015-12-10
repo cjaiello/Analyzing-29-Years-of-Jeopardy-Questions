@@ -167,6 +167,10 @@ h3 {
   background-color: #def1f4;
 }
 
+#jeopardyTitle {
+  font-size: 25px;
+}
+
 /* --------- Below is for All Bar Graphs --------- */
 
 .td-center {
