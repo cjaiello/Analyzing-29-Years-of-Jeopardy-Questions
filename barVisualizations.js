@@ -71,16 +71,6 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
         return x(d.values.length); 
       })
       .attr("height", y.rangeBand())
-      .on("click", function(d, i) {
-        showLoadingImage(true);
-        setTimeout(function(){
-          if(vizNumber == 1){
-            buildWordCloudVis(d.values, "Round");
-          } else {
-            buildWordCloudVis(d.values, "Value");
-          }
-        }, 10);
-      })
       .on("mouseover", function(d, i) {
         if(vizNumber == 1){
           showLoadingImage(true);

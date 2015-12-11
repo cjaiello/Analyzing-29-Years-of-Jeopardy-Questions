@@ -165,6 +165,8 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
 // http://bl.ocks.org/mbostock/4063318
 function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 
+  console.log(data);
+
   // Hide loading image
   showLoadingImage(false);
 
@@ -212,7 +214,11 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d) { 
-            return (data[d].length > 0) ? ((data[d].length > 1) ? (d + ": " + (data[d].length) + " questions: " + createStringForAllQuestionsAndAnswers(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswers(data[d]))) : (d); });
+      console.log(d);
+      console.log(data[d]);
+            return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions</h3>" + createStringForAllQuestionsAndAnswersDrilldownCharts(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswersDrilldownCharts(data[d]))) : (d); });
+
+  tip.direction('w');
 
   svg.call(tip);
 
@@ -287,7 +293,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 
 // Constructs text for tool tip
 function makeToolTipText(data, d){
-  return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions </h3>" + createStringForAllQuestionsAndAnswers(data[d])) : ("<h3>" + d + ": " + (data[d].length) + " Question </h3>" + createStringForAllQuestionsAndAnswers(data[d]))) : (d);
+  return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions </h3>" + createStringForAllQuestionsAndAnswersComparisonCharts(data[d])) : ("<h3>" + d + ": " + (data[d].length) + " Question </h3>" + createStringForAllQuestionsAndAnswersComaprisonCharts(data[d]))) : (d);
 }
 
 // Chooses where to place tool tip
