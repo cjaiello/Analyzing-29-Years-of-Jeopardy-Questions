@@ -465,7 +465,7 @@ function createStringForAllQuestionsAndAnswersDrilldownCharts(object){
   // For each data point in this object, which is a list of data points for this day
   for(counter = 0; counter < object.length; counter++){
     // Get the question and its answer
-    finalString += "<li>" + object[counter].Question + "? <i>" + object[counter].Answer + "</i> (" + object[counter].Question + ")</li>";
+    finalString += "<li>" + object[counter].Question + "? <i>" + object[counter].Answer + "</i> (" + object[counter].Category + ")</li>";
   }
   return finalString + "</ul>";
 }

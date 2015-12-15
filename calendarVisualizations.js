@@ -201,12 +201,15 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .attr("height", height)
       .attr("class", "RdYlGn")
       .on("click", function(d, i) {
+          showLoadingImage(true);
+          setTimeout(function(){
             // First remove old word cloud:
             d3.select(".wordCloud").remove();
             // Remove its old label too:
             d3.select(".wordCloudLabel").remove();
             buildWordCloudVis(data, d);
-          })
+          }, 10);
+        })
     .append("g")
       .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
