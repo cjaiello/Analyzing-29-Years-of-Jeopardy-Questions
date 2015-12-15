@@ -164,7 +164,7 @@ h3 {
 }
 
 .indexPageBody {
-  background-color: #def1f4;
+  background-color: #131446;
 }
 
 #jeopardyTitle {
@@ -304,6 +304,19 @@ text.active {
   color: #000000;
 }
 
+.mainPageBox{
+  background-color: #ffffff;
+  width: 1100px;
+  height: auto;
+  margin: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #000000;
+}
+
 /* Body text for process book page */
 .processBookText{
   font-size: 14px; 
@@ -312,8 +325,8 @@ text.active {
 /* Styling the text of the index page */
 .mainPageText{
   font-size: 14px; 
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Used for subtitles on images in process book */
