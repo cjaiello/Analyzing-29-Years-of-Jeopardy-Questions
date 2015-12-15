@@ -169,6 +169,12 @@ h3 {
 
 #jeopardyTitle {
   font-size: 25px;
+  color: #131446;
+}
+
+#jeopardySubtitle {
+  font-size: 18px;
+  color: #131446;
 }
 
 /* --------- Below is for All Bar Graphs --------- */
