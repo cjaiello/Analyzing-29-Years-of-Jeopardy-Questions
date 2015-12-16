@@ -296,7 +296,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 
 // Constructs text for tool tip
 function makeToolTipText(data, d){
-  return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions </h3>" + createStringForAllQuestionsAndAnswersComparisonCharts(data[d])) : ("<h3>" + d + ": " + (data[d].length) + " Question </h3>" + createStringForAllQuestionsAndAnswersComaprisonCharts(data[d]))) : (d);
+  return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions </h3>" + createStringForAllQuestionsAndAnswersComparisonCharts(data[d])) : ("<h3>" + d + ": " + (data[d].length) + " Question </h3>" + createStringForAllQuestionsAndAnswersComparisonCharts(data[d]))) : (d);
 }
 
 // Chooses where to place tool tip
