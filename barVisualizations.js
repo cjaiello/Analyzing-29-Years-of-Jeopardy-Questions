@@ -9,7 +9,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   // We can now hide the loading image
   showLoadingImage(false);
 
-  var w = 275;
+  var w = 250;
   var h = 600;
 
   var format = d3.format(",.0f");
@@ -189,7 +189,7 @@ var yAxis = d3.svg.axis()
       .attr("class", "countWordsVis")
       .attr("padding-left", "20")
       .attr("margin-left", "20")
-      .attr("width", w+125)
+      .attr("width", w+100)
       .attr("height", h + 50)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
