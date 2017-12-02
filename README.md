@@ -3,14 +3,14 @@ CS573 Final Project Proposal:
 “29 Years of Jeopardy Questions”
 
 
-[“29 Years of Jeopardy Questions” - Word Frequencies](http://cjaiello.github.io/DataVisFinal/compareWordFrequencies.html)
+Click to see my interactive [Word Frequencies](http://cjaiello.github.io/DataVisFinal/compareWordFrequencies.html) page.
 
 ![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisonbars.png?raw=true)
 
 ![Comparison Calendars](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisoncalendars.png?raw=true)
 
 
-[“29 Years of Jeopardy Questions” - Data Breakdown](http://cjaiello.github.io/DataVisFinal/dataBreakdown.html)
+Click to see my interactive [Data Breakdown](http://cjaiello.github.io/DataVisFinal/dataBreakdown.html) data breakdown page.
 
 ![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/bargraphs.png?raw=true)
 
