@@ -45,7 +45,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .style("padding-bottom", "15px")
       .style("padding-top", "10px")
       .attr("height", 1300)
-      .style("background-color", "#e3f5c6")
+      .style("background-color", "#3b6c88")
       .attr("class", "locationOfJustOneCalendar-calendarBoxSVG");
 
     var svg = d3.select(".locationOfJustOneCalendar-calendarBoxSVG").selectAll("svg")
@@ -74,7 +74,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
     d3.select(".calendarBoxWordComparisons" + vizNumber)
         .append("svg")
         .attr("class", "calendarLabel")
-        .style("background-color", "#e3f5c6")
+        .style("background-color", "#3b6c88")
         .attr("width", 650)
         .attr("height", 30).append("text")
         .attr("x", 110)
@@ -90,7 +90,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .style("padding-bottom", "15px")
       .style("padding-top", "10px")
       .attr("height", 1300)
-      .style("background-color", "#e3f5c6")
+      .style("background-color", "#3b6c88")
       .attr("class", "calendarBoxSVG" + vizNumber);
 
     var svg = d3.select(".calendarBoxSVG" + vizNumber).selectAll("svg")
@@ -188,7 +188,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
         return "q" + d + "-11"; }));
 
   d3.select(".calendarBoxIndex").append("div").attr("width", 450).style("padding-top", "10px").attr("height", 1300)
-      .style("background-color", "#e3f5c6").attr("class", "calendarBoxSVG");
+      .style("background-color", "#3b6c88").attr("class", "calendarBoxSVG");
 
   var svg = d3.select(".calendarBoxSVG").selectAll("svg")
       .data(d3.range(1984, 2013))
@@ -278,7 +278,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   d3.select(".calendarBoxIndex")
       .append("svg")
       .attr("class", "calendarLabel")
-      .style("background-color", "#e3f5c6")
+      .style("background-color", "#3b6c88")
       .attr("width", 650)
       .attr("height", 30).append("text")
       .attr("x", 275)
