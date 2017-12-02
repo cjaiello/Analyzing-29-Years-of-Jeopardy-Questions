@@ -1,6 +1,6 @@
 // By Christina Aiello
 
-// Reference: User mbostock, November 13, 2012, 
+// Reference: User mbostock, November 13, 2012,
 // http://bl.ocks.org/mbostock/4063318
 function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizNumber, vizLabel, word){
   console.log("buildCalendarViewVisForWordComparisons");
@@ -62,7 +62,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
     // If there's only one, always set it to be just above
     tip.direction('n');
 
-  } else {  
+  } else {
 
   var tip = d3.tip()
     .attr('class', 'd3-tip')
@@ -111,7 +111,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       return chooseToolTipDirection(d, word);
     });
   }
-  
+
   svg.call(tip);
 
   svg.append("text")
@@ -120,7 +120,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
       .text(function(d) { return d; });
 
   var rect = svg.selectAll(".day")
-      .data(function(d) { 
+      .data(function(d) {
         return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
     .enter().append("rect")
       .attr("class", "day")
@@ -161,7 +161,7 @@ function buildCalendarViewVisForWordComparisons(data, translateXCoordinate, vizN
 
 }
 
-// Reference: User mbostock, November 13, 2012, 
+// Reference: User mbostock, November 13, 2012,
 // http://bl.ocks.org/mbostock/4063318
 function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
 
@@ -190,7 +190,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
         return "q" + d + "-11"; }));
 
   d3.select(".calendarBoxIndex").append("div").attr("width", 450).style("padding-top", "10px").attr("height", 1200)
-      .style("background-color", "#3b6c88").attr("class", "calendarBoxSVG");
+      .style("background-color", "#ffffff").attr("class", "calendarBoxSVG");
 
   var svg = d3.select(".calendarBoxSVG").selectAll("svg")
       .data(d3.range(1984, 2013))
@@ -216,7 +216,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
-    .html(function(d) { 
+    .html(function(d) {
       console.log(d);
       console.log(data[d]);
             return (data[d].length > 0) ? ((data[d].length > 1) ? ("<h3>" + d + ": " + (data[d].length) + " Questions</h3>" + createStringForAllQuestionsAndAnswersDrilldownCharts(data[d])) : (d + ": " + (data[d].length) + " question: " + createStringForAllQuestionsAndAnswersDrilldownCharts(data[d]))) : (d); });
@@ -231,7 +231,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
       .text(function(d) { return d; });
 
   var rect = svg.selectAll(".day")
-      .data(function(d) { 
+      .data(function(d) {
         return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
     .enter().append("rect")
       .attr("class", "day")
@@ -253,7 +253,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
     var data = d3.nest()
       .key(function(d) {
         return d.Date; })/*
-      .rollup(function(d) { 
+      .rollup(function(d) {
         return d.length; })*/
       .map(data[0].values);
 
