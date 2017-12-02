@@ -4,13 +4,17 @@ CS573 Final Project Proposal:
 
 
 [“29 Years of Jeopardy Questions” - Word Frequencies](http://cjaiello.github.io/DataVisFinal/compareWordFrequencies.html)
-![Bar Graphs](https://github.com/cjaiello/DataVisFinal/blob/master/images/comparisonbars.png)
-![Word Cloud](https://github.com/cjaiello/DataVisFinal/blob/master/images/comparisoncalendars.png)
+
+![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisonbars.png?raw=true)
+
+![Word Cloud](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comaprisoncalendars.png?raw=true)
 
 
 [“29 Years of Jeopardy Questions” - Data Breakdown](http://cjaiello.github.io/DataVisFinal/dataBreakdown.html)
-![Bar Graphs](https://github.com/cjaiello/DataVisFinal/blob/master/images/bargraphs.png)
-![Word Cloud](https://github.com/cjaiello/DataVisFinal/blob/master/images/wordcloud.png)
+
+![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/bargraphs.png?raw=true)
+
+![Word Cloud](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/wordcloud.png?raw=true)
 
 ----------------------------------------------------
 
