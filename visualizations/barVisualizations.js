@@ -9,7 +9,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   // We can now hide the loading image
   showLoadingImage(false);
 
-  var w = 250;
+  var w = 225;
   var h = 600;
 
   var format = d3.format(",.0f");
