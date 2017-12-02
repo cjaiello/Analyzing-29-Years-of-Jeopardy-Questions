@@ -7,7 +7,7 @@ CS573 Final Project Proposal:
 
 ![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisonbars.png?raw=true)
 
-![Word Cloud](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comaprisoncalendars.png?raw=true)
+![Comparison Calendars](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisoncalendars.png?raw=true)
 
 
 [“29 Years of Jeopardy Questions” - Data Breakdown](http://cjaiello.github.io/DataVisFinal/dataBreakdown.html)
