@@ -22,7 +22,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .attr("class", getVizName(vizNumber))
-      .style("background-color", "#e2f6c4")
+      .style("background-color", "#3b6c88")
       .style("padding-left", "10px")
       .style("padding-top", "10px")
       .style("padding-bottom", "10px")
@@ -41,14 +41,14 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   // Adding x axis to screen
   svg.append("g")
       .attr("class", "x axis, axis")
-      .attr("fill", "#3b6c88")
+      .attr("fill", "#ffffff")
       .style("font-weight", "bold")
       .call(xAxis);
 
   // Adding y axis to screen
   svg.append("g")
       .attr("class", "labels, axis")
-      .attr("fill", "#3b6c88")
+      .attr("fill", "#ffffff")
       .style("font-weight", "bold")
       .style("font-size", "10px")
       .attr("transform", "translate(" + 10 + ",0)")
@@ -105,7 +105,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Placing the label text for each bar
   bar.append("text")
-      .attr("fill", "#3b6c88")
+      .attr("fill", "#ffffff")
       .attr("class", "labels")
       .style("font-size", "12px")
       .attr("x", function(d) {
@@ -125,7 +125,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .attr("y", h - 40)
       .style("font-size","14px")
       .style("font-weight","bold")
-      .attr("fill", "#3b6c88")
+      .attr("fill", "#ffffff")
       .text(vizLabel);
 
 }
