@@ -10,7 +10,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
   showLoadingImage(false);
 
   var w = 225;
-  var h = 600;
+  var h = 800;
 
   var format = d3.format(",.0f");
 
