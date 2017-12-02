@@ -65,7 +65,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Putting the rectangles on the bar chart
   bar.append("rect")
-      .attr("fill", "#63d7db")
+      .attr("fill", "#50cace")
       .attr("transform", "translate(" + 10 + ",0)")
       .attr("width", function(d, i) {
         return x(d.values.length);
@@ -96,11 +96,11 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
           }, 10);
         }
         d3.select(this)
-          .attr("fill", "#A8DBA8");
+          .attr("fill", "#34b5b9");
        })
       .on("mouseout", function() {
         d3.select(this)
-          .attr("fill", "#79BD9A");
+          .attr("fill", "#50cace");
     });
 
   // Placing the label text for each bar
