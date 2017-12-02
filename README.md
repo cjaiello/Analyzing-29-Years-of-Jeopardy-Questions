@@ -1,7 +1,4 @@
-CS573 Final Project Proposal:
-
 “29 Years of Jeopardy Questions”
-
 
 Click to see my interactive [Word Frequencies](http://cjaiello.github.io/DataVisFinal/compareWordFrequencies.html) page.
 
