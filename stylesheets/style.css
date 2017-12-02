@@ -80,6 +80,9 @@ h3 {
 .countWordVis{
   margin: 0 auto;
 }
+.white {
+  color: #ffffff;
+}
 
 /* All labels on charts */
 .labels {
