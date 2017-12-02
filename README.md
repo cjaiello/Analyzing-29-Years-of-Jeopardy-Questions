@@ -14,20 +14,6 @@ CS573 Final Project Proposal:
 
 ----------------------------------------------------
 
-Project Objectives
-
-I would like to give users the ability to view the frequency of categories, to potentially show which are most likely to appear in a Jeopardy game. In addition, I want to let the user see which categories end up being in the Double Jeopardy and Final Jeopardy rounds most frequently. This could help a user target his or her knowledge to categories that end up in these rounds.
-
-While I do have these goals, I also plan on letting the user explore the data himself or herself, meaning that the user will be able to sort the data first by one attribute (for example, “category”) and display the counts for that data, then sort the data by a second attribute (for example, “air date”) and display the counts, and finally sort by a third attribute (for example, “round”) and display the counts for each attribute.  
-
-What I need to specifically disallow (to prevent gigantic and unreadable graphs)unless I can find visualizations that can support them is the ability to count based on the “question,” “air date,” “answer,” “category,” and the “show number” attributes due to there being 216,930 questions in the file. While some may be duplicates, sorting the data by question (or by these other aforementioned attributes) would create an enormous and useless graph. I could also do preprocessing to modify the data to allow some of these attributes to be used.
-
-
-
-
-
-----------------------------------------------------
-
 Data
 
 Data was compiled by the user “trexmatt” of the website reddit.com. The user writes, “Questions were obtained by crawling www.j-archive.com. According to j-archive, the total number of Jeopardy! questions over the show's span (as of [January 11th, 2014]) is 252,583 - so this is approximately 83% of them. In particular, around the last two years of game play are missing.”
