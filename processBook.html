@@ -5,7 +5,7 @@
 <script src="buildBarVis.js" charset="utf-8"></script>
 <script src="buildCalendarVis.js" charset="utf-8"></script>
 <script src="buildWordCloudVis.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 <script src="d3tip/index.js" charset="utf-8"></script>
 
 <style>
@@ -21,15 +21,15 @@ body {
 
     <div class="processBookEntry">
         <center>
-          <a href="index.html" class="otherHeaderLink"><strong>Main Page</strong></a> | 
-          <a href="dataBreakdown.html" class="otherHeaderLink"><strong><u>Data Breakdown</u></strong></a> | 
-          <a href="compareWordFrequencies.html" class="otherHeaderLink"><strong>Comparing Word Frequencies</strong></a> | 
+          <a href="index.html" class="otherHeaderLink"><strong>Main Page</strong></a> |
+          <a href="dataBreakdown.html" class="otherHeaderLink"><strong><u>Data Breakdown</u></strong></a> |
+          <a href="compareWordFrequencies.html" class="otherHeaderLink"><strong>Comparing Word Frequencies</strong></a> |
           <a href="processBook.html" class="activeHeaderLink"><strong>Process Book</strong></a>
           <br><br>
           <h1 class="processBookTitle">
             CS573 Data Visualization<br>
             Final Project Process Book
-          </h1> 
+          </h1>
             <h2>By Christina Aiello</h2>
           </h1>
       </div>
@@ -41,7 +41,7 @@ body {
           <li><a href="#overview"><strong>Overview and Motivation</strong></a></li>
           <li><a href="#week1"><strong>Week 1: Data Preprocessing and Implementing the Visualizations</strong></a></li>
           <li><a href="#week2"><strong>Week 2: Post-Proposal-Feedback Work</strong></a></li>
-          
+
       </p>
     </div>
 
@@ -135,7 +135,7 @@ body {
         <br>
         <div class="processBookSub">Red represents dates with smaller values, and green represents dates with bigger values. The scale goes red to orange to yellow to green.</div>
       </center>
-      <p class="processBookText"><strong>Design Evolution:</strong> 
+      <p class="processBookText"><strong>Design Evolution:</strong>
         While I was happy with how this looked at first, we were taught in class that using a range of red -> orange -> yellow -> green colors as a scale is not the most effective method for coloring values, so I chose to make all colors blue instead. Lighter blue meant a smaller value, and darker blue meant a larger value. The resulting chart can be seen below:
       </p>
       <center>
@@ -291,7 +291,7 @@ body {
       <p class="processBookText">
         <strong>Data:</strong> While I find the two bar graphs and the calendar chart to be interesting, even with the addition of the Word Cloud I felt as though I wasn't using the actual question and answer data enough. Not having the questions and answers available for reading made it feel as though I had "detached" these attributes from the other attributes (round, value, and date), which just didn't feel "right." As I mentioned before, I feel as though much of the value of this project is in the content of the questions and answers, and not using them enough made me unsatisfied with the project as it was.
       </p>
-      <p class="processBookText"> 
+      <p class="processBookText">
         Because of this, I chose to create a tooltip (for now, just the standard text box that appears when you hover over something in a browser) that contained all questions and answers for any specific date (MM/DD/YYYY) in the Calendar Chart. The tooltip contains the date, the number of questions from that round -> value -> date drilldown, and then the content of each question and answer. This required writing a very short helper function that would take in an array of data points and construct a string with each question and answer from that array. Adding in this feature lets the user see the actual content of the questions and answers. The image below depicts this feature.
       </p>
       <center>
@@ -386,5 +386,4 @@ body {
 
   </div>
 
-</body> 
-
+</body>

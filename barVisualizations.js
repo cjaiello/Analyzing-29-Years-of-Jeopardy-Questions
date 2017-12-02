@@ -34,7 +34,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Set the scale domain.
   x.domain([0, d3.max(data, function(d) {
-    return d.values.length; 
+    return d.values.length;
   })]);
   y.domain(data.map(function(d) { return d.key; }));
 
@@ -60,7 +60,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
     .enter().append("g")
       .attr("class", "bar")
       .attr("transform", function(d) {
-        return "translate(1," + y(d.key) + ")"; 
+        return "translate(1," + y(d.key) + ")";
       });
 
   // Putting the rectangles on the bar chart
@@ -68,7 +68,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .attr("fill", "#79BD9A")
       .attr("transform", "translate(" + 10 + ",0)")
       .attr("width", function(d, i) {
-        return x(d.values.length); 
+        return x(d.values.length);
       })
       .attr("height", y.rangeBand())
       .on("mouseover", function(d, i) {
@@ -108,8 +108,8 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .attr("fill", "#3b6c88")
       .attr("class", "labels")
       .style("font-size", "12px")
-      .attr("x", function(d) { 
-        return x(d.values.length); 
+      .attr("x", function(d) {
+        return x(d.values.length);
       })
       .attr("y", y.rangeBand() / 2)
       .attr("dx", 40)
@@ -117,7 +117,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
       .style("font-weight","bold")
       .attr("text-anchor", "end")
       .text(function(d) {
-        return format(d.values.length); 
+        return format(d.values.length);
       });
 
   svg.append("text")
@@ -155,14 +155,14 @@ function buildWordMatchComparisonBarVis(dataObject, translateXCoordinate, word, 
   console.log(dateMapOfMatches);
 
 
-  
+
   // Creating a list of this data:
   var data = [];
   data.push(questionData);
   data.push(answerData);
   data.push(categoryData);
 
-  var w = 300;
+  var w = 250;
   var h = 250;
 
   var format = d3.format(",.0f");
@@ -189,7 +189,7 @@ var yAxis = d3.svg.axis()
       .attr("class", "countWordsVis")
       .attr("padding-left", "20")
       .attr("margin-left", "20")
-      .attr("width", w+125)
+      .attr("width", w+100)
       .attr("height", h + 50)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
@@ -199,7 +199,7 @@ var yAxis = d3.svg.axis()
   // Use either the max of the two graphs if you're viewing two words,
   // or just use the max of one word if only viewing one
   y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : d3.max(data, function(d) {
-    return d.Value; 
+    return d.Value;
   })]);
 
   // Adding x axis to screen
@@ -218,7 +218,7 @@ var yAxis = d3.svg.axis()
   var tip = d3.tip()
     .attr('class', 'd3-tip-barvis')
     .offset([-10, 0])
-    .html(function(d) { 
+    .html(function(d) {
             return d.Value;
           });
 
@@ -229,12 +229,12 @@ var yAxis = d3.svg.axis()
     .enter().append("rect")
       .attr("fill", "#79BD9A")
       .attr("class", "bar")
-      .attr("x", function(d) { 
+      .attr("x", function(d) {
         return x(d.Attribute); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { 
+      .attr("y", function(d) {
         return y(parseInt(d.Value)); })
-      .attr("height", function(d) { 
+      .attr("height", function(d) {
         return h - parseInt(y(d.Value)) })
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
@@ -303,7 +303,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   // Set the scale domain.
   x.domain([0, d3.max(data, function(d) {
-    return d.Value; 
+    return d.Value;
   })]);
   y.domain(data.map(function(d) { return d.Attribute; }));
 
@@ -325,7 +325,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
     .enter().append("g")
       .attr("class", "bar")
       .attr("transform", function(d) {
-        return "translate(1," + y(d.Attribute) + ")"; 
+        return "translate(1," + y(d.Attribute) + ")";
       });
 
   // Putting the rectangles on the bar chart
@@ -333,15 +333,15 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       .attr("fill", "#399DB1")
       .attr("transform", "translate(" + 10 + ",0)")
       .attr("width", function(d) {
-        return x(parseInt(d.Value)); 
+        return x(parseInt(d.Value));
       })
       .attr("height", y.rangeBand());
 
   // Placing the label text for each bar
   bar.append("text")
       .attr("class", "wordSearchLabel")
-      .attr("x", function(d) { 
-        return x(parseInt(d.Value)); 
+      .attr("x", function(d) {
+        return x(parseInt(d.Value));
       })
       .attr("y", y.rangeBand() / 2)
       .attr("dx", 20)
@@ -350,7 +350,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       .attr("text-anchor", "end")
       .attr("fill", "white")
       .text(function(d) {
-        return d.Value; 
+        return d.Value;
       });
 
   svg.append("text")

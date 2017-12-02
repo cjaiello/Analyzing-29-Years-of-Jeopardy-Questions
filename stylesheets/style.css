@@ -147,7 +147,7 @@ h3 {
 .d3-tip-barvis {
   color: #0B486B;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
 }
 
@@ -325,12 +325,12 @@ text.active {
 
 /* Body text for process book page */
 .processBookText{
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 /* Styling the text of the index page */
 .mainPageText{
-  font-size: 14px; 
+  font-size: 14px;
   padding-top: 10px;
   padding-bottom: 10px;
 }

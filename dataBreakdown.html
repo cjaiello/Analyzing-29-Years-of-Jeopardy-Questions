@@ -5,16 +5,16 @@
 <script src="barVisualizations.js" charset="utf-8"></script>
 <script src="calendarVisualizations.js" charset="utf-8"></script>
 <script src="wordCloudVisualizations.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 <script src="d3tip/index.js" charset="utf-8"></script>
 
 
 <body>
   <center>
     <div id="navigationBox">
-        <a href="index.html" class="otherHeaderLink"><strong>Main Page</strong></a> | 
-        <a href="dataBreakdown.html" class="activeHeaderLink"><strong><u>Data Breakdown</u></strong></a> | 
-        <a href="compareWordFrequencies.html" class="otherHeaderLink"><strong>Comparing Word Frequencies</strong></a> | 
+        <a href="index.html" class="otherHeaderLink"><strong>Main Page</strong></a> |
+        <a href="dataBreakdown.html" class="activeHeaderLink"><strong><u>Data Breakdown</u></strong></a> |
+        <a href="compareWordFrequencies.html" class="otherHeaderLink"><strong>Comparing Word Frequencies</strong></a> |
         <a href="processBook.html" class="otherHeaderLink"><strong>Process Book</strong></a>
     </div>
     <div id="loadingBoxImage">
@@ -46,7 +46,7 @@
       </tr>
     </table>
   </center>
-</body> 
+</body>
 
 <script>
   d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
