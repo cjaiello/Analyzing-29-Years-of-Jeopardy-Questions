@@ -2,7 +2,7 @@
 
 /* Body text on page */
 body {
-  background-color: #ffffff;
+  background-color: #285874;
   color: #000000;
   font-size: 12px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
@@ -21,7 +21,7 @@ h2 {
   font-size: 13px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
-  color: #3B8686;
+  color: #68d7da;
 }
 
 h3 {
@@ -43,7 +43,7 @@ h3 {
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
   margin-bottom: 5px;
-  color: #0B486B;
+  color: #ffffff;
   margin-top: 10px;
 }
 
