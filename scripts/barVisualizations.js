@@ -65,7 +65,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
 
   // Putting the rectangles on the bar chart
   bar.append("rect")
-      .attr("fill", "#79BD9A")
+      .attr("fill", "#63d7db")
       .attr("transform", "translate(" + 10 + ",0)")
       .attr("width", function(d, i) {
         return x(d.values.length);
