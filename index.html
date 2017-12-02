@@ -1,11 +1,16 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-<script src="build/d3.layout.cloud.js" charset="utf-8"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-<script src="scripts.js" charset="utf-8"></script>
-<script src="barVisualizations.js" charset="utf-8"></script>
-<script src="calendarVisualizations.js" charset="utf-8"></script>
-<script src="wordCloudVisualizations.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  <script src="build/d3.layout.cloud.js" charset="utf-8"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="scripts.js" charset="utf-8"></script>
+  <script src="barVisualizations.js" charset="utf-8"></script>
+  <script src="calendarVisualizations.js" charset="utf-8"></script>
+  <script src="wordCloudVisualizations.js" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
 
 
 <body class="indexPageBody">
@@ -15,22 +20,28 @@
       <h1 id="jeopardyTitle">29 Years of Jeopardy Questions!</h1>
       <h2 id="jeopardySubtitle">A Project by Christina Aiello</h2>
       <p class="mainPageText">
-        <br>
-         This <a href="data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv" target="_blank"><strong>data set of 216,931 data points</strong></a> contains every question, answer, and category for all Jeopardy questions from the year 1984 to 2012. Each row in the data set is a question, an answer, a category, the air date of the show where the question occurred, the round (Jeopardy, Double Jeopardy, Final Jeopardy, or Tiebreaker), and the question's value.
+        <br> This <a href="data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv" target="_blank"><strong>data set of 216,931 data points</strong></a> contains every question, answer, and category for all Jeopardy questions from the year
+        1984 to 2012. Each row in the data set is a question, an answer, a category, the air date of the show where the question occurred, the round (Jeopardy, Double Jeopardy, Final Jeopardy, or Tiebreaker), and the question's value.
       </p>
       <p class="mainPageText">
-        In the <a href="compareWordFrequencies.html" target="_blank"><strong>Comparing Word Frequencies</strong></a> page, you can compare the frequencies of two words of your choice throughout the entire data set (or if you only want to search for one word, you can do that as well). You are also able to see a calendar chart that shows when the words you searched appeared in shows over this 29-year timespan, and hovering over a date in the calendar chart lets you see what questions these words were featured in on that particular day.
+        In the <a href="compareWordFrequencies.html" target="_blank"><strong>Comparing Word Frequencies</strong></a> page, you can compare the frequencies of two words of your choice throughout the entire data set (or if you only want to search for one
+        word, you can do that as well). You are also able to see a calendar chart that shows when the words you searched appeared in shows over this 29-year timespan, and hovering over a date in the calendar chart lets you see what questions these words
+        were featured in on that particular day.
         <br>
         <strong>What does this let you do?</strong><br>This page allows to you see trends over time regarding the appearances of certain keywords. What can YOU discover?
       </p>
       <p class="mainPageText">
-        In the <a href="dataBreakdown.html" target="_blank"><strong>Data Breakdown</strong></a> page, you have the ability to break down the data (first by category, then by value the question was worth, and finally by air date of the show during which a question occurred), and you can then view a word cloud of all words from a specific combination of round + value + year of air date.
+        In the <a href="dataBreakdown.html" target="_blank"><strong>Data Breakdown</strong></a> page, you have the ability to break down the data (first by category, then by value the question was worth, and finally by air date of the show during which
+        a question occurred), and you can then view a word cloud of all words from a specific combination of round + value + year of air date.
         <br>
         <strong>What does this let you do?</strong><br>This part of this project can help trivia game fanatics discover trends in popular keywords/key topics found in questions.
-      <p class="mainPageText">
-        Lastly, my <a href="processBook.html" target="_blank"><strong>Process Book</strong></a> (also available in <a href="processBook.pdf" target="_blank"><strong>PDF form</strong></a>) details the construction and development of this project, and <a href="https://youtu.be/sR2Gvdhu80U" target="_blank"><strong>this video</strong></a> gives you a two-minute description of the project.
+        <p class="mainPageText">
+          Lastly, my <a href="processBook.html" target="_blank"><strong>Process Book</strong></a> (also available in <a href="processBook.pdf" target="_blank"><strong>PDF form</strong></a>) details the construction and development of this project, and
+          <a href="https://youtu.be/sR2Gvdhu80U" target="_blank"><strong>this video</strong></a> gives you a two-minute description of the project.
+        </p>
       </p>
-    </p>
-  </div>
+    </div>
   </center>
 </body>
+
+</html>
