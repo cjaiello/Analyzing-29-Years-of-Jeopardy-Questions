@@ -1,6 +1,6 @@
 “29 Years of Jeopardy Questions”
 
-Click to see my interactive [Word Frequencies](http://cjaiello.github.io/DataVisFinal/compareWordFrequencies.html) page.
+Click to see my interactive [Word Frequencies](http://cjaiello.github.io/DataVisFinalChristinaAiello/compareWordFrequencies.html) page.
 
 ![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisonbars.png?raw=true)
 
