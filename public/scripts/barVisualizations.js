@@ -241,7 +241,7 @@ var yAxis = d3.svg.axis()
 
   svg.append("text")
       .attr("x", w * (1/20))
-      .attr("y", h-18)
+      .attr("y", 18)
       .style("font-size","18px")
       .style("font-weight","bold")
       .attr("fill", "#0B486B")
@@ -356,7 +356,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   svg.append("text")
       .attr("x", w * (1/5) )
-      .attr("y", 40)
+      .attr("y", h - 40)
       .style("font-size","20px")
       .style("font-weight","bold")
       .attr("fill", "white")
