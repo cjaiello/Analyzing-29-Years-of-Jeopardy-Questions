@@ -1,18 +1,5 @@
 “29 Years of Jeopardy Questions”
 
-Click to see my interactive [Word Frequencies](http://cjaiello.github.io/DataVisFinalChristinaAiello/compareWordFrequencies.html) page.
-
-![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisonbars.png?raw=true)
-
-![Comparison Calendars](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/comparisoncalendars.png?raw=true)
-
-
-Click to see my interactive [Data Breakdown](http://cjaiello.github.io/DataVisFinal/dataBreakdown.html) page.
-
-![Bar Graphs](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/bargraphs.png?raw=true)
-
-![Word Cloud](https://github.com/cjaiello/DataVisFinalChristinaAiello/blob/master/images/wordcloud.png?raw=true)
-
 ----------------------------------------------------
 
 Data
