@@ -17,7 +17,6 @@
     "type": "git",
     "url": "http://github.com/jasondavies/d3-cloud.git"
   },
-  "main": "index.js",
   "scripts": {
     "build": "npm install && mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js"
   },
