@@ -149,6 +149,10 @@ h3 {
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
 }
 
+#homepageImage{
+  width: 90%;
+}
+
 /* For smaller-sized tooltips */
 .d3-tip-smaller {
   line-height: 1.5;
