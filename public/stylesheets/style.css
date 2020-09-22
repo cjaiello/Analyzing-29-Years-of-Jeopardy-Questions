@@ -38,21 +38,12 @@ h3 {
   text-align: center;
 }
 
-.otherHeaderLink {
+.headerLink {
   font-size: 15px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
   margin-bottom: 5px;
   color: #68d7da;
-  margin-top: 10px;
-}
-
-.activeHeaderLink {
-  font-size: 15px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  text-align: center;
-  margin-bottom: 5px;
-  color: #9aeaec;
   margin-top: 10px;
 }
 
