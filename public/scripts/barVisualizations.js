@@ -238,8 +238,8 @@ var yAxis = d3.svg.axis()
       .on('mouseout', tip.hide);
 
   svg.append("text")
-      .attr("x", w * (1/20))
-      .attr("y", h+25)
+      .attr("x", w * (1/22))
+      .attr("y", h + 40)
       .style("font-size","18px")
       .style("font-weight","bold")
       .attr("fill", "#0B486B")
