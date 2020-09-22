@@ -82,7 +82,7 @@ function buildBarVis(data, translateXCoordinate, vizNumber, vizLabel) {
               .remove();
             d3.selectAll(".calendarLabel")
               .remove();
-              buildBarVis(aggregateByValue(data[i].values), 25, vizNumber + 1, "Value");
+              buildBarVis(aggregateByValue(data[i].values), 85, vizNumber + 1, "Value");
           }, 10);
         } else if (vizNumber == 2) {
           // Show loading image
