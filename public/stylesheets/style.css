@@ -47,6 +47,10 @@ h3 {
   margin-top: 10px;
 }
 
+.navbar{
+  background-color: #09092c;
+}
+
 #wrapper {
   overflow: hidden;
 }
