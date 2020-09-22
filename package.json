@@ -21,7 +21,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js",
+    "build": "mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js && npm start",
     "start": "node index.js"
   },
   "dependencies": {
