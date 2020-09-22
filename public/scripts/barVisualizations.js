@@ -217,7 +217,7 @@ var yAxis = d3.svg.axis()
 
   var tip = d3.tip()
     .attr('class', 'd3-tip-barvis')
-    .offset([-10, -10])
+    .offset([-5, 0])
     .html(function(d) {
             return d.Attribute + ": " + d.Value;
           });
