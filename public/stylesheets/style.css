@@ -124,6 +124,11 @@ h3 {
   margin: 0 auto;
 }
 
+#navigationBox{
+  width: auto;
+  margin: 0 auto;
+}
+
 /* Turns code green with a black background */
 .code {
   padding: 15px;
