@@ -1,34 +1,21 @@
 {
-  "name": "analyzing-jeopardy-questions",
+  "name": "node-example",
   "version": "1.0.0",
-  "description": "Analyze Jeopardy Questions.",
-  "keywords": [
-    "word",
-    "cloud",
-    "tag",
-    "visualization",
-    "canvas"
-  ],
-  "author": {
-    "name": "Christina A"
-  },
-  "license": "BSD-3-Clause",
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/jasondavies/d3-cloud.git"
-  },
+  "description": "This example is so cool.",
+  "main": "web.js",
   "scripts": {
-    "build": "npm install && mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js && npm start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
+  "author": "jane-doe",
+  "license": "MIT",
   "dependencies": {
-    "browserify": "^12.0.1",
-    "d3-dispatch": "^2.0.0"
-  },
-  "devDependencies": {
-    "browserify": "^12.0.1"
+    "express": "^4.9.8"
   },
   "engines": {
-    "node": "7.0.0",
-    "npm": "3.10.8"
+    "node": "10.x"
   }
 }
