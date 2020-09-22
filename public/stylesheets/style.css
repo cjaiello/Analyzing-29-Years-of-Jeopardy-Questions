@@ -125,8 +125,7 @@ h3 {
 }
 
 #navigationBox{
-  width: auto;
-  margin: 0 auto;
+  text-align: center;
 }
 
 /* Turns code green with a black background */
