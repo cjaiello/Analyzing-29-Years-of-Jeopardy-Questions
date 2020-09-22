@@ -26,5 +26,8 @@
   },
   "devDependencies": {
     "browserify": "^11.2.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
