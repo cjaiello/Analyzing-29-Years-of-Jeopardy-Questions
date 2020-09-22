@@ -1,0 +1,1 @@
+That file has the same data as before, but I then copied the "Category" attribute into a new column (and only copied unique categories). This spreadsheet now also lists which categories are actually unique.

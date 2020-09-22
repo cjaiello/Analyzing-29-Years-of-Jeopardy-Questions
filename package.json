@@ -8,15 +8,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js",
     "test": "node test.js"
   },
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "d3-dispatch": "0.2.x"
   },
   "devDependencies": {
     "got": "^11.3.0",
-    "tape": "^4.7.0"
+    "tape": "^4.7.0",
+    "browserify": "^11.2.0"
   },
   "repository": {
     "type": "git",

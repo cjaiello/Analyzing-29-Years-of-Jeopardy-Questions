@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  <script src="build/d3.layout.cloud.js" charset="utf-8"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="scripts/scripts.js" charset="utf-8"></script>
+  <script src="scripts/barVisualizations.js" charset="utf-8"></script>
+  <script src="scripts/calendarVisualizations.js" charset="utf-8"></script>
+  <script src="scripts/wordCloudVisualizations.js" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script src="d3tip/index.js" charset="utf-8"></script>
+</head>
+
+
+<body>
+  <center>
+    <div id="navigationBox">
+      <a href="index.html" class="otherHeaderLink"><strong>Main Page</strong></a> |
+      <a href="dataBreakdown.html" class="otherHeaderLink"><strong><u>Data Breakdown</u></strong></a> |
+      <a href="compareWordFrequencies.html" class="activeHeaderLink"><strong>Comparing Word Frequencies</strong></a> |
+      <a href="processBook.html" class="otherHeaderLink"><strong>Process Book</strong></a>
+    </div>
+    <div id="loadingBoxImage">
+      <h2>Now loading...</h2>
+    </div>
+    <div id="directionsBox">
+      <h2>Type two words below to compare the frequencies of how often two words appear in all questions, answers, and categories (of the entire set of 216,931 data points)!<br>If you just want to search for one word, type one word into either of the boxes below and hit "Search."</h2>
+    </div>
+    <div id="inputDiv">
+      <input type="text" id="wordToSearchFor1" placeholder="Type first word here" class="smallPadding"> <span class="white">versus</span> <input type="text" id="wordToSearchFor2" placeholder="Type second word here" class="smallPadding"><button type="submit" id="submitButton" onclick="findWordPairMatchesInDataSet()"
+        class="smallPadding">Search</button>
+    </div>
+    <div id="wrapper">
+      <div id="locationOfSVGsWordComparison">
+      </div>
+      <div id="locationOfJustOneCalendar">
+      </div>
+      <div class="calendars">
+        <div class="calendarBoxWordComparisons1">
+        </div>
+        <div class="calendarBoxWordComparisons2" id="calendarBoxWordComparisons2">
+        </div>
+      </div>
+    </div>
+  </center>
+  </div>
+</body>
+
+<script>
+  // When people hit enter, have that also submit the answer
+  $("#wordToSearchFor").keypress(function(e) {
+    if (e.keyCode == 13) {
+      event.preventDefault();
+      // Check if input is valid:
+      if (validateForm()) {
+        findWordMatchesInDataSet();
+      }
+    }
+  });
+</script>
+
+</html>
