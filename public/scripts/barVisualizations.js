@@ -199,7 +199,7 @@ var yAxis = d3.svg.axis()
   // Use either the max of the two graphs if you're viewing two words,
   // or just use the max of one word if only viewing one
   y.domain([0, (topBoundForGraphs != null) ? topBoundForGraphs : d3.max(data, function(d) {
-    return d.Value + (d.Value * 20);
+    return d.Value + (d.Value * .20);
   })]);
 
   // Adding x axis to screen
