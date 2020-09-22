@@ -13,9 +13,9 @@ var app = express()
 var router = express.Router();
 
 router.get('/dataBreakdown', function(req, res, next) {
-        res.render('./views/dataBreakdown');
+        res.render('./views/pages/dataBreakdown');
 });
 
 router.get('/compareWordFrequencies', function(req, res, next) {
-        res.render('./views/compareWordFrequencies');
+        res.render('./views/pages/compareWordFrequencies');
 });
