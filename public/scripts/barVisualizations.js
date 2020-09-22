@@ -239,7 +239,7 @@ var yAxis = d3.svg.axis()
 
   svg.append("text")
       .attr("x", w * (1/20))
-      .attr("y", h + 100)
+      .attr("y", h)
       .style("font-size","18px")
       .style("font-weight","bold")
       .attr("fill", "#0B486B")
