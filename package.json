@@ -1,7 +1,7 @@
 {
-  "name": "d3-cloud",
-  "version": "1.2.1",
-  "description": "Generate word clouds in JavaScript.",
+  "name": "analyzing-jeopardy-questions",
+  "version": "1.0.0",
+  "description": "Analyze Jeopardy Questions.",
   "keywords": [
     "word",
     "cloud",
@@ -9,10 +9,8 @@
     "visualization",
     "canvas"
   ],
-  "homepage": "http://www.jasondavies.com/wordcloud/",
   "author": {
-    "name": "Jason Davies",
-    "url": "http://www.jasondavies.com/"
+    "name": "Christina A"
   },
   "license": "BSD-3-Clause",
   "repository": {
@@ -21,8 +19,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js && npm start",
-    "start": "node index.js"
+    "build": "mkdir -p build && browserify --standalone d3.layout.cloud index.js > build/d3.layout.cloud.js",
   },
   "dependencies": {
     "d3-dispatch": "0.2.x"
