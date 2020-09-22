@@ -1,3 +1,3 @@
-![Screenshot of app](https://raw.githubusercontent.com/cjaiello/standupbot/master/screenshot.png)
+![Data Deep Dive](https://github.com/cjaiello/Analyzing-29-Years-of-Jeopardy-Questions/blob/master/public/images/data-deep-dive.gif)
 
-![Standup Bot message](https://raw.githubusercontent.com/cjaiello/standupbot/master/standupbot_message)
+![Compare Word Frequencies](https://github.com/cjaiello/Analyzing-29-Years-of-Jeopardy-Questions/blob/master/public/images/compare-word-frequencies.gif)
