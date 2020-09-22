@@ -224,7 +224,7 @@ function buildCalendarViewVis(data, translateXCoordinate, vizNumber, vizLabel){
   svg.call(tip);
 
   svg.append("text")
-      .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
+      .attr("transform", "translate(-4," + cellSize * 3.5 + ")rotate(-90)")
       .style("text-anchor", "middle")
       .text(function(d) { return d; });
 
