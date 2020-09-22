@@ -7,12 +7,6 @@ var app = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
+  .get('/dataBreakdown', (req, res) => res.render('pages/dataBreakdown'))
+  .get('/compareWordFrequencies', (req, res) => res.render('pages/compareWordFrequencies'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-app.get('/dataBreakdown', function(req, res, next) {
-        res.render('./pages/dataBreakdown');
-});
-
-app.get('/compareWordFrequencies', function(req, res, next) {
-        res.render('./pages/compareWordFrequencies');
-});
