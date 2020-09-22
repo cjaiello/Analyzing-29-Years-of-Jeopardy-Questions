@@ -9,13 +9,10 @@ var app = express()
   .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-
-var router = express.Router();
-
 app.get('/dataBreakdown', function(req, res, next) {
-        res.render('./views/pages/dataBreakdown');
+        res.render('./pages/dataBreakdown');
 });
 
 app.get('/compareWordFrequencies', function(req, res, next) {
-        res.render('./views/pages/compareWordFrequencies');
+        res.render('./pages/compareWordFrequencies');
 });
