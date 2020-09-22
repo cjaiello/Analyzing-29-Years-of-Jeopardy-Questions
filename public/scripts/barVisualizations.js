@@ -187,8 +187,8 @@ var yAxis = d3.svg.axis()
       .attr("class", "countWordsVis")
       .attr("padding-left", "20")
       .attr("margin-left", "20")
-      .attr("width", w+100)
-      .attr("height", h + 50)
+      .attr("width", w + 100)
+      .attr("height", h + 100)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
