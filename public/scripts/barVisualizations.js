@@ -246,7 +246,7 @@ var yAxis = d3.svg.axis()
       .style("font-weight","bold")
       .attr("fill", "#0B486B")
       .attr("class", "barChartLabel")
-      .text("Appearances of \"" + word + "\" in answers, questions, and categories");
+      .text("Appearances of \"" + word + "\"");
 
   buildCalendarViewVisForWordComparisons(dateMapOfMatches, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred", word);
 
@@ -291,15 +291,15 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   var svg = d3.select("#locationOfSVGs").append("svg")
       .style("background-color", "#3a498c")
-      .style("padding", "30px")
-      .style("margin", "30px")
+      .style("padding", "16px")
+      .style("margin", "16px")
       .attr("class", "countWordsVis")
-      .attr("padding-left", "20")
-      .attr("margin-left", "20")
-      .attr("width", w+125)
+      .attr("padding-left", "20px")
+      .attr("margin-left", "20px")
+      .attr("width", w + 125)
       .attr("height", h + 50)
     .append("g")
-      .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
+      .attr("transform", "translate(" + translateXCoordinate + "," + 25 + ")");
 
   // Set the scale domain.
   x.domain([0, d3.max(data, function(d) {

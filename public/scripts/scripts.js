@@ -109,7 +109,7 @@ function findWordMatchesInDataSet(){
     var numberOfMatchesFound = findMatches(data, wordToSearchFor);
     
     // Now, build the visualization based on the data:
-    buildWordMatchBarVis(numberOfMatchesFound, 50, 1, "Appearances of the Word \"" + wordToSearchFor + "\"");
+    buildWordMatchBarVis(numberOfMatchesFound, 25, 1, "Appearances of the Word \"" + wordToSearchFor + "\"");
   });
 }
 
