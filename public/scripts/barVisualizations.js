@@ -217,8 +217,8 @@ var yAxis = d3.svg.axis()
     .attr('class', 'd3-tip-barvis')
     .offset([-5, 0])
     .html(function(d) {
-            return d.Attribute + ": " + d.Value;
-          });
+        return d.Value;
+      });
 
   svg.call(tip);
 
@@ -239,7 +239,7 @@ var yAxis = d3.svg.axis()
 
   svg.append("text")
       .attr("x", w * (1/20))
-      .attr("y", h)
+      .attr("y", h-25)
       .style("font-size","18px")
       .style("font-weight","bold")
       .attr("fill", "#0B486B")
