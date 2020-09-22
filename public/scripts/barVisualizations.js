@@ -297,7 +297,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
       .attr("padding-left", "20")
       .attr("margin-left", "20")
       .attr("width", w+125)
-      .attr("height", h)
+      .attr("height", h + 25)
     .append("g")
       .attr("transform", "translate(" + (translateXCoordinate + 25) + "," + 30 + ")");
 
@@ -356,7 +356,7 @@ function buildWordMatchBarVis(dataObject, translateXCoordinate, vizNumber, vizLa
 
   svg.append("text")
       .attr("x", w * (1/5) )
-      .attr("y", h - 40)
+      .attr("y", 40)
       .style("font-size","20px")
       .style("font-weight","bold")
       .attr("fill", "white")
