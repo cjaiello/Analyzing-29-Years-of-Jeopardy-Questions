@@ -182,7 +182,7 @@ var yAxis = d3.svg.axis()
     .ticks(10);
 
   var svg = d3.select("#locationOfSVGsWordComparison").append("svg")
-      .style("background-color", "#e2f6c4")
+      .style("background-color", "#c3e1bd")
       .style("margin", "10px")
       .attr("class", "countWordsVis")
       .attr("padding-left", "20")

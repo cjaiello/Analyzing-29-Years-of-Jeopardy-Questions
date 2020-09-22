@@ -2,7 +2,7 @@
 
 /* Body text on page */
 body {
-  background-color: #285874;
+  background-color: #ffffff;
   color: #000000;
   font-size: 12px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
@@ -21,7 +21,7 @@ h2 {
   font-size: 13px;
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
-  color: #9aeaec;
+  color: #0B486B;
 }
 
 h3 {
