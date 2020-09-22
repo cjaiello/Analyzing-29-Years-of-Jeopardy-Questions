@@ -219,7 +219,7 @@ var yAxis = d3.svg.axis()
     .attr('class', 'd3-tip-barvis')
     .offset([-10, 0])
     .html(function(d) {
-            return d.Value;
+            return d.Attribute + ": " + d.Value;
           });
 
   svg.call(tip);
@@ -241,12 +241,12 @@ var yAxis = d3.svg.axis()
 
   svg.append("text")
       .attr("x", w * (1/20))
-      .attr("y", h-50)
-      .style("font-size","18px")
+      .attr("y", h-25)
+      .style("font-size","12px")
       .style("font-weight","bold")
       .attr("fill", "#0B486B")
       .attr("class", "barChartLabel")
-      .text("Appearances of \"" + word + "\"");
+      .text("Appearances of \"" + word + "\" in answers, questions, and categories");
 
   buildCalendarViewVisForWordComparisons(dateMapOfMatches, 25, vizNumber, "Air Dates of Shows When Word \"" + word + "\" Occurred", word);
 
