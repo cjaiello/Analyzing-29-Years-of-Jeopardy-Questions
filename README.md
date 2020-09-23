@@ -1,8 +1,11 @@
-# Project Technologies:
+
+# Analyzing 29 Years of Jeopardy Questions
+
+## Project Technologies
 * Node + Express for the server https://expressjs.com/
 * d3 for visualizations https://www.d3js.org/
 
-# Analyzing 29 Years of Jeopardy Questions
+## Overview
 https://analyzing-jeopardy-questions.herokuapp.com/
 
 This data set of 216,931 data points contains every question, answer, and category for all Jeopardy questions from the year 1984 to 2012. Each row in the data set is a question, an answer, a category, the air date of the show where the question occurred, the round (Jeopardy, Double Jeopardy, Final Jeopardy, or Tiebreaker), and the question's value.
