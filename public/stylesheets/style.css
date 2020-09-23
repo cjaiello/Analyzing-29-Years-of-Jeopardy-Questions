@@ -15,6 +15,7 @@ h1 {
   margin-bottom: 5px;
   color: #0B486B;
   margin-top: 10px;
+  font-weight: 700;
 }
 
 h2 {
@@ -52,6 +53,7 @@ h3 {
   background-color: #09092c;
   border-color: #050520;
   color: #ffffff;
+  padding: 10px;
 }
 
 #wrapper {
