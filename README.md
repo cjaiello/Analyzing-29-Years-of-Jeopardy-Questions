@@ -5,6 +5,16 @@
 * Node + Express for the server https://expressjs.com/
 * d3 for visualizations https://www.d3js.org/
 
+## Local Setup
+* Download Node https://nodejs.org/
+* Open terminal
+* `cd` into where you've downloaded and unzipped this code
+* Run `npm init`
+* Run `npm install`
+* Run `node index.js`
+* Go to http://localhost:5000/ in your browser
+![Go to localhost:5000 in your browser](https://github.com/cjaiello/Analyzing-29-Years-of-Jeopardy-Questions/blob/master/public/images/localhost5000.png)
+
 ## Overview
 https://analyzing-jeopardy-questions.herokuapp.com/
 
