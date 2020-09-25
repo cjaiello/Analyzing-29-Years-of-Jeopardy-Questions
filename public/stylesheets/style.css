@@ -15,6 +15,7 @@ h1 {
   margin-bottom: 5px;
   color: #0B486B;
   margin-top: 10px;
+  font-weight: 700;
 }
 
 h2 {
@@ -29,6 +30,22 @@ h3 {
   font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
   text-align: center;
   color: #CFF09E;
+}
+
+#pageHeaderSiteName {
+  color: #50cace;
+}
+
+.navbar{
+  background-color: #09092c;
+  border-color: #050520;
+  color: #ffffff;
+  padding: 10px;
+}
+
+#wrapper {
+  overflow: hidden;
+  padding: 10px;
 }
 
 /* Labels for Word Search bars */
@@ -46,17 +63,6 @@ h3 {
   color: #68d7da;
   margin-top: 10px;
   padding: 0px 16px 0px 16px;
-}
-
-.navbar{
-  background-color: #09092c;
-  border-color: #050520;
-  color: #ffffff;
-}
-
-#wrapper {
-  overflow: hidden;
-  padding: 10px;
 }
 
 /* Div that holds word cloud on index page */
