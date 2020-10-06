@@ -2,381 +2,403 @@
 
 /* Body text on page */
 body {
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 12px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	background-color: #ffffff;
+	color: #000000;
+	font-size: 12px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
 }
 
 h1 {
-  font-size: 15px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  text-align: center;
-  margin-bottom: 5px;
-  color: #0B486B;
-  margin-top: 10px;
-  font-weight: 700;
+	font-size: 15px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	text-align: center;
+	margin-bottom: 5px;
+	color: #0b486b;
+	margin-top: 10px;
+	font-weight: 700;
 }
 
 h2 {
-  font-size: 13px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  text-align: center;
-  color: #0B486B;
+	font-size: 13px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	text-align: center;
+	color: #0b486b;
 }
 
 h3 {
-  font-size: 11px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  text-align: center;
-  color: #CFF09E;
+	font-size: 11px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	text-align: center;
+	color: #cff09e;
 }
 
 #pageHeaderSiteName {
-  color: #50cace;
+	color: #50cace;
 }
 
-.navbar{
-  background-color: #09092c;
-  border-color: #050520;
-  color: #ffffff;
-  padding: 10px;
+.navbar {
+	background-color: #09092c;
+	border-color: #050520;
+	color: #ffffff;
+	padding: 10px;
 }
 
 #wrapper {
-  overflow: hidden;
-  padding: 10px;
+	overflow: hidden;
+	padding: 10px;
 }
 
 /* Labels for Word Search bars */
 .wordSearchLabel {
-  font-size: 15px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;;
-  text-align: center;
+	font-size: 15px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	text-align: center;
 }
 
 .headerLink {
-  font-size: 15px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  text-align: center;
-  margin-bottom: 5px;
-  color: #68d7da;
-  margin-top: 10px;
-  padding: 0px 16px 0px 16px;
+	font-size: 15px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	text-align: center;
+	margin-bottom: 5px;
+	color: #68d7da;
+	margin-top: 10px;
+	padding: 0px 16px 0px 16px;
 }
 
 /* Div that holds word cloud on index page */
-#locationOfWordCloud{
-  color: #000000;
+#locationOfWordCloud {
+	color: #000000;
 }
 
 /* Div that holds two bar graphs on index page */
-#locationOfSVGs{
-  float: left;
+#locationOfSVGs {
+	float: left;
 }
 
 /* Div that holds two bar graphs on index page */
-#locationOfSVGsWordComparison{
-  margin: 0 auto;
-  width: auto;
-  height: 400px;
+#locationOfSVGsWordComparison {
+	margin: 0 auto;
+	width: auto;
+	height: 400px;
 }
 
-.countWordVis{
-  margin: 0 auto;
+.countWordVis {
+	margin: 0 auto;
 }
 .white {
-  color: #ffffff;
+	color: #ffffff;
 }
 
 /* All labels on charts */
 .labels {
-  font-size: 11px;
-  font-family: Calibri,sans-serif;
+	font-size: 11px;
+	font-family: Calibri, sans-serif;
 }
 
 /* hover info */
 #tooltip {
-  background-color: #fff;
-  border: 2px solid #ccc;
-  padding: 10px;
+	background-color: #fff;
+	border: 2px solid #ccc;
+	padding: 10px;
 }
 
 .smallPadding {
-  margin: 5px;
-  padding: 5px;
+	margin: 5px;
+	padding: 5px;
 }
 
 /* Div that holds loading message */
-#loadingBoxImage{
-  width: auto;
-  height: 45px;
-  display: none;
-  padding-bottom: 5px;
+#loadingBoxImage {
+	width: auto;
+	height: 45px;
+	display: none;
+	padding-bottom: 5px;
 }
 
 /* Div that holds directions */
-#directionsBox{
-  width: auto;
-  height: 45px;
-  display: visible;
-  float: center;
-  padding-bottom: 5px;
+#directionsBox {
+	width: auto;
+	height: 45px;
+	display: visible;
+	float: center;
+	padding-bottom: 5px;
 }
 
-#inputDiv{
-  width: 500px;
-  margin: 0 auto;
+#inputDiv {
+	width: 500px;
+	margin: 0 auto;
 }
 
-#navigationBox{
-  text-align: center;
+#navigationBox {
+	text-align: center;
 }
 
 /* Turns code green with a black background */
 .code {
-  padding: 15px;
-  font-family: Consolas,monaco,monospace;
-  color: #32cd32;
-  font-size: 14px;
-  background-color: #000000;
+	padding: 15px;
+	font-family: Consolas, monaco, monospace;
+	color: #32cd32;
+	font-size: 14px;
+	background-color: #000000;
 }
-
 
 /* From: http://bl.ocks.org/Caged/6476579 */
 .d3-tip {
-  line-height: 1.5;
-  padding: 12px;
-  background-color: #15262f;
-  color: #fff;
-  font-size: 12px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  border-radius: 2px;
-  width: 750px;
+	line-height: 1.5;
+	padding: 12px;
+	background-color: #15262f;
+	color: #fff;
+	font-size: 12px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	border-radius: 2px;
+	width: 750px;
 }
 
 /* Tooltip that shows up on the bar visualizations */
 .d3-tip-barvis {
-  color: #0B486B;
-  font-weight: bold;
-  font-size: 12px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	color: #0b486b;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
 }
 
-#homepageImage{
-  width: 90%;
+#homepageImage {
+	width: 90%;
 }
 
 /* For smaller-sized tooltips */
 .d3-tip-smaller {
-  line-height: 1.5;
-  padding: 12px;
-  background-color: #15262f;
-  color: #fff;
-  font-size: 12px;
-  font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
-  border-radius: 2px;
-  width: 400px;
+	line-height: 1.5;
+	padding: 12px;
+	background-color: #15262f;
+	color: #fff;
+	font-size: 12px;
+	font-family: "Lato", "Lucida Grande", "Tahoma", sans-serif;
+	border-radius: 2px;
+	width: 400px;
 }
 
 .indexPageBody {
-  background-color: #131446;
+	background-color: #131446;
 }
 
 #jeopardyTitle {
-  font-size: 25px;
-  color: #131446;
+	font-size: 25px;
+	color: #131446;
 }
 
 #jeopardySubtitle {
-  font-size: 18px;
-  color: #131446;
+	font-size: 18px;
+	color: #131446;
 }
 
 /* --------- Below is for All Bar Graphs --------- */
 
 .td-center {
-  text-align: center;
+	text-align: center;
 }
 
 .td-leftpadding {
-  padding-left: 50px;
+	padding-left: 50px;
 }
 
 .td-rightpadding {
-  padding-right 50px;
+	padding-right: 50px;
 }
 
 .bar text.value {
-  fill: #0B486B;
+	fill: #0b486b;
 }
 
 .axis {
-  shape-rendering: crispEdges;
+	shape-rendering: crispEdges;
 }
 
 .axis path {
-  fill: none;
+	fill: none;
 }
 
 .x.axis line {
-  stroke: #000;
-  stroke-opacity: 0.2;
+	stroke: #000;
+	stroke-opacity: 0.2;
 }
 
 .y.axis path {
-  stroke: black;
+	stroke: black;
 }
 
 /* --------- Below is for Calendar View --------- */
 
 .calendarBox {
-  width: 650px;
-  height: 650px;
-  float: center;
+	width: 650px;
+	height: 650px;
+	float: center;
 }
 
 .calendarBoxIndex {
-  width: 650px;
-  height: 800px;
-  float: left;
+	width: 650px;
+	height: 800px;
+	float: left;
 }
 
-.calendarBoxWordComparisons1, .calendarBoxWordComparisons2 {
-  width: 650px;
-  height: auto;
-  padding: 10px;
-  float: left;
+.calendarBoxWordComparisons1,
+.calendarBoxWordComparisons2 {
+	width: 650px;
+	height: auto;
+	padding: 10px;
+	float: left;
 }
 
 .calendars {
-  width: 1400px;
-  margin: 0 auto;
+	width: 1400px;
+	margin: 0 auto;
 }
 
-#chart{
-  width: 800px;
-  margin: 0 auto;
+#chart {
+	width: 800px;
+	margin: 0 auto;
 }
 
 .background {
-  fill: #eee;
+	fill: #eee;
 }
 
 line {
-  stroke: #fff;
+	stroke: #fff;
 }
 
 text.active {
-  fill: red;
+	fill: red;
 }
 
 .day {
-  fill: #fff;
-  stroke: #ccc;
+	fill: #fff;
+	stroke: #ccc;
 }
 
 .month {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 4px;
+	fill: none;
+	stroke: #fff;
+	stroke-width: 4px;
 }
 .year-title {
-  font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 /* color ranges */
-.RdYlGn .q0-11{fill:rgb(119, 197, 211)}
-.RdYlGn .q1-11{fill:rgb(81, 181, 199)}
-.RdYlGn .q2-11{fill:rgb(62, 172, 192)}
-.RdYlGn .q3-11{fill:rgb(55, 155, 173)}
-.RdYlGn .q4-11{fill:rgb(49, 139, 155)}
-.RdYlGn .q5-11{fill:rgb(43, 121, 135)}
-.RdYlGn .q6-11{fill:rgb(37, 103, 115)}
-.RdYlGn .q7-11{fill:rgb(31, 85, 95)}
-.RdYlGn .q8-11{fill:rgb(25, 69, 77)}
-.RdYlGn .q9-11{fill:rgb(19, 51, 57)}
-.RdYlGn .q10-11{fill:rgb(9, 25, 29)}
+.RdYlGn .q0-11 {
+	fill: rgb(119, 197, 211);
+}
+.RdYlGn .q1-11 {
+	fill: rgb(81, 181, 199);
+}
+.RdYlGn .q2-11 {
+	fill: rgb(62, 172, 192);
+}
+.RdYlGn .q3-11 {
+	fill: rgb(55, 155, 173);
+}
+.RdYlGn .q4-11 {
+	fill: rgb(49, 139, 155);
+}
+.RdYlGn .q5-11 {
+	fill: rgb(43, 121, 135);
+}
+.RdYlGn .q6-11 {
+	fill: rgb(37, 103, 115);
+}
+.RdYlGn .q7-11 {
+	fill: rgb(31, 85, 95);
+}
+.RdYlGn .q8-11 {
+	fill: rgb(25, 69, 77);
+}
+.RdYlGn .q9-11 {
+	fill: rgb(19, 51, 57);
+}
+.RdYlGn .q10-11 {
+	fill: rgb(9, 25, 29);
+}
 
 /* --------- Below is for Progress Book --------- */
 .processBookPage {
-  background-color: #266a77;
+	background-color: #266a77;
 }
 /* Used for the entire encompassing box for the progress book */
-.processBookMainBox{
-  margin: auto;
-  background-color: #399DB1;
-  width: 910px;
-  height: auto;
-  padding: 30px;
-  color: #000000;
+.processBookMainBox {
+	margin: auto;
+	background-color: #399db1;
+	width: 910px;
+	height: auto;
+	padding: 30px;
+	color: #000000;
 }
 
 /* Used for each entry in the progress book */
-.processBookEntry{
-  background-color: #ffffff;
-  width: 850px;
-  height: auto;
-  margin: 15px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  padding: 15px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  color: #000000;
+.processBookEntry {
+	background-color: #ffffff;
+	width: 850px;
+	height: auto;
+	margin: 15px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 15px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	color: #000000;
 }
 
-.mainPageBox{
-  background-color: #ffffff;
-  width: 1100px;
-  height: auto;
-  margin: 15px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  padding: 15px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  color: #000000;
+.mainPageBox {
+	background-color: #ffffff;
+	width: 1100px;
+	height: auto;
+	margin: 15px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 15px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	color: #000000;
 }
 
 /* Body text for process book page */
-.processBookText{
-  font-size: 14px;
+.processBookText {
+	font-size: 14px;
 }
 
 /* Styling the text of the index page */
-.mainPageText{
-  font-size: 14px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.mainPageText {
+	font-size: 14px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 /* Used for subtitles on images in process book */
 .processBookSub {
-  width: 500px;
-  height: auto;
-  font-size: 13px;
-  font-weight: bold;
-  font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
-  text-align: center;
-  line-height: 13px;
-  color: #399DB1;
-  padding: 10px;
-  margin-bottom: 50px;
+	width: 500px;
+	height: auto;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	text-align: center;
+	line-height: 13px;
+	color: #399db1;
+	padding: 10px;
+	margin-bottom: 50px;
 }
 
 .processBookH1 {
-  color: #266a77;
-  font-size: 22px;
+	color: #266a77;
+	font-size: 22px;
 }
 
 .processBookH2 {
-  color: #44a644;
-  font-size: 20px;
+	color: #44a644;
+	font-size: 20px;
 }
 
 .processBookTitle {
-  font-size: 30px;
-  color: #266a77;
-  line-height: 29px;
+	font-size: 30px;
+	color: #266a77;
+	line-height: 29px;
 }
