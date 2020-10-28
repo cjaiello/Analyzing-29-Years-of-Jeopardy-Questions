@@ -86,36 +86,6 @@ function showLoadingImage(boolean){
 
 // Function to find the number of word matches in the data
 // set. Finds number of matches in questions, answers, and categories
-function findWordMatchesInDataSet(){
-  // If form is invalid, don't do the search:
-  if(!validateForm()){
-    return;
-  }
-
-  // Remove old visualization
-  d3.select(".countWordsVis")
-        .remove();
-
-  // Tell the user that something is loading
-  showLoadingImage(true);
-
-  // First, load the data set
-  d3.csv('data/jeopardy_questions_and_answers_preprocessed_groupingvalues.csv', function(err, data) {
-    if(err) console.log(err);
-
-    // Next, get the word we need from the screen
-    var wordToSearchFor = document.getElementById('wordToSearchFor').value;
-    // Array with number of matches
-    var numberOfMatchesFound = findMatches(data, wordToSearchFor);
-    
-    // Now, build the visualization based on the data:
-    buildWordMatchBarVis(numberOfMatchesFound, 25, 1, "Appearances of the Word \"" + wordToSearchFor + "\"");
-  });
-}
-
-
-// Function to find the number of word matches in the data
-// set. Finds number of matches in questions, answers, and categories
 function findWordPairMatchesInDataSet(){
   // If form is invalid, don't do the search:
   if(!validateForm("wordToSearchFor1") && !validateForm("wordToSearchFor2")){
