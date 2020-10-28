@@ -66,10 +66,12 @@ function getVizName(vizNumber){
 // and prevents them from entering more than one word
 function validateForm(shouldNotBeEmpty) {
   var usersWord = document.getElementById(shouldNotBeEmpty).value;
-  if (usersWord==null || usersWord== "" || usersWord.indexOf(" ") > -1) {
-    return false;
-  } else return true;
+  return !(usersWord==null || usersWord=="" || usersWord.indexOf(" ") > -1);
 }
+
+
+
+
 
 // When called, this will show or hide the loading image
 function showLoadingImage(boolean){
