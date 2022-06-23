@@ -17,7 +17,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "got": "^11.3.0",
+    "got": "^11.8.5",
     "tape": "^4.7.0",
     "browserify": "^11.2.0"
   },
