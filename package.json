@@ -14,7 +14,7 @@
   "dependencies": {
     "d3-dispatch": "0.2.x",
     "ejs": "^2.5.6",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "got": "^11.3.0",
